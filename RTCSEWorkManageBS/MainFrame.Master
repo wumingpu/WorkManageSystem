@@ -145,16 +145,18 @@
                                     <li>
                                         <a href="<%=ResolveUrl("~/TestPages/TinyMCE.aspx") %>"><i class="fa fa-fw"></i>TinyMCE</a>
                                     </li>
-                                    <li>
+                                    <%--<li>
                                         <a href="<%=ResolveUrl("~/TestPages/Validate.aspx") %>"><i class="fa fa-fw"></i>Validate</a>
-                                    </li>
-                                    <li>
+                                    </li>--%>
+                                    <%--<li>
                                         <a href="<%=ResolveUrl("~/TestPages/JQValidator.aspx") %>"><i class="fa fa-fw"></i>JQValidator</a>
-                                    </li>
-                                    <li>
+                                    </li>--%>
+                                    <%--<li>
                                         <a href="<%=ResolveUrl("~/TestPages/FileManagerTest.aspx") %>"><i class="fa fa-fw"></i>FileManager</a>
+                                    </li>--%>
+                                    <li>
+                                        <a href="<%=ResolveUrl("~/TestPages/TimeLineTest.aspx") %>"><i class="fa fa-fw"></i>TimeLine</a>
                                     </li>
-                                    
                                 </ul>
                             </li>
                         </ul>

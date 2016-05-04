@@ -139,6 +139,7 @@
     <Content Include="TestPages\FileManagerTest.aspx" />
     <Content Include="TestPages\JQValidator.aspx" />
     <Content Include="TestPages\RagulaTest.aspx" />
+    <Content Include="TestPages\TimeLineTest.aspx" />
     <Content Include="TestPages\TinyMCE.aspx" />
     <Content Include="TestPages\Validate.aspx" />
     <Content Include="UsingDLL\PHP.VisualStudio.PhalangerTasks.dll" />
@@ -301,6 +302,13 @@
     </Compile>
     <Compile Include="TestPages\RagulaTest.aspx.designer.cs">
       <DependentUpon>RagulaTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestPages\TimeLineTest.aspx.cs">
+      <DependentUpon>TimeLineTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestPages\TimeLineTest.aspx.designer.cs">
+      <DependentUpon>TimeLineTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="TestPages\TinyMCE.aspx.cs">
       <DependentUpon>TinyMCE.aspx</DependentUpon>
