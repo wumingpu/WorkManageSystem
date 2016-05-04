@@ -1,0 +1,111 @@
+﻿objectClass:top
+cn:Mingpu Wu (Beyondsoft Corporation)
+sn:Wu
+physicalDeliveryOfficeName:No WorkSpace
+userCertificate:System.Byte[]
+givenName:Mingpu
+distinguishedName:CN=Mingpu Wu (Beyondsoft Corporation),OU=UserAccounts,DC=fareast,DC=corp,DC=microsoft,DC=com
+instanceType:4
+whenCreated:4/16/2015 1:09:03 PM
+whenChanged:4/3/2016 10:57:59 AM
+displayName:Mingpu Wu (Beyondsoft Corporation)
+uSNCreated:System.__ComObject
+memberOf:CN=O16DF-TELEMETRY05,OU=UserAccounts,DC=redmond,DC=corp,DC=microsoft,DC=com
+uSNChanged:System.__ComObject
+department:Skype Bus - Customer Lifecycle Eng
+company:Beyondsoft Corporation
+proxyAddresses:X500:/o=microsoft/ou=External (FYDIBOHF25SPDLT)/cn=Recipients/cn=ffbb1eacbb764c16b89153da849e5e0c
+nTSecurityDescriptor:System.__ComObject
+targetAddress:SMTP:v-mingpw@service.microsoft.com
+extensionAttribute2:92
+extensionAttribute4:802705
+extensionAttribute5:97622
+mailNickname:v-mingpw
+protocolSettings:HTTP§1§1§§§§§§
+extensionAttribute12:/o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=be5f8881c4b849209cd0087f76972612-Mingpu Wu (
+employeeType:92
+name:Mingpu Wu (Beyondsoft Corporation)
+objectGUID:System.Byte[]
+userAccountControl:512
+badPwdCount:0
+codePage:0
+countryCode:0
+employeeID:802705
+badPasswordTime:System.__ComObject
+lastLogoff:System.__ComObject
+lastLogon:System.__ComObject
+scriptPath:wwct
+pwdLastSet:System.__ComObject
+primaryGroupID:513
+objectSid:System.Byte[]
+accountExpires:System.__ComObject
+logonCount:4337
+sAMAccountName:v-mingpw
+sAMAccountType:805306368
+showInAddressBook:CN=Default Global Address List,CN=All Global Address Lists,CN=Address Lists Container,CN=microsoft,CN=Microsoft Exchange,CN=Services,CN=Configuration,DC=corp,DC=microsoft,DC=com
+legacyExchangeDN:/o=microsoft/ou=External (FYDIBOHF25SPDLT)/cn=Recipients/cn=ffbb1eacbb764c16b89153da849e5e0c
+userPrincipalName:v-mingpw@microsoft.com
+objectCategory:CN=Person,CN=Schema,CN=Configuration,DC=corp,DC=microsoft,DC=com
+msNPAllowDialin:False
+dSCorePropagationData:3/30/2016 8:05:36 AM
+lastLogonTimestamp:System.__ComObject
+msTSExpireDate:5/31/2016 9:03:52 AM
+msTSLicenseVersion:393216
+msTSManagingLS:55041-006-0582141-84780
+msDS-ExternalDirectoryObjectId:User_bea39193-6ff2-4230-969e-6d5e21ef20f4
+textEncodedORAddress:X400:C=US;A=MCI;P=msft;O=Exchange;S=Wu;G=Mingpu;
+mail:v-mingpw@microsoft.com
+manager:CN=Shirmay Chang,OU=UserAccounts,DC=redmond,DC=corp,DC=microsoft,DC=com
+msExchUserAccountControl:0
+msExchMailboxGuid:System.Byte[]
+msExchPoliciesIncluded:fa9d5cc2-dd0f-440a-8e71-bc0071eba0b9
+msRTCSIP-OptionFlags:257
+msRTCSIP-DeploymentLocator:SRV:
+msExchSafeSendersHash:System.Byte[]
+msRTCSIP-UserPolicies:0=1016766233
+msRTCSIP-FederationEnabled:True
+msRTCSIP-PrimaryUserAddress:sip:v-mingpw@microsoft.com
+msExchWhenMailboxCreated:4/16/2015 1:09:11 PM
+msExchUMDtmfMap:lastNameFirstName:98646478
+msRTCSIP-InternetAccessEnabled:True
+msDS-SourceObjectDN:CN=Mingpu Wu (Beyondsoft Corporation),OU=UserAccounts,DC=fareast,DC=corp,DC=microsoft,DC=com
+msExchMobileMailboxPolicyLink:CN=Default,CN=Mobile Mailbox Policies,CN=microsoft,CN=Microsoft Exchange,CN=Services,CN=Configuration,DC=corp,DC=microsoft,DC=com
+msExchRecipientDisplayType:-2147483642
+msExchELCMailboxFlags:18
+msRTCSIP-UserRoutingGroupId:System.Byte[]
+msExchRecipientTypeDetails:System.__ComObject
+msRTCSIP-UserEnabled:True
+msExchImmutableId:802705@microsoft.com
+msRTCSIP-PrimaryHomeServer:CN=Lc Services,CN=Microsoft,CN=36:1,CN=Pools,CN=RTC Service,CN=Microsoft,CN=System,DC=corp,DC=microsoft,DC=com
+msRTCSIP-OriginatorSid:System.Byte[]
+msExchTextMessagingState:302120705
+msExchMailboxTemplateLink:CN=Primary Retention Policy,CN=Retention Policies Container,CN=microsoft,CN=Microsoft Exchange,CN=Services,CN=Configuration,DC=corp,DC=microsoft,DC=com
+msExchRemoteRecipientType:System.__ComObject
+msExchVersion:System.__ComObject
+
+
+public static bool IsUserValid(string psPath, string UserName, string Password)
+        {
+            if (string.IsNullOrEmpty(psPath))
+            {
+                psPath = "AD域名";
+            }
+            string strName = UserName;
+            try
+            {
+                using (DirectoryEntry deUser = new DirectoryEntry(@"LDAP://" + psPath, strName, Password))
+                {
+                    DirectorySearcher src = new DirectorySearcher(deUser);
+                    src.Filter = ("(objectClass=user)");
+                    src.PropertiesToLoad.Add("cn");
+                    src.SearchRoot = deUser;
+                    src.SearchScope = SearchScope.Subtree;
+ 
+                    return src.FindAll().Count > 0;
+                }
+            }
+            catch (Exception exc)
+            {
+                return false;
+            }
+        }

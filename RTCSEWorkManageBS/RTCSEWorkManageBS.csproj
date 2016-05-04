@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5FBBE78A-C614-4BD7-B92F-A290BE772E5B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RTCSEWorkManageBS</RootNamespace>
+    <AssemblyName>RTCSEWorkManageBS</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PHP.VisualStudio.PhalangerTasks, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UsingDLL\PHP.VisualStudio.PhalangerTasks.dll</HintPath>
+    </Reference>
+    <Reference Include="PhpNetClassLibrary, Version=4.0.0.0, Culture=neutral, PublicKeyToken=4af37afe3cde05fb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UsingDLL\PhpNetClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="PhpNetCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0a8e8c4c76728c71, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UsingDLL\PhpNetCore.dll</HintPath>
+    </Reference>
+    <Reference Include="PhpNetCore.CodeDom, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0a8e8c4c76728c71, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UsingDLL\PhpNetCore.CodeDom.dll</HintPath>
+    </Reference>
+    <Reference Include="PhpNetCore.DuckTyping, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0a8e8c4c76728c71, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UsingDLL\PhpNetCore.DuckTyping.dll</HintPath>
+    </Reference>
+    <Reference Include="PhpNetCore.Parsers, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0a8e8c4c76728c71, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UsingDLL\PhpNetCore.Parsers.dll</HintPath>
+    </Reference>
+    <Reference Include="PhpNetCurl, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2771987119c16a03, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UsingDLL\PhpNetCurl.dll</HintPath>
+    </Reference>
+    <Reference Include="PhpNetGd2, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2771987119c16a03, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UsingDLL\PhpNetGd2.dll</HintPath>
+    </Reference>
+    <Reference Include="PhpNetIconv, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2771987119c16a03, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UsingDLL\PhpNetIconv.dll</HintPath>
+    </Reference>
+    <Reference Include="PhpNetMbstring, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2771987119c16a03, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UsingDLL\PhpNetMbstring.dll</HintPath>
+    </Reference>
+    <Reference Include="PhpNetSoap, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2771987119c16a03, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UsingDLL\PhpNetSoap.dll</HintPath>
+    </Reference>
+    <Reference Include="PhpNetXml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2771987119c16a03, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UsingDLL\PhpNetXml.dll</HintPath>
+    </Reference>
+    <Reference Include="PhpNetXmlDom, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2771987119c16a03, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UsingDLL\PhpNetXmlDom.dll</HintPath>
+    </Reference>
+    <Reference Include="PhpNetZlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2771987119c16a03, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UsingDLL\PhpNetZlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ADLogin.txt" />
+    <Content Include="BugIssue\BugList.aspx" />
+    <Content Include="BugIssue\BugManage.aspx" />
+    <Content Include="DashBoard.aspx" />
+    <Content Include="DynamicJS\TagsInputUserData.js" />
+    <Content Include="Other record.txt" />
+    <Content Include="SystemManage\JsonManage.aspx" />
+    <Content Include="SystemManage\UserManage.aspx" />
+    <Content Include="TaskManage\jqGridTest.aspx" />
+    <Content Include="TaskManage\JsonData.txt" />
+    <Content Include="TaskManage\JsonDataCity.txt" />
+    <Content Include="TaskManage\Scenario.aspx" />
+    <Content Include="TaskManage\ScenarioRole.aspx" />
+    <Content Include="TaskManage\TaskBoard.aspx" />
+    <Content Include="TaskManage\TaskListDaily.aspx" />
+    <Content Include="TaskManage\TaskListTotal.aspx" />
+    <Content Include="TaskManage\TaskListTotalNew.aspx" />
+    <Content Include="TestFrame.aspx" />
+    <Content Include="TestPage.aspx" />
+    <Content Include="TestPages\FileManagerTest.aspx" />
+    <Content Include="TestPages\JQValidator.aspx" />
+    <Content Include="TestPages\RagulaTest.aspx" />
+    <Content Include="TestPages\TinyMCE.aspx" />
+    <Content Include="TestPages\Validate.aspx" />
+    <Content Include="UsingDLL\PHP.VisualStudio.PhalangerTasks.dll" />
+    <Content Include="UsingDLL\PhpNetClassLibrary.dll" />
+    <Content Include="UsingDLL\PhpNetCore.CodeDom.dll" />
+    <Content Include="UsingDLL\PhpNetCore.dll" />
+    <Content Include="UsingDLL\PhpNetCore.DuckTyping.dll" />
+    <Content Include="UsingDLL\PhpNetCore.Parsers.dll" />
+    <Content Include="UsingDLL\PhpNetCurl.dll" />
+    <Content Include="UsingDLL\PhpNetGd2.dll" />
+    <Content Include="UsingDLL\PhpNetIconv.dll" />
+    <Content Include="UsingDLL\PhpNetMbstring.dll" />
+    <Content Include="UsingDLL\PhpNetMsSql.dll" />
+    <Content Include="UsingDLL\PhpNetPDO.dll" />
+    <Content Include="UsingDLL\PhpNetPDOSQLite.dll" />
+    <Content Include="UsingDLL\PhpNetPDOSQLServer.dll" />
+    <Content Include="UsingDLL\PhpNetSoap.dll" />
+    <Content Include="UsingDLL\PhpNetSQLite.dll" />
+    <Content Include="UsingDLL\PhpNetXml.dll" />
+    <Content Include="UsingDLL\PhpNetXmlDom.dll" />
+    <Content Include="UsingDLL\PhpNetZip.dll" />
+    <Content Include="UsingDLL\PhpNetZlib.dll" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ashx\BugIssueHandler.ashx.cs">
+      <DependentUpon>BugIssueHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ashx\SystemManageHandler.ashx.cs">
+      <DependentUpon>SystemManageHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ashx\TaskHandler.ashx.cs">
+      <DependentUpon>TaskHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="BugIssue\BugList.aspx.cs">
+      <DependentUpon>BugList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BugIssue\BugList.aspx.designer.cs">
+      <DependentUpon>BugList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BugIssue\BugManage.aspx.cs">
+      <DependentUpon>BugManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BugIssue\BugManage.aspx.designer.cs">
+      <DependentUpon>BugManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DashBoard.aspx.cs">
+      <DependentUpon>DashBoard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DashBoard.aspx.designer.cs">
+      <DependentUpon>DashBoard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MainFrame.Master.cs">
+      <DependentUpon>MainFrame.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MainFrame.Master.designer.cs">
+      <DependentUpon>MainFrame.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemManage\JsonManage.aspx.cs">
+      <DependentUpon>JsonManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\JsonManage.aspx.designer.cs">
+      <DependentUpon>JsonManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemManage\UserManage.aspx.cs">
+      <DependentUpon>UserManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\UserManage.aspx.designer.cs">
+      <DependentUpon>UserManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TaskManage\jqGridTest.aspx.cs">
+      <DependentUpon>jqGridTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TaskManage\jqGridTest.aspx.designer.cs">
+      <DependentUpon>jqGridTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TaskManage\Scenario.aspx.cs">
+      <DependentUpon>Scenario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TaskManage\Scenario.aspx.designer.cs">
+      <DependentUpon>Scenario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TaskManage\ScenarioRole.aspx.cs">
+      <DependentUpon>ScenarioRole.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TaskManage\ScenarioRole.aspx.designer.cs">
+      <DependentUpon>ScenarioRole.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TaskManage\TaskBoard.aspx.cs">
+      <DependentUpon>TaskBoard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TaskManage\TaskBoard.aspx.designer.cs">
+      <DependentUpon>TaskBoard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TaskManage\TaskListDaily.aspx.cs">
+      <DependentUpon>TaskListDaily.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TaskManage\TaskListDaily.aspx.designer.cs">
+      <DependentUpon>TaskListDaily.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TaskManage\TaskListTotal.aspx.cs">
+      <DependentUpon>TaskListTotal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TaskManage\TaskListTotal.aspx.designer.cs">
+      <DependentUpon>TaskListTotal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TaskManage\TaskListTotalNew.aspx.cs">
+      <DependentUpon>TaskListTotalNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TaskManage\TaskListTotalNew.aspx.designer.cs">
+      <DependentUpon>TaskListTotalNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestFrame.aspx.cs">
+      <DependentUpon>TestFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestFrame.aspx.designer.cs">
+      <DependentUpon>TestFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestPage.aspx.cs">
+      <DependentUpon>TestPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestPage.aspx.designer.cs">
+      <DependentUpon>TestPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestPages\FileManagerTest.aspx.cs">
+      <DependentUpon>FileManagerTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestPages\FileManagerTest.aspx.designer.cs">
+      <DependentUpon>FileManagerTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestPages\JQValidator.aspx.cs">
+      <DependentUpon>JQValidator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestPages\JQValidator.aspx.designer.cs">
+      <DependentUpon>JQValidator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestPages\RagulaTest.aspx.cs">
+      <DependentUpon>RagulaTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestPages\RagulaTest.aspx.designer.cs">
+      <DependentUpon>RagulaTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestPages\TinyMCE.aspx.cs">
+      <DependentUpon>TinyMCE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestPages\TinyMCE.aspx.designer.cs">
+      <DependentUpon>TinyMCE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestPages\Validate.aspx.cs">
+      <DependentUpon>Validate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestPages\Validate.aspx.designer.cs">
+      <DependentUpon>Validate.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MainFrame.Master" />
+    <Content Include="ashx\TaskHandler.ashx" />
+    <Content Include="jsonData\UserInfo.json" />
+    <Content Include="ashx\SystemManageHandler.ashx" />
+    <Content Include="jsonData\cities.json" />
+    <Content Include="ashx\BugIssueHandler.ashx" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{f9aa5fdf-f0ad-4c1f-8747-4a4cb46f613b}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{e3d8759a-c5eb-402d-9f10-f5c6029a8d1a}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{a8aa8161-f719-4f4e-a446-3fa774e40447}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bower_components\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
