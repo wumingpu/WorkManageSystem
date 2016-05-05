@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ADLogin.txt" />
+    <Content Include="BugIssue\BugAdd.aspx" />
     <Content Include="BugIssue\BugList.aspx" />
     <Content Include="BugIssue\BugManage.aspx" />
     <Content Include="DashBoard.aspx" />
@@ -175,6 +176,13 @@
     </Compile>
     <Compile Include="ashx\TaskHandler.ashx.cs">
       <DependentUpon>TaskHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="BugIssue\BugAdd.aspx.cs">
+      <DependentUpon>BugAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BugIssue\BugAdd.aspx.designer.cs">
+      <DependentUpon>BugAdd.aspx</DependentUpon>
     </Compile>
     <Compile Include="BugIssue\BugList.aspx.cs">
       <DependentUpon>BugList.aspx</DependentUpon>

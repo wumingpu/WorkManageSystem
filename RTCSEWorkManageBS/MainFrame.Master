@@ -123,6 +123,20 @@
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
+                                <a href="#"><i class="fa fa-bitbucket fa-fw"></i>Bug/Issue<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<%=ResolveUrl("~/BugIssue/BugAdd.aspx") %>">New B/I</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%=ResolveUrl("~/BugIssue/BugManage.aspx") %>">B/I Manage</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%=ResolveUrl("~/BugIssue/BugList.aspx") %>">B/I List</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
                                 <a href="#"><i class="fa fa-cogs fa-fw"></i>SystemManage<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
@@ -136,9 +150,6 @@
                             <li>
                                 <a href="#"><i class="fa fa-warning fa-fw"></i>Test Pages<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="<%=ResolveUrl("~/TestPage.aspx") %>"><i class="fa fa-fw"></i>Domain Login</a>
-                                    </li>
                                     <li>
                                         <a href="<%=ResolveUrl("~/TestPages/RagulaTest.aspx") %>"><i class="fa fa-fw"></i>Dragula</a>
                                     </li>
@@ -156,6 +167,9 @@
                                     </li>--%>
                                     <li>
                                         <a href="<%=ResolveUrl("~/TestPages/TimeLineTest.aspx") %>"><i class="fa fa-fw"></i>TimeLine</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%=ResolveUrl("~/TestPage.aspx") %>"><i class="fa fa-fw"></i>Other Test</a>
                                     </li>
                                 </ul>
                             </li>

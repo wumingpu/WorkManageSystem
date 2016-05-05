@@ -68,4 +68,11 @@ namespace Model
         public string TT_TaskProgress { set; get; }
         public string TT_TaskStatus { set; get; }
     }
+
+    [Serializable]
+    public partial class TaskTotalForDLL
+    {
+        public int TT_ID { set; get; }
+        public string TT_Title { set; get; }
+    }
 }
