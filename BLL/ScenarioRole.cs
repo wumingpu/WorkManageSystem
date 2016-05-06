@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,10 @@ namespace BLL
         private readonly DAL.ScenarioRole dal = new DAL.ScenarioRole();
         public ScenarioRole()
         { }
-
+        public DataSet GetList(string strWhere)
+        {
+            return dal.GetList(strWhere);
+        }
         public bool AddBatch(List<Model.ScenarioRoleForJson> list, int SR_FK_S_ID, int SR_FK_TT_ID, int User_ID)
         {
             DAL.Scenario dalScenario = new DAL.Scenario();

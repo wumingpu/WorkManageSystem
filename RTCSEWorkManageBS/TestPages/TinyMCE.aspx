@@ -24,10 +24,21 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Data Display
+                    </div>
+                    <div class="panel-body" id="BI_Content">
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="CustomerJavaScriptPlace" runat="server">
-    3
     <script type="text/javascript" src="<%=ResolveUrl("~/bower_components/tinymce/tinymce.min.js") %>"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -46,6 +57,11 @@
                 //filemanager_title: "Responsive Filemanager",
                 //external_plugins: { "filemanager": "../bower_components/filemanager/plugin.min.js" }
                 file_browser_callback: RoxyFileBrowser
+            });
+
+            $.post('../ashx/BugIssueHandler.ashx', { mode: 'GetBugIssueSingle', BI_ID: 1 }, function (data) {
+                var dataJson = $.parseJSON(data);
+                $('#BI_Content').html(dataJson.BI_Content);
             });
         });
         var roxyFileman = '../bower_components/fileman/index.html?integration=tinymce4';

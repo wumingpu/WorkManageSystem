@@ -23,4 +23,14 @@ namespace Model
         /// </summary>
         public string S_ScenarioNames { set; get; }
     }
+
+    [Serializable]
+    public partial class ScenarioForDDL
+    {
+        public ScenarioForDDL()
+        { }
+
+        public int S_ID { set; get; }
+        public string S_ScenarioName { set; get; }
+    }
 }

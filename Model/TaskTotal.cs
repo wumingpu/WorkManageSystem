@@ -74,5 +74,6 @@ namespace Model
     {
         public int TT_ID { set; get; }
         public string TT_Title { set; get; }
+        public string TT_TaskStatus { set; get; }
     }
 }

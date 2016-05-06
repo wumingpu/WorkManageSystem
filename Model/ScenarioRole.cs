@@ -43,4 +43,14 @@ namespace Model
         public string SR_AssignedUser { set; get; }
         public string SR_AssignedUserName { set; get; }
     }
+
+    [Serializable]
+    public partial class ScenarioRoleForDDL
+    {
+        public ScenarioRoleForDDL()
+        { }
+
+        public int SR_ID { set; get; }
+        public string SR_RoleTitle { set; get; }
+    }
 }

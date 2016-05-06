@@ -12,7 +12,17 @@ namespace DAL
     {
         public ScenarioRole()
         { }
-
+        public DataSet GetList(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select * from ScenarioRole");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            strSql.Append(" order by SR_ID asc");
+            return DbHelperSQL.Query(strSql.ToString());
+        }
         public int Exist(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();

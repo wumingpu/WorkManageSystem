@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,10 @@ namespace BLL
         private readonly DAL.Scenario dal = new DAL.Scenario();
         public Scenario()
         { }
-
+        public DataSet GetList(string strWhere)
+        {
+            return dal.GetList(strWhere);
+        }
         public int Add(Model.Scenario model, bool UpdateHaveScenario)
         {
             DAL.TaskTotal dalTaskTotal = new DAL.TaskTotal();
