@@ -42,14 +42,79 @@ namespace RTCSEWorkManageBS.ashx
                     case "AddBugIssue":
                         AddBugIssue(context);
                         break;
-                    case "GetBugIssueSingle":
-                        GetBugIssueSingle(context);
+                    
+                    case "QueryBugIssueListGroup":
+                        QueryBugIssueListGroup(context);
+                        break;
+                    case "GetBugIssueDetail":
+                        GetBugIssueDetail(context);
+                        break;
+                    case "GetBugIssueContentSingle":
+                        GetBugIssueContentSingle(context);
+                        break;
+                    case "GetBugIssueReplySingle":
+                        GetBugIssueReplySingle(context);
+                        break;
+
+                        // Bug Reply
+                    case "AddBugIssueReply":
+                        AddBugIssueReply(context);
                         break;
                 }
             }
         }
 
-        private void GetBugIssueSingle(HttpContext context)
+        private void AddBugIssueReply(HttpContext context)
+        {
+            BLL.BugIssueReply bll = new BLL.BugIssueReply();
+            Model.BugIssueReply model = new Model.BugIssueReply();
+            model.BIR_FK_BI_ID = Convert.ToInt32(context.Request["BIR_FK_BI_ID"]);
+            model.BIR_Content = context.Request["BIR_Content"];
+            model.BIR_CreateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            model.BIR_CreateUser = Convert.ToInt32(context.Request["BIR_CreateUser"]);
+            int AddRes = bll.Add(model);
+            if (AddRes>0)
+            {
+                context.Response.Write("success");
+            }
+            else
+            {
+                context.Response.Write("fail");
+            }
+        }
+
+        private void GetBugIssueReplySingle(HttpContext context)
+        {
+            string BI_ID = context.Request["BI_ID"];
+            if (string.IsNullOrEmpty(BI_ID))
+            {
+                BI_ID = "0";
+            }
+            BLL.V_BugReplyDetail bll = new BLL.V_BugReplyDetail();
+            List<Model.V_BugReplyDetail> list = new List<Model.V_BugReplyDetail>();
+            DataSet ds = bll.GetList("BIR_FK_BI_ID=" + BI_ID);
+            if (ds.Tables[0].Rows.Count>0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    list.Add(new Model.V_BugReplyDetail()
+                    {
+                        BIR_Content = dr["BIR_Content"].ToString(),
+                        BIR_CreateTime = dr["BIR_CreateTime"].ToString(),
+                        U_nickname = dr["U_nickname"].ToString()
+                    });
+                }
+                JavaScriptSerializer jss = new JavaScriptSerializer();
+                string strJson = jss.Serialize(list);
+                context.Response.Write(strJson);
+            }
+            else
+            {
+                context.Response.Write("fail");
+            }
+        }
+
+        private void GetBugIssueContentSingle(HttpContext context)
         {
             string BI_ID = context.Request["BI_ID"];
             if (string.IsNullOrEmpty(BI_ID))
@@ -59,10 +124,13 @@ namespace RTCSEWorkManageBS.ashx
             BLL.BugIssue bll = new BLL.BugIssue();
             List<Model.BugIssue> list = new List<Model.BugIssue>();
             DataSet ds = bll.GetSingle(Convert.ToInt32(BI_ID));
-            if (ds.Tables[0].Rows.Count>0)
+            if (ds.Tables[0].Rows.Count > 0)
             {
                 DataRow dr = ds.Tables[0].Rows[0];
-                list.Add(new Model.BugIssue() {
+                list.Add(new Model.BugIssue()
+                {
+                    BI_Title = dr["BI_Title"].ToString(),
+                    BI_CreateDate = dr["BI_CreateDate"].ToString(),
                     BI_Content = dr["BI_Content"].ToString()
                 });
                 JavaScriptSerializer jss = new JavaScriptSerializer();
@@ -75,13 +143,68 @@ namespace RTCSEWorkManageBS.ashx
             }
         }
 
+        private void GetBugIssueDetail(HttpContext context)
+        {
+            string BI_ID = context.Request["BI_ID"];
+            BLL.V_BugDetail bll = new BLL.V_BugDetail();
+            DataSet ds = bll.GetList("*", "BI_ID=" + BI_ID);
+            List<Model.V_BugDetail> list = new List<Model.V_BugDetail>();
+            DataRow dr = ds.Tables[0].Rows[0];
+            list.Add(new Model.V_BugDetail() {
+                TT_Title = dr["TT_Title"].ToString(),
+                S_ScenarioName = dr["S_ScenarioName"].ToString(),
+                SR_RoleTitle = dr["SR_RoleTitle"].ToString(),
+                BI_CaseNumber = dr["BI_CaseNumber"].ToString(),
+                BI_EnvironmentServer = dr["BI_EnvironmentServer"].ToString(),
+                BI_TopologyName = dr["BI_TopologyName"].ToString(),
+                BI_UpdateTime = dr["BI_UpdateTime"].ToString(),
+                BI_CloseTime = dr["BI_CloseTime"].ToString()
+            });
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            string strJson = jss.Serialize(list).TrimStart('[').TrimEnd(']');
+            context.Response.Write(strJson);
+        }
+
+        private void QueryBugIssueListGroup(HttpContext context)
+        {
+            string strKeyWord = context.Request["keyWord"];
+            BLL.V_BugDetail bll = new BLL.V_BugDetail();
+            DataSet ds = new DataSet();
+            string strFields = "BI_ID,BI_Title,BI_Type,BI_Status,BI_CreateDate,U_nickname";
+            if (string.IsNullOrEmpty(strKeyWord))
+            {
+                ds = bll.GetList(strFields, "BI_Status='Open'");
+            }
+            else
+            {
+                ds = bll.GetList(strFields, string.Format("BI_Title like '%{0}%'", strKeyWord));
+            }
+            List<Model.V_BugDetailForBugListGroup> list = new List<Model.V_BugDetailForBugListGroup>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                list.Add(new Model.V_BugDetailForBugListGroup() {
+                    BI_ID = Convert.ToInt32(dr["BI_ID"]),
+                    BI_Title = dr["BI_Title"].ToString(),
+                    BI_Type = dr["BI_Type"].ToString(),
+                    BI_Status = dr["BI_Status"].ToString(),
+                    BI_CreateDate = dr["BI_CreateDate"].ToString(),
+                    U_nickname = dr["U_nickname"].ToString()
+                });
+            }
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            string strJson = jss.Serialize(list);
+            context.Response.Write(strJson);
+        }
+
+        
+
         private void AddBugIssue(HttpContext context)
         {
             Model.BugIssue model = new Model.BugIssue();
             BLL.BugIssue bll = new BLL.BugIssue();
-            model.BI_FK_SR_ID = Convert.ToInt32(context.Request["BI_FK_SR_ID"]);
-            model.BI_FK_S_ID = Convert.ToInt32(context.Request["BI_FK_S_ID"]);
-            model.BI_FK_TT_ID = Convert.ToInt32(context.Request["BI_FK_TT_ID"]);
+            model.BI_FK_SR_ID = Convert.ToInt32(string.IsNullOrEmpty(context.Request["BI_FK_SR_ID"]) ? "0" : context.Request["BI_FK_SR_ID"]);
+            model.BI_FK_S_ID = Convert.ToInt32(string.IsNullOrEmpty(context.Request["BI_FK_S_ID"]) ? "0" : context.Request["BI_FK_S_ID"]);
+            model.BI_FK_TT_ID = Convert.ToInt32(string.IsNullOrEmpty(context.Request["BI_FK_TT_ID"]) ? "0" : context.Request["BI_FK_TT_ID"]);
             model.BI_Title = context.Request["BI_Title"];
             model.BI_Type = context.Request["BI_Type"];
             model.BI_Content = context.Request["BI_Content"];
@@ -92,10 +215,11 @@ namespace RTCSEWorkManageBS.ashx
             model.BI_CreateDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             model.BI_Status = "Open";
             model.BI_Owner = Convert.ToInt32(context.Request["BI_Owner"]);
-            model.BI_UpdateTime = "";
+            model.BI_CloseTime = "";
             model.BI_ReferenceBIID = 0;
+            model.BI_UpdateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             int AddRes = bll.Add(model);
-            if (AddRes>0)
+            if (AddRes > 0)
             {
                 context.Response.Write("success");
             }
@@ -121,7 +245,8 @@ namespace RTCSEWorkManageBS.ashx
             List<Model.ScenarioRoleForDDL> list = new List<Model.ScenarioRoleForDDL>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                list.Add(new Model.ScenarioRoleForDDL() {
+                list.Add(new Model.ScenarioRoleForDDL()
+                {
                     SR_ID = Convert.ToInt32(dr["SR_ID"]),
                     SR_RoleTitle = dr["SR_RoleTitle"].ToString()
                 });
@@ -147,7 +272,8 @@ namespace RTCSEWorkManageBS.ashx
             List<Model.ScenarioForDDL> list = new List<Model.ScenarioForDDL>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                list.Add(new Model.ScenarioForDDL() {
+                list.Add(new Model.ScenarioForDDL()
+                {
                     S_ID = Convert.ToInt32(dr["S_ID"]),
                     S_ScenarioName = dr["S_ScenarioName"].ToString()
                 });

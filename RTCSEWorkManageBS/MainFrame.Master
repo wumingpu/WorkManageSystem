@@ -34,7 +34,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body><%-- data-spy="scroll" data-target="#myScrollspy"--%>
     <form id="defaultForm" runat="server" method="post">
         <div id="wrapper">
 
@@ -75,8 +75,8 @@
                 </ul>
 
                 <!-- Left Nav -->
-                <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
+                <div class="navbar-default sidebar"><%-- role="navigation" id="myScrollspy"--%>
+                    <div class="sidebar-nav navbar-collapse"><%-- data-spy="affix"--%>
                         <ul class="nav" id="side-menu">
                             <%--Search--%>
                             <%--<li class="sidebar-search">
@@ -169,8 +169,12 @@
                                         <a href="<%=ResolveUrl("~/TestPages/TimeLineTest.aspx") %>"><i class="fa fa-fw"></i>TimeLine</a>
                                     </li>
                                     <li>
+                                        <a href="<%=ResolveUrl("~/TestPages/ListGroupPaging.aspx") %>"><i class="fa fa-fw"></i>ListGroupPaging</a>
+                                    </li>
+                                    <li>
                                         <a href="<%=ResolveUrl("~/TestPage.aspx") %>"><i class="fa fa-fw"></i>Other Test</a>
                                     </li>
+                                    
                                 </ul>
                             </li>
                         </ul>

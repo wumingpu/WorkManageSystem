@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BugIssue.cs" />
+    <Compile Include="BugIssueReply.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenario.cs" />
     <Compile Include="ScenarioRole.cs" />
@@ -48,6 +49,8 @@
     <Compile Include="TaskPersonal.cs" />
     <Compile Include="TaskTotal.cs" />
     <Compile Include="UserInfo.cs" />
+    <Compile Include="V_BugDetail.cs" />
+    <Compile Include="V_BugReplyDetail.cs" />
     <Compile Include="V_TaskDetail.cs" />
     <Compile Include="V_TaskDetailSimple.cs" />
     <Compile Include="V_TaskTotalScenario.cs" />

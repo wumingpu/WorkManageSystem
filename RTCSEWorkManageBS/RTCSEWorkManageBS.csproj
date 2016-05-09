@@ -119,6 +119,7 @@
   <ItemGroup>
     <Content Include="ADLogin.txt" />
     <Content Include="BugIssue\BugAdd.aspx" />
+    <Content Include="BugIssue\BugContent.aspx" />
     <Content Include="BugIssue\BugList.aspx" />
     <Content Include="BugIssue\BugManage.aspx" />
     <Content Include="DashBoard.aspx" />
@@ -139,6 +140,7 @@
     <Content Include="TestPage.aspx" />
     <Content Include="TestPages\FileManagerTest.aspx" />
     <Content Include="TestPages\JQValidator.aspx" />
+    <Content Include="TestPages\ListGroupPaging.aspx" />
     <Content Include="TestPages\RagulaTest.aspx" />
     <Content Include="TestPages\TimeLineTest.aspx" />
     <Content Include="TestPages\TinyMCE.aspx" />
@@ -183,6 +185,13 @@
     </Compile>
     <Compile Include="BugIssue\BugAdd.aspx.designer.cs">
       <DependentUpon>BugAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BugIssue\BugContent.aspx.cs">
+      <DependentUpon>BugContent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BugIssue\BugContent.aspx.designer.cs">
+      <DependentUpon>BugContent.aspx</DependentUpon>
     </Compile>
     <Compile Include="BugIssue\BugList.aspx.cs">
       <DependentUpon>BugList.aspx</DependentUpon>
@@ -303,6 +312,13 @@
     </Compile>
     <Compile Include="TestPages\JQValidator.aspx.designer.cs">
       <DependentUpon>JQValidator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestPages\ListGroupPaging.aspx.cs">
+      <DependentUpon>ListGroupPaging.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestPages\ListGroupPaging.aspx.designer.cs">
+      <DependentUpon>ListGroupPaging.aspx</DependentUpon>
     </Compile>
     <Compile Include="TestPages\RagulaTest.aspx.cs">
       <DependentUpon>RagulaTest.aspx</DependentUpon>

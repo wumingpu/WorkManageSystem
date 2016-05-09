@@ -7,21 +7,11 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public partial class BugIssue
+    public partial class V_BugDetail
     {
         private readonly DAL.BugIssue dal = new DAL.BugIssue();
-        public BugIssue()
+        public V_BugDetail()
         { }
-
-        public DataSet GetSingle(int BI_ID)
-        {
-            return dal.GetSingle(BI_ID);
-        }
-
-        public int Add(Model.BugIssue model)
-        {
-            return dal.Add(model);
-        }
 
         public DataSet GetList(string Fields, string strWhere)
         {

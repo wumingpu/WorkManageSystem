@@ -25,19 +25,19 @@
 
                         <ul class="timeline">
                             <li class="timeline-inverted">
-                                <div class="timeline-badge">Ming</div>
+                                <div class="timeline-badge success">B / I</div>
                                 <div class="timeline-panel">
                                     <div class="timeline-heading">
                                         <h4 class="timeline-title">Mussum ipsum cacilds</h4>
                                         <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>11 hours ago via Twitter</small></p>
                                     </div>
-                                    <div class="timeline-body">
+                                    <div class="timeline-body" id="BI_Content">
                                         <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
                                     </div>
                                 </div>
                             </li>
                             <li class="timeline-inverted">
-                                <div class="timeline-badge danger"><i class="glyphicon glyphicon-credit-card"></i></div>
+                                <div class="timeline-badge warning">R E</div>
                                 <div class="timeline-panel">
                                     <div class="timeline-heading">
                                         <h4 class="timeline-title">Mussum ipsum cacilds</h4>
@@ -96,4 +96,13 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="CustomerJavaScriptPlace" runat="server">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.post('../ashx/BugIssueHandler.ashx', { mode: 'GetBugIssueContentSingle', BI_ID: 1 }, function (data) {
+                var dataJson = $.parseJSON(data);
+                $('#BI_Content').html(dataJson.BI_Content);
+            });
+        });
+        //$.url().param('data');
+    </script>
 </asp:Content>

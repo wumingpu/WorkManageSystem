@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-body">
+                    <div class="panel-body" id="formBugIssue">
                         <div class="row">
                             <div class="col-lg-10">
                                 <div class="form-group">
@@ -109,6 +109,8 @@
                     </div>
                     <div class="panel-footer">
                         <button type="button" class="btn btn-success" onclick="SaveBug()">Save</button>
+                        <%--<button type="button" class="btn btn-danger" onclick="EmptyPageContent()">EmptyPageContent</button>--%>
+
                     </div>
                 </div>
             </div>
@@ -124,13 +126,13 @@
         $(document).ready(function () {
             ReloadDDLTaskTotal('InProgress');
 
-            $('#BI_FK_TT_ID').on('changed.bs.select', function () {
+            $('#BI_FK_TT_ID').off().on('changed.bs.select', function () {
                 var TT_ID = $(this).find('option:selected').val();
                 ReloadDDLScenario(TT_ID);
                 $('#BI_FK_SR_ID').html('<option></option>');
                 $('#BI_FK_SR_ID').selectpicker('refresh');
             });
-            $('#BI_FK_S_ID').on('changed.bs.select', function () {
+            $('#BI_FK_S_ID').off().on('changed.bs.select', function () {
                 var S_ID = $(this).find('option:selected').val();
                 ReloadDDLScenarioRole(S_ID);
             });
@@ -158,6 +160,18 @@
                 file_browser_callback: RoxyFileBrowser
             });
         });
+
+        function EmptyPageContent() {
+            $('#BI_Title').val('');
+            $('#BI_TT_Keyword').val('');
+            $('#BI_EnvironmentServer').val('');
+            $('#BI_TopologyName').val('');
+            $('#BI_CaseNumber').val('');
+            $('#BI_Type').selectpicker('val', 'Issue');
+            $('.selectpicker:not(#BI_Type)').html('<option></option>').selectpicker('refresh');
+            ReloadDDLTaskTotal('InProgress');
+            tinymce.activeEditor.setContent('');
+        }
 
         function ReloadDDLTaskTotal(keyword) {
             $.post('../ashx/BugIssueHandler.ashx', {
@@ -228,10 +242,15 @@
         }
 
         function SaveBug() {
+            var BI_Title = $('#BI_Title').val();
+            if (BI_Title == '') {
+                alert('Bug/Issue Title can not Empty !');
+                $('#BI_Title').focus();
+                return;
+            }
             var BI_FK_TT_ID = $('#BI_FK_TT_ID').val();
             var BI_FK_S_ID = $('#BI_FK_S_ID').val();
             var BI_FK_SR_ID = $('#BI_FK_SR_ID').val();
-            var BI_Title = $('#BI_Title').val();
             var BI_Type = $('#BI_Type').selectpicker('val');
             var BI_EnvironmentServer = $('#BI_EnvironmentServer').val();
             var BI_TopologyName = $('#BI_TopologyName').val();
@@ -246,13 +265,16 @@
             }, function (data) {
                 if (data=='success') {
                     alert('Save Data Success ~');
-                    location.reload();
+                    //location.reload();
+                    //$('#formBugIssue').load(location.href + " #formBugIssue");
+                    //jQuery.read();
+                    //onPageLoad();
+                    EmptyPageContent();
                 }
                 else {
                     alert('Save Data Failed !');
                 }
             });
-            
         }
 
     </script>

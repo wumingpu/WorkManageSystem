@@ -59,7 +59,7 @@
                 file_browser_callback: RoxyFileBrowser
             });
 
-            $.post('../ashx/BugIssueHandler.ashx', { mode: 'GetBugIssueSingle', BI_ID: 1 }, function (data) {
+            $.post('../ashx/BugIssueHandler.ashx', { mode: 'GetBugIssueContentSingle', BI_ID: 1 }, function (data) {
                 var dataJson = $.parseJSON(data);
                 $('#BI_Content').html(dataJson.BI_Content);
             });
