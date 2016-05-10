@@ -138,6 +138,7 @@
     <Content Include="TaskManage\TaskListTotalNew.aspx" />
     <Content Include="TestFrame.aspx" />
     <Content Include="TestPage.aspx" />
+    <Content Include="TestPages\ChartJS.aspx" />
     <Content Include="TestPages\FileManagerTest.aspx" />
     <Content Include="TestPages\JQValidator.aspx" />
     <Content Include="TestPages\ListGroupPaging.aspx" />
@@ -172,6 +173,9 @@
   <ItemGroup>
     <Compile Include="ashx\BugIssueHandler.ashx.cs">
       <DependentUpon>BugIssueHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ashx\ChartReportHandler.ashx.cs">
+      <DependentUpon>ChartReportHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="ashx\SystemManageHandler.ashx.cs">
       <DependentUpon>SystemManageHandler.ashx</DependentUpon>
@@ -299,6 +303,13 @@
     <Compile Include="TestPage.aspx.designer.cs">
       <DependentUpon>TestPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="TestPages\ChartJS.aspx.cs">
+      <DependentUpon>ChartJS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestPages\ChartJS.aspx.designer.cs">
+      <DependentUpon>ChartJS.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TestPages\FileManagerTest.aspx.cs">
       <DependentUpon>FileManagerTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -356,6 +367,7 @@
     <Content Include="ashx\SystemManageHandler.ashx" />
     <Content Include="jsonData\cities.json" />
     <Content Include="ashx\BugIssueHandler.ashx" />
+    <Content Include="ashx\ChartReportHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -379,6 +391,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bower_components\" />
+    <Folder Include="ChartReport\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

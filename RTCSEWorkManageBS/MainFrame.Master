@@ -105,10 +105,10 @@
                                         <a href="<%=ResolveUrl("~/TaskManage/TaskListTotal.aspx") %>">Task List(Total)</a>
                                     </li>--%>
                                     <li>
-                                        <a href="<%=ResolveUrl("~/TaskManage/TaskListDaily.aspx") %>">Task List(Daily)</a>
+                                        <a href="<%=ResolveUrl("~/TaskManage/TaskListTotalNew.aspx") %>">Task List(Total)</a>
                                     </li>
                                     <li>
-                                        <a href="<%=ResolveUrl("~/TaskManage/TaskListTotalNew.aspx") %>">Task List(Total)</a>
+                                        <a href="<%=ResolveUrl("~/TaskManage/TaskListDaily.aspx") %>">Task List(Daily)</a>
                                     </li>
                                     <%--<li>
                                         <a href="<%=ResolveUrl("~/TaskManage/jqGridTest.aspx") %>">JQGrid (Test)</a>
@@ -128,9 +128,9 @@
                                     <li>
                                         <a href="<%=ResolveUrl("~/BugIssue/BugAdd.aspx") %>">New B/I</a>
                                     </li>
-                                    <li>
+                                    <%--<li>
                                         <a href="<%=ResolveUrl("~/BugIssue/BugManage.aspx") %>">B/I Manage</a>
-                                    </li>
+                                    </li>--%>
                                     <li>
                                         <a href="<%=ResolveUrl("~/BugIssue/BugList.aspx") %>">B/I List</a>
                                     </li>
@@ -170,6 +170,9 @@
                                     </li>
                                     <li>
                                         <a href="<%=ResolveUrl("~/TestPages/ListGroupPaging.aspx") %>"><i class="fa fa-fw"></i>ListGroupPaging</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%=ResolveUrl("~/TestPages/ChartJS.aspx") %>"><i class="fa fa-fw"></i>ChartJS</a>
                                     </li>
                                     <li>
                                         <a href="<%=ResolveUrl("~/TestPage.aspx") %>"><i class="fa fa-fw"></i>Other Test</a>

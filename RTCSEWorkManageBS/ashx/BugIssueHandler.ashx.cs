@@ -56,11 +56,49 @@ namespace RTCSEWorkManageBS.ashx
                         GetBugIssueReplySingle(context);
                         break;
 
-                        // Bug Reply
+                    // Bug Reply
                     case "AddBugIssueReply":
                         AddBugIssueReply(context);
                         break;
+                    case "CloseBugIssue":
+                        CloseBugIssue(context);
+                        break;
+                    case "ReOpenBugIssue":
+                        ReOpenBugIssue(context);
+                        break;
                 }
+            }
+        }
+
+        private void ReOpenBugIssue(HttpContext context)
+        {
+            int BI_ID = Convert.ToInt32(context.Request["BI_ID"]);
+            int User_ID = Convert.ToInt32(context.Request["User_ID"]);
+            BLL.BugIssue bll = new BLL.BugIssue();
+            bool ReOpenRes = bll.ReOpenBugIssue(BI_ID, User_ID);
+            if (ReOpenRes)
+            {
+                context.Response.Write("success");
+            }
+            else
+            {
+                context.Response.Write("fail");
+            }
+        }
+
+        private void CloseBugIssue(HttpContext context)
+        {
+            int BI_ID = Convert.ToInt32(context.Request["BI_ID"]);
+            int User_ID = Convert.ToInt32(context.Request["User_ID"]);
+            BLL.BugIssue bll = new BLL.BugIssue();
+            bool CloseRes = bll.CloseBugIssue(BI_ID, User_ID);
+            if (CloseRes)
+            {
+                context.Response.Write("success");
+            }
+            else
+            {
+                context.Response.Write("fail");
             }
         }
 
@@ -158,7 +196,9 @@ namespace RTCSEWorkManageBS.ashx
                 BI_EnvironmentServer = dr["BI_EnvironmentServer"].ToString(),
                 BI_TopologyName = dr["BI_TopologyName"].ToString(),
                 BI_UpdateTime = dr["BI_UpdateTime"].ToString(),
-                BI_CloseTime = dr["BI_CloseTime"].ToString()
+                BI_CloseTime = dr["BI_CloseTime"].ToString(),
+                BI_Owner = Convert.ToInt32(dr["BI_Owner"]),
+                BI_Status = dr["BI_Status"].ToString()
             });
             JavaScriptSerializer jss = new JavaScriptSerializer();
             string strJson = jss.Serialize(list).TrimStart('[').TrimEnd(']');
@@ -174,6 +214,10 @@ namespace RTCSEWorkManageBS.ashx
             if (string.IsNullOrEmpty(strKeyWord))
             {
                 ds = bll.GetList(strFields, "BI_Status='Open'");
+            }
+            else if (strKeyWord.ToLower() == "@all")
+            {
+                ds = bll.GetList(strFields, "");
             }
             else
             {

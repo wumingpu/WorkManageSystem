@@ -23,6 +23,7 @@ namespace Model
         public string BI_TopologyName { set; get; }
         public string BI_UpdateTime { set; get; }
         public string BI_CloseTime { set; get; }
+        public int BI_Owner { set; get; }
     }
 
     [Serializable]

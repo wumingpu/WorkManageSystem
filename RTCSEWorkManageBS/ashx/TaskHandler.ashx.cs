@@ -518,7 +518,16 @@ namespace RTCSEWorkManageBS.ashx
         private void QueryTaskListDaily(HttpContext context)
         {
             BLL.TaskDaily bll = new BLL.TaskDaily();
-            DataSet ds = bll.GetList("");
+            string TD_FK_TaskTotalID = context.Request["TD_FK_TaskTotalID"];
+            DataSet ds = new DataSet();
+            if (!string.IsNullOrEmpty(TD_FK_TaskTotalID))
+            {
+                ds = bll.GetList("TD_FK_TaskTotalID=" + TD_FK_TaskTotalID);
+            }
+            else
+            {
+                ds = bll.GetList("TD_FK_TaskTotalID=0");
+            }
             List<Model.TaskDaily> list = new List<Model.TaskDaily>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {

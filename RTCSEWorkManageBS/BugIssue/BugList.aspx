@@ -28,6 +28,10 @@
             padding-top: 2px;
             vertical-align: middle;
         }
+
+        .help-block {
+            margin-bottom: 0px !important;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -53,7 +57,9 @@
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="button" onclick="SearchBugIssueList()">Search</button>
                                         </span>
+
                                     </div>
+                                    <span class="help-block">Empty for 'Open' Bug/Issue; Input '@all' display all Bug/Issue</span>
                                     <!-- /input-group -->
                                 </div>
                             </div>
@@ -147,11 +153,15 @@
                             </div>
                         </div>
 
-                        <textarea id="BIR_Content"></textarea>
+                        <div id="div_BIR_Content">
+                            <textarea id="BIR_Content"></textarea>
+                        </div>
                     </div>
                     <div class="panel-footer">
                         <input type="button" class="btn btn-success" id="btn_AddBugIssueReply" value="Add Bug/Issue Reply" onclick="AddReply()" />
                         <%--<button class="btn btn-default btn-sm" onclick="window.location.href = '#page-wrapper'">Top</button>--%>
+                        <input type="button" class="btn btn-default" id="btn_CloseBugIssue" value="Close Bug/Issue" onclick="CloseBugIssue()" />
+                        <input type="button" class="btn btn-primary" id="btn_ReOpenBugIssue" value="ReOpen Bug/Issue" onclick="ReOpenBugIssue()" />
                     </div>
                 </div>
             </div>
@@ -184,11 +194,17 @@
                 toolbar2: "paste | link unlink anchor | image media emoticons hr insertdatetime codesample | forecolor backcolor | charmap  | print preview code ",//fullpage fullscreen 
                 image_advtab: true,
                 paste_data_images: true,
+                //readonly:true,
                 file_browser_callback: RoxyFileBrowser
             });
 
             $('#btn_AddBugIssueReply').prop('disabled', true);
             $('#btn_BugIssueContent').prop('disabled', true);
+            $('#btn_AddBugIssueReply').hide();
+            $('#div_BIR_Content').hide();
+            //tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
+            $('#btn_CloseBugIssue').hide();
+            $('#btn_ReOpenBugIssue').hide();
         });
         var roxyFileman = '../bower_components/fileman/index.html?integration=tinymce4';
         function RoxyFileBrowser(field_name, url, type, win) {
@@ -301,6 +317,10 @@
             $('#BugIssueTimeLine').empty();
             $('#btn_AddBugIssueReply').prop('disabled', true);
             $('#btn_BugIssueContent').prop('disabled', false);
+            $('#btn_AddBugIssueReply').hide();
+            $('#BIR_Content').hide();
+            $('#btn_CloseBugIssue').hide();
+            $('#btn_ReOpenBugIssue').hide();
             var BI_ID = selector.attr('id').substring(12);
             ReloadBugIssueDetail(BI_ID);
         }
@@ -308,8 +328,8 @@
             $.post('../ashx/BugIssueHandler.ashx', {
                 mode: 'GetBugIssueDetail', BI_ID: BI_ID
             }, function (data) {
-                $('#btn_BugIssueContent').attr('onclick', 'ShowBugIssueContent(' + BI_ID + ')');
                 var BugInfo = $.parseJSON(data);
+                $('#btn_BugIssueContent').attr('onclick', 'ShowBugIssueContent(' + BI_ID + ',' + BugInfo.BI_Owner + ',"' + BugInfo.BI_Status + '")');
                 $('#TT_Title').html(BugInfo.TT_Title == '' ? '*' : BugInfo.TT_Title);
                 $('#S_ScenarioName').html(BugInfo.S_ScenarioName == '' ? '*' : BugInfo.S_ScenarioName);
                 $('#SR_RoleTitle').html(BugInfo.SR_RoleTitle == '' ? '*' : BugInfo.SR_RoleTitle);
@@ -320,7 +340,7 @@
                 $('#BI_CloseTime').html(BugInfo.BI_CloseTime == '' ? '*' : BugInfo.BI_CloseTime);
             });
         }
-        function ShowBugIssueContent(BI_ID) {
+        function ShowBugIssueContent(BI_ID, BI_Owner, BI_Status) {
             //window.location.href = 'BugContent.aspx?id=' + BI_ID;
             //<li class="timeline-inverted">
             //                    <div class="timeline-badge success">B / I</div>
@@ -353,19 +373,46 @@
                         if (data != 'fail') {
                             var replyJson = $.parseJSON(data);
                             for (var i in replyJson) {
-                                $('#BugIssueTimeLine').append('<li class="timeline-inverted"><div class="timeline-badge warning">R E</div><div class="timeline-panel">' +
+                                if (replyJson[i].BIR_Content == '<p>Bug/Issue Closed</p>') {
+                                    var cssReplyIcon = '<div class="timeline-badge info">SYS</div>'
+                                }
+                                else if (replyJson[i].BIR_Content == '<p>Bug/Issue ReOpen</p>') {
+                                    var cssReplyIcon = '<div class="timeline-badge info">SYS</div>'
+                                }
+                                else {
+                                    var cssReplyIcon = '<div class="timeline-badge warning">R E</div>'
+                                }
+                                $('#BugIssueTimeLine').append('<li class="timeline-inverted">' + cssReplyIcon + '<div class="timeline-panel">' +
                                 //'<div class="timeline-heading"><h4 class="timeline-title">' + replyJson[i].BI_Title + '</h4>' +
                                 '<p><small class="text-muted"><i class="glyphicon glyphicon-user"></i>' + replyJson[i].U_nickname + ' | <i class="glyphicon glyphicon-time"></i>' + replyJson[i].BIR_CreateTime + '</small></p>' +//</div>
                                 '<div class="timeline-body">' + replyJson[i].BIR_Content + '</div></div></li>');
                             }
                         }
                     });
-
                 }
                 $('#btn_BugIssueContent').prop('disabled', false);
                 $('#btn_AddBugIssueReply').prop('disabled', false);
-                //$('#BugIssueList').prop('disabled', false);
                 $('#btn_BugIssueContent').text('B/I Content');
+                if (BI_Owner == $('#User_ID').text()) {
+                    if (BI_Status == "Open") {
+                        $('#btn_CloseBugIssue').show(); $('#btn_ReOpenBugIssue').hide();
+                    }
+                    else if (BI_Status == "Closed") {
+                        $('#btn_CloseBugIssue').hide(); $('#btn_ReOpenBugIssue').show();
+                    }
+                }
+                else { $('#btn_CloseBugIssue').hide(); $('#btn_ReOpenBugIssue').hide(); }
+
+                if (BI_Status == 'Open') {
+                    $('#btn_AddBugIssueReply').show(); $('#div_BIR_Content').show();
+                }
+                else if (BI_Status == 'Closed') {
+                    $('#btn_AddBugIssueReply').hide(); $('#div_BIR_Content').hide();
+                }
+                else {
+                    $('#btn_AddBugIssueReply').hide(); $('#div_BIR_Content').hide();
+                }
+
                 window.location.href = '#BugIssueContent';
             });
         }
@@ -388,6 +435,56 @@
                     $('#BugIssueTimeLine').append('<li class="timeline-inverted"><div class="timeline-badge warning">R E</div><div class="timeline-panel">' +
                         '<p><small class="text-muted"><i class="glyphicon glyphicon-user"></i>' + U_nickname + ' | <i class="glyphicon glyphicon-time"></i>recently</small></p>' +//| <i class="glyphicon glyphicon-time"></i>' + replyJson[i].TT_CreateDate + '
                         '<div class="timeline-body">' + BIR_Content + '</div></div></li>');
+                }
+                else {
+                    alert('Save Data Failed !');
+                }
+            });
+        }
+
+        function CloseBugIssue() {
+            var BIR_FK_BI_ID = $('#BI_ID').val();
+            var User_ID = $('#User_ID').text();
+            if (!confirm('Close This Bug/Issue Now ?')) {
+                return;
+            }
+            $.post('../ashx/BugIssueHandler.ashx', {
+                mode: 'CloseBugIssue', BI_ID: BIR_FK_BI_ID, User_ID: User_ID
+            }, function (data) {
+                if (data == 'success') {
+                    //<p>Bug/Issue Closed</p>
+                    $('#BugIssueTimeLine').append('<li class="timeline-inverted"><div class="timeline-badge info">SYS</div><div class="timeline-panel">' +
+                        '<p><small class="text-muted"><i class="glyphicon glyphicon-user"></i>' + $('#User_UserName').text() + ' | <i class="glyphicon glyphicon-time"></i>recently</small></p>' +//| <i class="glyphicon glyphicon-time"></i>' + replyJson[i].TT_CreateDate + '
+                        '<div class="timeline-body"><p>Bug/Issue Closed</p></div></div></li>');
+                    $('#div_BIR_Content').hide();
+                    $('#btn_AddBugIssueReply').hide();
+                    $('#btn_CloseBugIssue').hide();
+                    $('#btn_ReOpenBugIssue').show();
+                    //ReloadBugIssueList('');
+                }
+                else {
+                    alert('Save Data Failed !');
+                }
+            });
+        }
+
+        function ReOpenBugIssue() {
+            var BIR_FK_BI_ID = $('#BI_ID').val();
+            var User_ID = $('#User_ID').text();
+            if (!confirm('ReOpen This Bug/Issue Now ?')) {
+                return;
+            }
+            $.post('../ashx/BugIssueHandler.ashx', {
+                mode: 'ReOpenBugIssue', BI_ID: BIR_FK_BI_ID, User_ID: User_ID
+            }, function (data) {
+                if (data == 'success') {
+                    $('#BugIssueTimeLine').append('<li class="timeline-inverted"><div class="timeline-badge info">SYS</div><div class="timeline-panel">' +
+                        '<p><small class="text-muted"><i class="glyphicon glyphicon-user"></i>' + $('#User_UserName').text() + ' | <i class="glyphicon glyphicon-time"></i>recently</small></p>' +//| <i class="glyphicon glyphicon-time"></i>' + replyJson[i].TT_CreateDate + '
+                        '<div class="timeline-body"><p>Bug/Issue ReOpen</p></div></div></li>');
+                    $('#div_BIR_Content').show();
+                    $('#btn_AddBugIssueReply').show();
+                    $('#btn_CloseBugIssue').show();
+                    $('#btn_ReOpenBugIssue').hide();
                 }
                 else {
                     alert('Save Data Failed !');

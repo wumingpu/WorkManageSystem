@@ -14,6 +14,40 @@ namespace DAL
         public BugIssue()
         { }
 
+        public bool ReOpenBugIssue(int BI_ID, int User_ID)
+        {
+            string DateTimeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(string.Format("update BugIssue set BI_Status='Open',BI_UpdateTime='{0}' where BI_ID={1};", DateTimeNow, BI_ID));
+            strSql.Append(string.Format("insert into BugIssueReply (BIR_FK_BI_ID,BIR_Content,BIR_CreateTime,BIR_CreateUser) values ({0},'<p>Bug/Issue ReOpen</p>','{1}',{2});", BI_ID, DateTimeNow, User_ID));
+            int CloseRes = DbHelperSQL.ExecuteSql(strSql.ToString());
+            if (CloseRes > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool CloseBugIssue(int BI_ID, int User_ID)
+        {
+            string DateTimeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(string.Format("update BugIssue set BI_Status='Closed',BI_CloseTime='{0}',BI_UpdateTime='{0}' where BI_ID={1};", DateTimeNow, BI_ID));
+            strSql.Append(string.Format("insert into BugIssueReply (BIR_FK_BI_ID,BIR_Content,BIR_CreateTime,BIR_CreateUser) values ({0},'<p>Bug/Issue Closed</p>','{1}',{2});", BI_ID, DateTimeNow, User_ID));
+            int CloseRes = DbHelperSQL.ExecuteSql(strSql.ToString());
+            if (CloseRes > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public DataSet GetSingle(int BI_ID)
         {
             StringBuilder strSql = new StringBuilder();
