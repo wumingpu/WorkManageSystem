@@ -73,6 +73,9 @@
                     <div class="row">
                         <ul class="pager">
                             <li><a class="btn" onclick="prevPage(); return false;">Previous</a></li>
+                            <li><span id="CurrentPage">Current:3</span></li>
+                            <li><span id="TotalPage">Total:5</span></li>
+                            <li><span id="TotalItem">Items:5</span></li>
                             <li><a class="btn" onclick="nextPage(); return false;">Next</a></li>
                         </ul>
                     </div>
@@ -147,7 +150,7 @@
                         <textarea id="BIR_Content"></textarea>
                     </div>
                     <div class="panel-footer">
-                        <input type="button" class="btn btn-success" value="Add Bug/Issue Reply" onclick="AddReply()" />
+                        <input type="button" class="btn btn-success" id="btn_AddBugIssueReply" value="Add Bug/Issue Reply" onclick="AddReply()" />
                         <%--<button class="btn btn-default btn-sm" onclick="window.location.href = '#page-wrapper'">Top</button>--%>
                     </div>
                 </div>
@@ -160,7 +163,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             ReloadBugIssueList('');
-            
+
             tinymce.init({
                 selector: "textarea", theme: "modern",
                 height: 200,
@@ -183,6 +186,9 @@
                 paste_data_images: true,
                 file_browser_callback: RoxyFileBrowser
             });
+
+            $('#btn_AddBugIssueReply').prop('disabled', true);
+            $('#btn_BugIssueContent').prop('disabled', true);
         });
         var roxyFileman = '../bower_components/fileman/index.html?integration=tinymce4';
         function RoxyFileBrowser(field_name, url, type, win) {
@@ -227,11 +233,14 @@
                 var BugInfo = $.parseJSON(data);
                 pager.items = BugInfo;
                 pagerInit(pager);
+                $('#TotalPage').text('Total:' + pager.pagedItems.length);
+                $('#TotalItem').text('Items:' + BugInfo.length);
                 BindBugIssueList();
             });
         }
         function BindBugIssueList() {
             var BugInfo = pager.pagedItems[pager.currentPage];
+            $('#CurrentPage').text('Current:' + (pager.currentPage + 1));
             var cssBI_Type, cssBI_Status;
             $('#BugIssueList').empty();
             for (var i in BugInfo) {
@@ -279,9 +288,6 @@
             };
             init();
         }
-        //$(function () {
-        //    BindBugIssueList();
-        //});
 
         function SearchBugIssueList() {
             var KeyWord = $('#txt_KeyWord').val();
@@ -293,6 +299,8 @@
             }
             tinymce.activeEditor.setContent('');
             $('#BugIssueTimeLine').empty();
+            $('#btn_AddBugIssueReply').prop('disabled', true);
+            $('#btn_BugIssueContent').prop('disabled', false);
             var BI_ID = selector.attr('id').substring(12);
             ReloadBugIssueDetail(BI_ID);
         }
@@ -355,6 +363,7 @@
 
                 }
                 $('#btn_BugIssueContent').prop('disabled', false);
+                $('#btn_AddBugIssueReply').prop('disabled', false);
                 //$('#BugIssueList').prop('disabled', false);
                 $('#btn_BugIssueContent').text('B/I Content');
                 window.location.href = '#BugIssueContent';
