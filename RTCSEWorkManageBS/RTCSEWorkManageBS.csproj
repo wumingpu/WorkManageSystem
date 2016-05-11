@@ -122,6 +122,8 @@
     <Content Include="BugIssue\BugContent.aspx" />
     <Content Include="BugIssue\BugList.aspx" />
     <Content Include="BugIssue\BugManage.aspx" />
+    <Content Include="DailyReport\PersonalReport.aspx" />
+    <Content Include="DailyReport\ReportList.aspx" />
     <Content Include="DashBoard.aspx" />
     <Content Include="DynamicJS\TagsInputUserData.js" />
     <Content Include="Other record.txt" />
@@ -177,6 +179,9 @@
     <Compile Include="ashx\ChartReportHandler.ashx.cs">
       <DependentUpon>ChartReportHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="ashx\DailyReportHandler.ashx.cs">
+      <DependentUpon>DailyReportHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="ashx\SystemManageHandler.ashx.cs">
       <DependentUpon>SystemManageHandler.ashx</DependentUpon>
     </Compile>
@@ -210,6 +215,20 @@
     </Compile>
     <Compile Include="BugIssue\BugManage.aspx.designer.cs">
       <DependentUpon>BugManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DailyReport\PersonalReport.aspx.cs">
+      <DependentUpon>PersonalReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DailyReport\PersonalReport.aspx.designer.cs">
+      <DependentUpon>PersonalReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DailyReport\ReportList.aspx.cs">
+      <DependentUpon>ReportList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DailyReport\ReportList.aspx.designer.cs">
+      <DependentUpon>ReportList.aspx</DependentUpon>
     </Compile>
     <Compile Include="DashBoard.aspx.cs">
       <DependentUpon>DashBoard.aspx</DependentUpon>
@@ -368,6 +387,7 @@
     <Content Include="jsonData\cities.json" />
     <Content Include="ashx\BugIssueHandler.ashx" />
     <Content Include="ashx\ChartReportHandler.ashx" />
+    <Content Include="ashx\DailyReportHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

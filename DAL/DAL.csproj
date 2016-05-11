@@ -52,6 +52,7 @@
     <Compile Include="UserInfo.cs" />
     <Compile Include="V_BugDetail.cs" />
     <Compile Include="V_BugReplyDetail.cs" />
+    <Compile Include="V_DailyReport.cs" />
     <Compile Include="V_TaskDetail.cs" />
     <Compile Include="V_TaskDetailSimple.cs" />
     <Compile Include="V_TaskTotalScenario.cs" />

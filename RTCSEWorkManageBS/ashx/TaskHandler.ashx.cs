@@ -141,6 +141,7 @@ namespace RTCSEWorkManageBS.ashx
 
             string TD_Progress = context.Request["TD_Progress"];
             string TD_CompleteReason = context.Request["TD_CompleteReason"];
+            string ResourcesID = context.Request["User_ID"];
 
             BLL.V_TaskDetailSimple bll = new BLL.V_TaskDetailSimple();
             // Refresh:刷新Middle和RightPanel; TaskStart：任务开始；SaveSuccess：进度保存成功
@@ -157,6 +158,11 @@ namespace RTCSEWorkManageBS.ashx
                 string SR_CaseRedmondGrow = context.Request["SR_CaseRedmondGrow"];
                 bll.UpdateCaseNumTotalDaily(TT_ID, SR_CasePassedGrow, SR_CaseFailedGrow, SR_CaseNAGrow, SR_CaseRedmondGrow);
             }
+
+            // Add Daily Report
+            BLL.V_DailyReport bllDR = new BLL.V_DailyReport();
+            bllDR.Add(ResourcesID, TD_ID, TD_CardType == "private" ? "TP" : "TT");
+
             context.Response.Write(UpdateRes);
         }
 
@@ -273,7 +279,8 @@ namespace RTCSEWorkManageBS.ashx
                     TD_CardType = dr["TD_CardType"].ToString(),
                     TD_Date = Convert.ToDateTime(dr["TD_DateStart"]).ToString("MM/dd/yyyy") + '-' + Convert.ToDateTime(dr["TD_DateEnd"]).ToString("MM/dd/yyyy"),
                     TD_Owner = dr["TD_Owner"].ToString(),
-                    TD_TaskType = dr["TD_TaskType"].ToString()
+                    TD_TaskType = dr["TD_TaskType"].ToString(),
+                    TD_OwnerID = dr["TD_OwnerID"].ToString()
                 });
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();

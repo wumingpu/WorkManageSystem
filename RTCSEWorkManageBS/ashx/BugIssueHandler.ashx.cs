@@ -78,6 +78,10 @@ namespace RTCSEWorkManageBS.ashx
             bool ReOpenRes = bll.ReOpenBugIssue(BI_ID, User_ID);
             if (ReOpenRes)
             {
+                // Add Daily Report
+                BLL.V_DailyReport bllDR = new BLL.V_DailyReport();
+                bllDR.Add(User_ID.ToString(), BI_ID, "BI");
+
                 context.Response.Write("success");
             }
             else
@@ -265,6 +269,10 @@ namespace RTCSEWorkManageBS.ashx
             int AddRes = bll.Add(model);
             if (AddRes > 0)
             {
+                // Add Daily Report
+                BLL.V_DailyReport bllDR = new BLL.V_DailyReport();
+                bllDR.Add(model.BI_Owner.ToString(), AddRes, "BI");
+
                 context.Response.Write("success");
             }
             else

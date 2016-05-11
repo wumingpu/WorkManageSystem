@@ -34,7 +34,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body><%-- data-spy="scroll" data-target="#myScrollspy"--%>
+<body>
+    <%-- data-spy="scroll" data-target="#myScrollspy"--%>
     <form id="defaultForm" runat="server" method="post">
         <div id="wrapper">
 
@@ -60,7 +61,7 @@
                             <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            
+
                             <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
                             </li>
                             <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
@@ -75,8 +76,10 @@
                 </ul>
 
                 <!-- Left Nav -->
-                <div class="navbar-default sidebar"><%-- role="navigation" id="myScrollspy"--%>
-                    <div class="sidebar-nav navbar-collapse"><%-- data-spy="affix"--%>
+                <div class="navbar-default sidebar">
+                    <%-- role="navigation" id="myScrollspy"--%>
+                    <div class="sidebar-nav navbar-collapse">
+                        <%-- data-spy="affix"--%>
                         <ul class="nav" id="side-menu">
                             <%--Search--%>
                             <%--<li class="sidebar-search">
@@ -123,7 +126,7 @@
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-bitbucket fa-fw"></i>Bug/Issue<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-bug fa-fw"></i>Bug/Issue<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="<%=ResolveUrl("~/BugIssue/BugAdd.aspx") %>">New B/I</a>
@@ -133,6 +136,17 @@
                                     </li>--%>
                                     <li>
                                         <a href="<%=ResolveUrl("~/BugIssue/BugList.aspx") %>">B/I List</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-envelope-o fa-fw"></i>Daily Report<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<%=ResolveUrl("~/DailyReport/PersonalReport.aspx") %>"><i class="fa fa-fw"></i>Personal Report</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%=ResolveUrl("~/DailyReport/ReportList.aspx") %>"><i class="fa fa-fw"></i>Everyone Report</a>
                                     </li>
                                 </ul>
                             </li>
@@ -147,6 +161,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            
                             <li>
                                 <a href="#"><i class="fa fa-warning fa-fw"></i>Test Pages<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -177,7 +192,7 @@
                                     <li>
                                         <a href="<%=ResolveUrl("~/TestPage.aspx") %>"><i class="fa fa-fw"></i>Other Test</a>
                                     </li>
-                                    
+
                                 </ul>
                             </li>
                         </ul>

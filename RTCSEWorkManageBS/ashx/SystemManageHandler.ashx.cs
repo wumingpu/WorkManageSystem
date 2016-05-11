@@ -51,11 +51,12 @@ namespace RTCSEWorkManageBS.ashx
 
         private void GetUserInfoSingle(HttpContext context)
         {
-            BLL.UserInfo bll = new BLL.UserInfo ();
+            BLL.UserInfo bll = new BLL.UserInfo();
             DataSet ds = bll.GetList(" U_ID=" + context.Request["U_ID"]);
             DataRow dr = ds.Tables[0].Rows[0];
             List<Model.UserInfo> list = new List<Model.UserInfo>();
-            list.Add(new Model.UserInfo() {
+            list.Add(new Model.UserInfo()
+            {
                 U_username = dr["U_username"].ToString(),
                 U_power = dr["U_power"].ToString(),
                 U_nickname = dr["U_nickname"].ToString(),
@@ -143,9 +144,18 @@ namespace RTCSEWorkManageBS.ashx
 
         private void QueryUserList(HttpContext context)
         {
+            string strKeyWord = context.Request["KeyWord"];
             BLL.UserInfo bll = new BLL.UserInfo();
             List<Model.UserInfo> list = new List<Model.UserInfo>();
-            DataSet ds = bll.GetList("");
+            DataSet ds = new DataSet();
+            if (!string.IsNullOrEmpty(strKeyWord))
+            {
+               ds = bll.GetList(string.Format("U_nickname like '%{0}%'", strKeyWord));
+            }
+            else
+            {
+                ds = bll.GetList("");
+            }
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
                 list.Add(new Model.UserInfo()
@@ -160,7 +170,8 @@ namespace RTCSEWorkManageBS.ashx
                 });
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            string strJson = string.Format("{{\"rows\":{0}}}", jss.Serialize(list));
+            //string strJson = string.Format("{{\"rows\":{0}}}", jss.Serialize(list));
+            string strJson = jss.Serialize(list);
             context.Response.Write(strJson);
         }
         private string ChangePowerToDisplay(string power)

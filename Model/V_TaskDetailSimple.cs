@@ -25,5 +25,6 @@ namespace Model
         public string TD_DateEnd { set; get; }
         public string TD_Owner { set; get; }
         public string TD_AssignedUserID { set; get; }
+        public string TD_OwnerID { set; get; }
     }
 }

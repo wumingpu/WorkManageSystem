@@ -92,9 +92,11 @@ namespace DAL
         {
             StringBuilder strSql = new StringBuilder();
             string DateTimeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string DateNow = DateTime.Now.ToString("yyyy-MM-dd");
             if (TD_CardType == "public")
             {
-                strSql.Append(string.Format("update ScenarioRole set SR_TimeStart='{0}',SR_Status='InProgress' where SR_ID={1}", DateTimeNow, TD_ID));
+                strSql.Append(string.Format("update ScenarioRole set SR_TimeStart='{0}',SR_Status='InProgress' where SR_ID={1};", DateTimeNow, TD_ID));
+                
             }
             else if (TD_CardType == "private")
             {

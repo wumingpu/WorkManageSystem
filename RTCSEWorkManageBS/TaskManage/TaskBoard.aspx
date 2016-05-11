@@ -678,6 +678,7 @@
             var TD_ID = $('#p_TD_ID').text();
             var TD_CardType = $('#p_TD_CardType').text();
             var TT_ID = $('#TT_ID').text();
+            var User_ID = $('#User_ID').text();
 
             if (!(dragFrom=="LeftPanel" && dropTo == "MiddlePanel")) {
                 var SR_CasePassed = $('#SR_CasePassed').val();
@@ -725,7 +726,8 @@
                 SR_CasePassedGrow: SR_CasePassedGrow, SR_CaseFailedGrow: SR_CaseFailedGrow, SR_CaseNAGrow: SR_CaseNAGrow, SR_CaseRedmondGrow: SR_CaseRedmondGrow,
                 SR_CaseNA: SR_CaseNA, SR_CaseRedmond: SR_CaseRedmond, TimeStart: TimeStart,
                 TimeEnd: TimeEnd, TD_Progress: TD_Progress,TD_CompleteReason:TD_CompleteReason,
-                dragFrom: dragFrom, dropTo: dropTo, TD_CardType: TD_CardType, TD_ID: TD_ID, TT_ID: TT_ID
+                dragFrom: dragFrom, dropTo: dropTo, TD_CardType: TD_CardType, TD_ID: TD_ID, TT_ID: TT_ID,
+                User_ID: User_ID
             }, function (data, status) {
                 if (data == 'Refresh') {
                     alert("Task Complete");
