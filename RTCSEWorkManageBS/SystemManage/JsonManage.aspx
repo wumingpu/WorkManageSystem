@@ -8,6 +8,12 @@
         .bootstrap-tagsinput {
             width: 100%;
         }
+
+        .page-header {
+            padding-bottom: 9px;
+            margin: 15px 0 10px;
+            border-bottom: 1px solid #eee;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

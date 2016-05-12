@@ -115,6 +115,7 @@ namespace DAL
                 model.TT_TimeUsed = dr["TT_TimeUsed"].ToString();
                 model.TT_Title = dr["TT_Title"].ToString();
                 model.TT_CompleteReason = dr["TT_CompleteReason"].ToString();
+                model.TT_ServerClient = dr["TT_ServerClient"].ToString();
                 return model;
             }
             else
@@ -127,9 +128,9 @@ namespace DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into TaskTotal(");
-            strSql.Append("TT_Release,TT_CU,TT_BuildType,TT_BuildNum,TT_TaskType,TT_CaseTotalNum,TT_CaseRealRunNum,TT_DateStart,TT_DateEnd,TT_TaskStyle,TT_BugIssueNum,TT_ReportLink,TT_Comments,TT_CreateDate,TT_Title,TT_TaskProgress,TT_TaskStatus,TT_HaveScenario)");
+            strSql.Append("TT_Release,TT_CU,TT_BuildType,TT_BuildNum,TT_TaskType,TT_CaseTotalNum,TT_CaseRealRunNum,TT_DateStart,TT_DateEnd,TT_TaskStyle,TT_BugIssueNum,TT_ReportLink,TT_Comments,TT_CreateDate,TT_Title,TT_TaskProgress,TT_TaskStatus,TT_HaveScenario,TT_ServerClient)");
             strSql.Append(" values (");
-            strSql.Append("@TT_Release,@TT_CU,@TT_BuildType,@TT_BuildNum,@TT_TaskType,@TT_CaseTotalNum,@TT_CaseRealRunNum,@TT_DateStart,@TT_DateEnd,@TT_TaskStyle,@TT_BugIssueNum,@TT_ReportLink,@TT_Comments,@TT_CreateDate,@TT_Title,@TT_TaskProgress,@TT_TaskStatus,@TT_HaveScenario)");
+            strSql.Append("@TT_Release,@TT_CU,@TT_BuildType,@TT_BuildNum,@TT_TaskType,@TT_CaseTotalNum,@TT_CaseRealRunNum,@TT_DateStart,@TT_DateEnd,@TT_TaskStyle,@TT_BugIssueNum,@TT_ReportLink,@TT_Comments,@TT_CreateDate,@TT_Title,@TT_TaskProgress,@TT_TaskStatus,@TT_HaveScenario,@TT_ServerClient)");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
                         new SqlParameter("@TT_Release",SqlDbType.VarChar,10),
@@ -149,7 +150,9 @@ namespace DAL
                         new SqlParameter("@TT_Title",SqlDbType.VarChar,300),
                         new SqlParameter("@TT_TaskProgress",SqlDbType.VarChar,10),
                         new SqlParameter("@TT_TaskStatus",SqlDbType.VarChar,10),
-                        new SqlParameter("@TT_HaveScenario",SqlDbType.VarChar,5)};
+                        new SqlParameter("@TT_HaveScenario",SqlDbType.VarChar,5),
+                        new SqlParameter("@TT_ServerClient",SqlDbType.VarChar,20)
+            };
             parameters[0].Value = model.TT_Release;
             parameters[1].Value = model.TT_CU;
             parameters[2].Value = model.TT_BuildType;
@@ -168,6 +171,7 @@ namespace DAL
             parameters[15].Value = model.TT_TaskProgress;
             parameters[16].Value = model.TT_TaskStatus;
             parameters[17].Value = model.TT_HaveScenario;
+            parameters[18].Value = model.TT_ServerClient;
 
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -230,7 +234,8 @@ namespace DAL
             strSql.Append("TT_TaskStyle=@TT_TaskStyle,");
             strSql.Append("TT_BugIssueNum=@TT_BugIssueNum,");
             strSql.Append("TT_ReportLink=@TT_ReportLink,");
-            strSql.Append("TT_Comments=@TT_Comments");
+            strSql.Append("TT_Comments=@TT_Comments,");
+            strSql.Append("TT_ServerClient=@TT_ServerClient");
             strSql.Append(" where TT_ID=@TT_ID");
             SqlParameter[] parameters = {
                         new SqlParameter("@TT_Release",SqlDbType.VarChar,10),
@@ -246,6 +251,7 @@ namespace DAL
                         new SqlParameter("@TT_BugIssueNum",SqlDbType.VarChar),
                         new SqlParameter("@TT_ReportLink",SqlDbType.VarChar),
                         new SqlParameter("@TT_Comments",SqlDbType.VarChar),
+                        new SqlParameter("@TT_ServerClient",SqlDbType.VarChar,20),
                         new SqlParameter("@TT_ID",SqlDbType.Int,4)};
             parameters[0].Value = model.TT_Release;
             parameters[1].Value = model.TT_CU;
@@ -260,7 +266,8 @@ namespace DAL
             parameters[10].Value = model.TT_BugIssueNum;
             parameters[11].Value = model.TT_ReportLink;
             parameters[12].Value = model.TT_Comments;
-            parameters[13].Value = model.TT_ID;
+            parameters[13].Value = model.TT_ServerClient;
+            parameters[14].Value = model.TT_ID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)

@@ -15,9 +15,12 @@
             border-bottom: 1px solid #eee;
         }
 
+        .col-lg-3 {
+            border-right: 1px solid #eee;
+        }
+
         .col-lg-4 {
             border-right: 1px solid #eee;
-            /*border-bottom: 1px solid #eee;*/
         }
 
         .col-lg-6 {
@@ -97,7 +100,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <div class="list-group-item">
                                     <%--<div class="list-group-item">
                                         <p class="list-group-item-text"></p>
@@ -107,13 +110,21 @@
                                     <h4 class="list-group-item-heading" id="D_TT_Release">*</h4>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="list-group-item">
+                                        <p class="list-group-item-text">Server/Client</p>
+                                        <h4 class="list-group-item-heading" id="D_TT_ServerClient">*</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
                                 <div class="list-group-item">
                                     <p class="list-group-item-text">CU</p>
                                     <h4 class="list-group-item-heading" id="D_TT_CU">*</h4>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <div class="list-group-item">
                                     <p class="list-group-item-text">Build Type</p>
                                     <h4 class="list-group-item-heading" id="D_TT_BuildType">*</h4>
@@ -253,8 +264,28 @@
                                     <option>W16</option>
                                     <option>W15</option>
                                     <option>W14</option>
+                                    <option>LM</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>CU</label>
+                                <input class="form-control" id="TT_CU" value="CU" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Server/Client Build</label>
+                                <select class="form-control selectpicker" id="TT_ServerClient">
+                                    <option>Server</option>
+                                    <option>Client</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
                             <div class="form-group">
                                 <label>Build Type</label>
                                 <select class="form-control selectpicker" id="TT_BuildType">
@@ -263,6 +294,16 @@
                                     <option>MSRC</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Build Number</label>
+                                <input class="form-control" id="TT_BuildNum" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Task Type</label>
                                 <select class="form-control selectpicker" id="TT_TaskType">
@@ -285,45 +326,37 @@
                                     </optgroup>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Task Style</label>
-                                <select class="form-control selectpicker" id="TT_TaskStyle">
-                                    <option>Re-Set</option>
-                                    <option>Skip</option>
-                                    <option>Official</option>
-                                </select>
-                            </div>
                         </div>
-                        <!-- /.col left -->
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>CU</label>
-                                <input class="form-control" id="TT_CU" value="CU" />
-                            </div>
-                            <div class="form-group">
-                                <label>Build Number</label>
-                                <input class="form-control" id="TT_BuildNum" />
-                            </div>
                             <div class="form-group">
                                 <label>Case No.</label>
                                 <input class="form-control" id="TT_CaseTotalNum" />
                             </div>
-                            <%--<div class="form-inline">--%>
-                            <div class="form-group">
-                                <div class="col-lg-6">
-                                    <label>Start Date</label>
-                                    <input class="form-control" id="TT_DateStart" />
-                                    <%--<span class="add-on"><i class="icon-remove"></i></span>
-                                    <span class="add-on"><i class="icon-calendar"></i></span>--%>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>End Date</label>
-                                    <input class="form-control" id="TT_DateEnd" />
-                                </div>
-                            </div>
-                            <%--</div>--%>
                         </div>
-                        <!-- /.col right -->
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Task Style</label>
+                                <select class="form-control selectpicker" id="TT_TaskStyle">
+                                    <option>Official</option>
+                                    <option>Re-Set</option>
+                                    <option>Skip</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Start Date</label>
+                                <input class="form-control" id="TT_DateStart" />
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>End Date</label>
+                                <input class="form-control" id="TT_DateEnd" />
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
@@ -526,6 +559,7 @@
             $('#TT_BuildType').selectpicker('val', document.getElementById("TT_BuildType").options[0].value);
             $('#TT_TaskType').selectpicker('val', document.getElementById("TT_TaskType").options[0].value);
             $('#TT_TaskStyle').selectpicker('val', document.getElementById("TT_TaskStyle").options[0].value);
+            $('#TT_ServerClient').selectpicker('val', document.getElementById("TT_ServerClient").options[0].value);
             $('#TT_CU').val('CU');
             $('#TT_CaseTotalNum').val('');
             $('#TT_DateStart').val('');
@@ -567,6 +601,7 @@
                 $('#D_TT_TimeEnd').html(TaskInfo.TT_TimeEnd);
                 $('#D_TT_TimeUsed').html(TaskInfo.TT_TimeUsed);
                 $('#D_TT_CompleteReason').html(TaskInfo.TT_CompleteReason);
+                $('#D_TT_ServerClient').html(TaskInfo.TT_ServerClient)
             });
         }
 
@@ -677,10 +712,12 @@
                 $.post('../ashx/TaskHandler.ashx', { mode: 'GetTaskTotalInfoSingle', id: rowIndex }, function (data, status) {
                     $('#TT_ID').val(rowIndex);
                     var result = $.parseJSON(data);
+                    $('#TT_Title').val(result.TT_Title);
                     $('#TT_Release').selectpicker('val', result.TT_Release);
                     $('#TT_BuildType').selectpicker('val', result.TT_BuildType);
                     $('#TT_TaskType').selectpicker('val', result.TT_TaskType);
                     $('#TT_TaskStyle').selectpicker('val', result.TT_TaskStyle);
+                    $('#TT_ServerClient').selectpicker('val', result.TT_ServerClient);
                     $('#TT_BuildNum').val(result.TT_BuildNum);
                     $('#TT_CU').val(result.TT_CU);
                     $('#TT_CaseTotalNum').val(result.TT_CaseTotalNum);
@@ -703,6 +740,7 @@
             var TT_BuildType = $('#TT_BuildType').selectpicker('val');
             var TT_TaskType = $('#TT_TaskType').selectpicker('val');
             var TT_TaskStyle = $('#TT_TaskStyle').selectpicker('val');
+            var TT_ServerClient = $('#TT_ServerClient').selectpicker('val');
             var TT_CU = $('#TT_CU').val();
             var TT_BuildNum = $('#TT_BuildNum').val();
             var TT_CaseTotalNum = $('#TT_CaseTotalNum').val();
@@ -717,12 +755,15 @@
                     mode: 'AddTaskListTotal', TT_Release: TT_Release, TT_BuildType: TT_BuildType,
                     TT_TaskType: TT_TaskType, TT_TaskStyle: TT_TaskStyle, TT_CU: TT_CU,
                     TT_BuildNum: TT_BuildNum, TT_CaseTotalNum: TT_CaseTotalNum, TT_DateStart: TT_DateStart,
-                    TT_DateEnd: TT_DateEnd, TT_Comments: TT_Comments, TT_Title: TT_Title
+                    TT_DateEnd: TT_DateEnd, TT_Comments: TT_Comments, TT_Title: TT_Title,
+                    TT_ServerClient: TT_ServerClient
                 }, function (data, status) {
-                    if (data == 'success') {
+                    if (data != 'fail') {
                         //alert('Save Data Success !');
                         $('#ModalTaskListTotal').modal('hide');
                         ReloadJQGrid();
+                        ReloadTaskDetail(data);
+                        //$('#GT_TaskListTotal').jqGrid('setSelection', data);
                     }
                     else {
                         alert('Save Data Failed !');
@@ -735,12 +776,15 @@
                     mode: 'UpdateTaskListTotal', TT_ID: TT_ID, TT_Release: TT_Release, TT_BuildType: TT_BuildType,
                     TT_TaskType: TT_TaskType, TT_TaskStyle: TT_TaskStyle, TT_CU: TT_CU,
                     TT_BuildNum: TT_BuildNum, TT_CaseTotalNum: TT_CaseTotalNum, TT_DateStart: TT_DateStart,
-                    TT_DateEnd: TT_DateEnd, TT_Comments: TT_Comments, TT_Title: TT_Title
+                    TT_DateEnd: TT_DateEnd, TT_Comments: TT_Comments, TT_Title: TT_Title,
+                    TT_ServerClient: TT_ServerClient
                 }, function (data, status) {
                     if (data == 'success') {
                         //alert('Update Data Success !');
                         $('#ModalTaskListTotal').modal('hide');
                         ReloadJQGrid();
+                        ReloadTaskDetail(TT_ID);
+                        //$('#GT_TaskListTotal').jqGrid('setSelection', TT_ID);
                     }
                     else {
                         alert('Update Data Failed !');

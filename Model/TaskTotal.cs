@@ -40,6 +40,7 @@ namespace Model
 
         public string TT_Date { set; get; } // only for display TT_DateStart + TT_DateEnd
         public string TT_CompleteReason { set; get; }
+        public string TT_ServerClient { set; get; }
         #endregion
     }
 

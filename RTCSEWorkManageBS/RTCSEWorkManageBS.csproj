@@ -127,6 +127,7 @@
     <Content Include="DashBoard.aspx" />
     <Content Include="DynamicJS\TagsInputUserData.js" />
     <Content Include="Other record.txt" />
+    <Content Include="QBR\SOWList.aspx" />
     <Content Include="SystemManage\JsonManage.aspx" />
     <Content Include="SystemManage\UserManage.aspx" />
     <Content Include="TaskManage\jqGridTest.aspx" />
@@ -181,6 +182,9 @@
     </Compile>
     <Compile Include="ashx\DailyReportHandler.ashx.cs">
       <DependentUpon>DailyReportHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ashx\QBRHandler.ashx.cs">
+      <DependentUpon>QBRHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="ashx\SystemManageHandler.ashx.cs">
       <DependentUpon>SystemManageHandler.ashx</DependentUpon>
@@ -245,6 +249,13 @@
       <DependentUpon>MainFrame.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QBR\SOWList.aspx.cs">
+      <DependentUpon>SOWList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QBR\SOWList.aspx.designer.cs">
+      <DependentUpon>SOWList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SystemManage\JsonManage.aspx.cs">
       <DependentUpon>JsonManage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -388,6 +399,7 @@
     <Content Include="ashx\BugIssueHandler.ashx" />
     <Content Include="ashx\ChartReportHandler.ashx" />
     <Content Include="ashx\DailyReportHandler.ashx" />
+    <Content Include="ashx\QBRHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

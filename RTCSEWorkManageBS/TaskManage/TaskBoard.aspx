@@ -152,6 +152,7 @@
                                 <label>Release</label><input class="form-control" id="TT_Release" />
                             </div>
                         </div>
+                        
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>Build Type</label><input class="form-control" id="TT_BuildType" />

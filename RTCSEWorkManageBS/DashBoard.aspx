@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainFrame.Master" AutoEventWireup="true" CodeBehind="DashBoard.aspx.cs" Inherits="RTCSEWorkManageBS.DashBoard" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="CustomerCSSPlace" runat="server">
+    <link href="<%=ResolveUrl("~/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css") %>" rel="stylesheet" />
     <style type="text/css">
         .page-header {
             padding-bottom: 9px;
@@ -19,7 +20,23 @@
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-
+        <div class="row">
+            <div class="col-lg-6">
+                <div id="cp3" class="input-group colorpicker-component">
+                    <input type="text" value="#00AABB" class="form-control" id="ColorPicker" />
+                    <span class="input-group-addon">
+                        <i></i>
+                    </span>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" onclick="LoadBarMonthTasknumber()">Reload</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                
+            </div>
+        </div>
+        <br />
         <div class="row">
             <div class="col-lg-6">
                 <div class="panel panel-info">
@@ -56,15 +73,19 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="CustomerJavaScriptPlace" runat="server">
     <script type="text/ecmascript" src="<%=ResolveUrl("~/bower_components/Chartjs/dist/Chart.bundle.min.js") %>"></script>
+    <script type="text/ecmascript" src="<%=ResolveUrl("~/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js") %>"></script>
     <script type="text/javascript">
         var randomColorFactor = function () {
             return Math.round(Math.random() * 255);
         };
         var randomColor = function () {
-            return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',.7)';
+            //return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',.7)';
+            return $('#ColorPicker').val();
         };
 
         $(document).ready(function () {
+            $('#cp3').colorpicker({ color: 'rgba(0,134,246,0.71)', format: 'rgba' });//#AA3399
+
             LoadBarMonthTasknumber();
         });
 
@@ -74,7 +95,7 @@
                 labels: [],
                 datasets: [{
                     label: 'Task Number',
-                    backgroundColor: randomColor(),
+                    backgroundColor: randomColor(), // rgba(15,122,233,0.8)
                     data: []
                 }]
             }
@@ -96,7 +117,7 @@
                 options: {
                     responsive: true,
                     legend: {
-                        position: 'top'
+                        position: 'bottom'
                     },
                     //title: {
                     //    display: true,

@@ -151,6 +151,14 @@
                                 </ul>
                             </li>
                             <li>
+                                <a href="#"><i class="fa fa-book fa-fw"></i>QBR<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<%=ResolveUrl("~/QBR/SOWList.aspx") %>"><i class="fa fa-fw"></i>SOW List</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
                                 <a href="#"><i class="fa fa-cogs fa-fw"></i>SystemManage<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
@@ -161,7 +169,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            
+
                             <li>
                                 <a href="#"><i class="fa fa-warning fa-fw"></i>Test Pages<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">

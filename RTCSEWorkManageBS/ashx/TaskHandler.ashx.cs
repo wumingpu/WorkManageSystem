@@ -619,6 +619,7 @@ namespace RTCSEWorkManageBS.ashx
             model.TT_DateStart = Convert.ToDateTime(context.Request["TT_DateStart"]).ToString("yyyy-MM-dd");
             model.TT_DateEnd = Convert.ToDateTime(context.Request["TT_DateEnd"]).ToString("yyyy-MM-dd");
             model.TT_Comments = context.Request["TT_Comments"];
+            model.TT_ServerClient = context.Request["TT_ServerClient"];
             bool UpdateResult = bll.Update(model);
             if (UpdateResult)
             {
@@ -662,7 +663,8 @@ namespace RTCSEWorkManageBS.ashx
                 TT_TimeEnd = string.IsNullOrEmpty(model.TT_TimeEnd) ? "Task Not End" : model.TT_TimeEnd,
                 TT_TimeUsed = Minute2Day(model.TT_TimeUsed),
                 TT_Title = model.TT_Title,
-                TT_CompleteReason = model.TT_CompleteReason
+                TT_CompleteReason = model.TT_CompleteReason,
+                TT_ServerClient = model.TT_ServerClient
             });
             JavaScriptSerializer jss = new JavaScriptSerializer();
             string strJson = jss.Serialize(list);
@@ -772,11 +774,12 @@ namespace RTCSEWorkManageBS.ashx
             model.TT_TaskProgress = "0";
             model.TT_TaskStatus = "Pending";
             model.TT_HaveScenario = "No";
+            model.TT_ServerClient = context.Request["TT_ServerClient"].ToString();
 
             int iRows = bll.Add(model);
             if (iRows > 0)
             {
-                context.Response.Write("success");
+                context.Response.Write(iRows);
             }
             else
             {

@@ -38,7 +38,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Bug Issue List</h2>
+                <h1 class="page-header">Bug Issue List</h1>
                 <%--class="page-header"--%>
             </div>
             <!-- /.col-lg-12 -->
