@@ -26,4 +26,19 @@ namespace Model.ChartReport
         public string TaskName { set; get; }
         public int DataPerTask { set; get; } 
     }
+
+    [Serializable]
+    public partial class LabelData
+    {
+        public string LabelName { set; get; }
+        public int iData { set; get; }
+    }
+
+    [Serializable]
+    public partial class LabelReleaseData
+    {
+        public string LabelName { set; get; }
+        public string Release { set; get; }
+        public int iData { set; get; }
+    }
 }

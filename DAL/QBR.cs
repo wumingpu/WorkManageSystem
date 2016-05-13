@@ -15,7 +15,7 @@ namespace DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append(string.Format("select DATENAME(QUARTER,TT_TimeEnd) as SeasonNum,TT_Release,sum(convert(int,TT_CaseRealRunNum)) as CaseNo from TaskTotal where TT_TimeEnd between '{0}-01-01 00:00:00' and '{0}-12-31 24:59:59' and TT_TaskType like '%HotFix%' and TT_ServerClient='Server' group by TT_Release,DATENAME(QUARTER,TT_TimeEnd)", Year));
             strSql.Append(" union all ");
-            strSql.Append(string.Format("select DATENAME(QUARTER,TT_TimeEnd) as SeasonNum,'',sum(convert(int,TT_CaseRealRunNum)) as CaseNo from TaskTotal where  TT_TimeEnd between '{0}-01-01 00:00:00' and '{0}-12-31 24:59:59' and TT_TaskType like '%HotFix%' and TT_ServerClient='Server' group by DATENAME(QUARTER,TT_TimeEnd);", Year));
+            strSql.Append(string.Format("select DATENAME(QUARTER,TT_TimeEnd) as SeasonNum,'',sum(convert(int,TT_CaseRealRunNum)) as CaseNo from TaskTotal where  TT_TimeEnd between '{0}-01-01 00:00:00' and '{0}-12-31 24:59:59' and TT_TaskType like '%HotFix%' and TT_ServerClient='Server' and TT_Release!='LM' group by DATENAME(QUARTER,TT_TimeEnd);", Year));
             return DbHelperSQL.Query(strSql.ToString());
         }
 
@@ -24,7 +24,7 @@ namespace DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append(string.Format("select DATENAME(QUARTER,TT_TimeEnd) as SeasonNum,TT_Release,sum(convert(int,TT_CaseRealRunNum)) as CaseNo from TaskTotal where TT_TimeEnd between '{0}-01-01 00:00:00' and '{0}-12-31 24:59:59' and TT_TaskType like '%MU%' and TT_ServerClient='Server' group by TT_Release,DATENAME(QUARTER,TT_TimeEnd)", Year));
             strSql.Append(" union all ");
-            strSql.Append(string.Format("select DATENAME(QUARTER,TT_TimeEnd) as SeasonNum,'',sum(convert(int,TT_CaseRealRunNum)) as CaseNo from TaskTotal where  TT_TimeEnd between '{0}-01-01 00:00:00' and '{0}-12-31 24:59:59' and TT_TaskType like '%MU%' and TT_ServerClient='Server' group by DATENAME(QUARTER,TT_TimeEnd);", Year));
+            strSql.Append(string.Format("select DATENAME(QUARTER,TT_TimeEnd) as SeasonNum,'',sum(convert(int,TT_CaseRealRunNum)) as CaseNo from TaskTotal where  TT_TimeEnd between '{0}-01-01 00:00:00' and '{0}-12-31 24:59:59' and TT_TaskType like '%MU%' and TT_ServerClient='Server' and TT_Release!='LM' group by DATENAME(QUARTER,TT_TimeEnd);", Year));
             return DbHelperSQL.Query(strSql.ToString());
         }
 
@@ -32,8 +32,6 @@ namespace DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append(string.Format("select DATENAME(QUARTER,TT_TimeEnd) as SeasonNum,TT_Release,sum(convert(int,TT_CaseRealRunNum)) as CaseNo from TaskTotal where TT_TimeEnd between '{0}-01-01 00:00:00' and '{0}-12-31 24:59:59' and TT_TaskType like '%E2E%' and TT_ServerClient='Server' group by TT_Release,DATENAME(QUARTER,TT_TimeEnd)", Year));
-            //strSql.Append(" union all ");
-            //strSql.Append(string.Format("select DATENAME(QUARTER,TT_TimeEnd) as SeasonNum,'',sum(convert(int,TT_CaseRealRunNum)) as CaseNo from TaskTotal where  TT_TimeEnd between '{0}-01-01 00:00:00' and '{0}-12-31 24:59:59' and TT_TaskType like '%E2E%' and TT_ServerClient='Server' group by DATENAME(QUARTER,TT_TimeEnd);", Year));
             return DbHelperSQL.Query(strSql.ToString());
         }
 
@@ -41,17 +39,21 @@ namespace DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append(string.Format("select DATENAME(QUARTER,TT_TimeEnd) as SeasonNum,TT_Release,sum(convert(int,TT_CaseRealRunNum)) as CaseNo from TaskTotal where TT_TimeEnd between '{0}-01-01 00:00:00' and '{0}-12-31 24:59:59' and TT_TaskType like '%E2E%' and TT_ServerClient='Client' group by TT_Release,DATENAME(QUARTER,TT_TimeEnd)", Year));
-            //strSql.Append(" union all ");
-            //strSql.Append(string.Format("select DATENAME(QUARTER,TT_TimeEnd) as SeasonNum,'',sum(convert(int,TT_CaseRealRunNum)) as CaseNo from TaskTotal where  TT_TimeEnd between '{0}-01-01 00:00:00' and '{0}-12-31 24:59:59' and TT_TaskType like '%E2E%' and TT_ServerClient='Client' group by DATENAME(QUARTER,TT_TimeEnd);", Year));
             return DbHelperSQL.Query(strSql.ToString());
         }
 
         public DataSet GetLMSeasonReleaseCaseno(string Year)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(string.Format("select DATENAME(QUARTER,TT_TimeEnd) as SeasonNum,'LM',sum(convert(int,TT_CaseRealRunNum)) as CaseNo from TaskTotal where TT_TimeEnd between '{0}-01-01 00:00:00' and '{0}-12-31 24:59:59' and TT_Release='LM' group by TT_Release,DATENAME(QUARTER,TT_TimeEnd)", Year));
-            //strSql.Append(" union all ");
-            //strSql.Append(string.Format("select DATENAME(QUARTER,TT_TimeEnd) as SeasonNum,'',sum(convert(int,TT_CaseRealRunNum)) as CaseNo from TaskTotal where  TT_TimeEnd between '{0}-01-01 00:00:00' and '{0}-12-31 24:59:59' and TT_Release='LM' group by DATENAME(QUARTER,TT_TimeEnd);", Year));
+            strSql.Append(string.Format("select DATENAME(QUARTER,TT_TimeEnd) as SeasonNum,'LM' as TT_Release,sum(convert(int,TT_CaseRealRunNum)) as CaseNo from TaskTotal where TT_TimeEnd between '{0}-01-01 00:00:00' and '{0}-12-31 24:59:59' and TT_Release='LM' group by TT_Release,DATENAME(QUARTER,TT_TimeEnd)", Year));
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
+        public DataSet GetSeasonTotalCaseno()
+        {
+            string DateTimeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(string.Format("select 0 as SeasonNum,'' as TT_Release,sum(convert(int,TT_CaseRealRunNum)) as caseNo from TaskTotal where DATENAME(QUARTER,TT_TimeEnd)=DATENAME(QUARTER,'{0}');", DateTimeNow));
             return DbHelperSQL.Query(strSql.ToString());
         }
     }

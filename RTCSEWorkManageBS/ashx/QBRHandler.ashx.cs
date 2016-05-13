@@ -36,8 +36,27 @@ namespace RTCSEWorkManageBS.ashx
                     case "GetLMSeasonReleaseCaseno":
                         GetLMSeasonReleaseCaseno(context);
                         break;
+                    case "GetSeasonTotalCaseno":
+                        GetSeasonTotalCaseno(context);
+                        break;
                 }
             }
+        }
+
+        private void GetSeasonTotalCaseno(HttpContext context)
+        {
+            BLL.QBR bll = new BLL.QBR();
+            DataSet ds = bll.GetSeasonTotalCaseno();
+            List<Model.QBR.LSReleaseCaseNo> list = new List<Model.QBR.LSReleaseCaseNo>();
+            DataRow dr = ds.Tables[0].Rows[0];
+            list.Add(new Model.QBR.LSReleaseCaseNo() {
+                SeasonNum = dr["SeasonNum"].ToString(),
+                TT_Release = dr["TT_Release"].ToString(),
+                CaseNo = Convert.ToInt32(dr["CaseNo"])
+            });
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            string strJson = jss.Serialize(list).TrimStart('[').TrimEnd(']');
+            context.Response.Write(strJson);
         }
 
         private void GetLMSeasonReleaseCaseno(HttpContext context)

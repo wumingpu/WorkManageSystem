@@ -17,5 +17,14 @@ namespace BLL
         {
             return dal.BarMonthTasknumber(Year);
         }
+
+        public DataSet BarTaskstyleCaseno(string strDateTime)
+        {
+            return dal.BarTaskstyleCaseno(strDateTime);
+        }
+        public DataSet LineMonthCasenoRelease(string Year)
+        {
+            return dal.LineMonthCasenoRelease(Year);
+        }
     }
 }

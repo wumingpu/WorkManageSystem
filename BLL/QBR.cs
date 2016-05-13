@@ -37,5 +37,10 @@ namespace BLL
         {
             return dal.GetLMSeasonReleaseCaseno(Year);
         }
+
+        public DataSet GetSeasonTotalCaseno()
+        {
+            return dal.GetSeasonTotalCaseno();
+        }
     }
 }

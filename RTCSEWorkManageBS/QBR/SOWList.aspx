@@ -19,8 +19,33 @@
         </div>
         <!-- /.row Title -->
         <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-1">
+                                <i class="fa fa-tasks fa-5x"></i>
+                            </div>
+                            <div class="col-xs-3 text-right">
+                                <div class="huge" id="SeasonCaseTarget">4200</div>
+                                <div>Target Case / Season </div>
+                            </div>
+                            <div class="col-xs-3 text-right">
+                                <div class="huge" id="SeasonCaseRuned">0</div>
+                                <div>Case Runned / This Season</div>
+                            </div>
+                            <div class="col-xs-3 text-right">
+                                <div class="huge" id="SeasonCaseProgress">0%</div>
+                                <div>Progress</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-6">
-                <div class="panel panel-primary">
+                <div class="panel panel-danger">
                     <div class="panel-heading">
                         Lync Server 2015/2013/2010 Hot fix regression testing
                     </div>
@@ -38,7 +63,7 @@
                         <div class="row">
                             <div class="list-group text-success">
                                 <div class="col-lg-3">
-                                    <div class="list-group-item">
+                                    <div class="list-group-item bg-success">
                                         <p class="list-group-item-text">Jan - Mar</p>
                                         <h4 class="list-group-item-heading" id="LS_HF_1S_">0</h4>
                                     </div>
@@ -153,6 +178,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-6">
                 <div class="panel panel-warning">
                     <div class="panel-heading">
@@ -489,12 +515,25 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="CustomerJavaScriptPlace" runat="server">
     <script type="text/javascript">
         $(document).ready(function () {
+            LoadSeasonCaseTotal();
             LoadLSHFCaseNum('');
             LoadLSMUCaseNum('');
             LoadLSE2ECaseNum('');
             LoadLCE2ECaseNum('');
             LoadLMCaseNum('');
         });
+
+        function LoadSeasonCaseTotal() {
+            $.post('../ashx/QBRHandler.ashx', {
+                mode: 'GetSeasonTotalCaseno'
+            }, function (data) {
+                var dataJSON = $.parseJSON(data);
+                var CaseTarget = $('#SeasonCaseTarget').text();
+                var CaseRunned = dataJSON.CaseNo;
+                $('#SeasonCaseRuned').html(CaseRunned);
+                $('#SeasonCaseProgress').html(((Number(CaseRunned) / Number(CaseTarget)) * 100).toFixed(2) + '%');
+            });
+        }
 
         function LoadLSHFCaseNum(Year) {
             $.post('../ashx/QBRHandler.ashx', {

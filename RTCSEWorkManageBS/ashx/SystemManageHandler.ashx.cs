@@ -45,9 +45,18 @@ namespace RTCSEWorkManageBS.ashx
                     case "GetUserInfoSingle":
                         GetUserInfoSingle(context);
                         break;
+
+                    //case "LoginReturnUserInfo":
+                    //    LoginReturnUserInfo(context);
+                    //    break;
                 }
             }
         }
+
+        //private void LoginReturnUserInfo(HttpContext context)
+        //{
+            
+        //}
 
         private void GetUserInfoSingle(HttpContext context)
         {
@@ -58,6 +67,7 @@ namespace RTCSEWorkManageBS.ashx
             list.Add(new Model.UserInfo()
             {
                 U_username = dr["U_username"].ToString(),
+                U_PowerDisplay = ChangePowerToDisplay(dr["U_power"].ToString()),
                 U_power = dr["U_power"].ToString(),
                 U_nickname = dr["U_nickname"].ToString(),
                 U_mailbox = dr["U_mailbox"].ToString(),
@@ -164,6 +174,7 @@ namespace RTCSEWorkManageBS.ashx
                     U_username = dr["U_username"].ToString(),
                     //U_power = dr["U_power"].ToString(),
                     U_PowerDisplay = ChangePowerToDisplay(dr["U_power"].ToString()),
+                    //U_power = dr["U_Power"].ToString(),
                     U_nickname = dr["U_nickname"].ToString(),
                     U_mailbox = dr["U_mailbox"].ToString(),
                     U_Role = dr["U_Role"].ToString(),
