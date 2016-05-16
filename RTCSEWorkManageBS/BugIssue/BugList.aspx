@@ -6,12 +6,17 @@
     <link href="<%=ResolveUrl("~/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css") %>" rel="stylesheet" />
     <link href="<%=ResolveUrl("~/bower_components/bootcards/dist/css/bootcards-desktop.css") %>" rel="stylesheet" />
     <link href="<%=ResolveUrl("~/dist/css/timeline.css") %>" rel="stylesheet" />
+    <link href="<%=ResolveUrl("~/bower_components/bootstrap-select/dist/css/bootstrap-select.min.css") %>" rel="stylesheet" />
     <style type="text/css">
         .bootstrap-tagsinput {
             width: 100%;
         }
 
         .row > .list-group-item {
+            border: 0px 0px 0px 0px !important;
+        }
+
+        .row > .col-lg-6 > .list-group-item {
             border: 0px 0px 0px 0px !important;
         }
 
@@ -111,25 +116,41 @@
                                     <p class="list-group-item-text">Failed Case Number</p>
                                     <h4 class="list-group-item-heading" id="BI_CaseNumber">*</h4>
                                 </div>
-                                <div class="list-group-item">
-                                    <p class="list-group-item-text">Repo Server Name</p>
-                                    <h4 class="list-group-item-heading" id="BI_EnvironmentServer">*</h4>
-                                </div>
-                                <div class="list-group-item">
-                                    <p class="list-group-item-text">Repo Topology Name</p>
-                                    <h4 class="list-group-item-heading" id="BI_TopologyName">*</h4>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="list-group-item">
+                                            <p class="list-group-item-text">Repo Server Name</p>
+                                            <h4 class="list-group-item-heading" id="BI_EnvironmentServer">*</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="list-group-item">
+                                            <p class="list-group-item-text">Repo Topology Name</p>
+                                            <h4 class="list-group-item-heading" id="BI_TopologyName">*</h4>
+                                        </div>
+                                    </div>
                                 </div>
                                 <%--<div class="list-group-item">
                                     <p class="list-group-item-text">Create Time</p>
                                     <h4 class="list-group-item-heading" id="BI_CreateDate">*</h4>
                                 </div>--%>
-                                <div class="list-group-item">
-                                    <p class="list-group-item-text">Update Time</p>
-                                    <h4 class="list-group-item-heading" id="BI_UpdateTime">*</h4>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="list-group-item">
+                                            <p class="list-group-item-text">Update Time</p>
+                                            <h4 class="list-group-item-heading" id="BI_UpdateTime">*</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="list-group-item">
+                                            <p class="list-group-item-text">Close Time</p>
+                                            <h4 class="list-group-item-heading" id="BI_CloseTime">*</h4>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="list-group-item">
-                                    <p class="list-group-item-text">Close Time</p>
-                                    <h4 class="list-group-item-heading" id="BI_CloseTime">*</h4>
+                                    <p class="list-group-item-text">Priority</p>
+                                    <h4 class="list-group-item-heading" id="BI_Priority">*</h4>
                                 </div>
                             </div>
                         </div>
@@ -157,10 +178,20 @@
                             <textarea id="BIR_Content"></textarea>
                         </div>
                     </div>
-                    <div class="panel-footer">
+                    <div class="panel-footer form-inline">
                         <input type="button" class="btn btn-success" id="btn_AddBugIssueReply" value="Add Bug/Issue Reply" onclick="AddReply()" />
                         <%--<button class="btn btn-default btn-sm" onclick="window.location.href = '#page-wrapper'">Top</button>--%>
-                        <input type="button" class="btn btn-default" id="btn_CloseBugIssue" value="Close Bug/Issue" onclick="CloseBugIssue()" />
+                        <div class="input-group">
+                            <select class="form-control selectpicker" id="BI_Resolution" style="width: 200px" data-container="body">
+                                <option></option>
+                                <option>Fixed</option>
+                                <option>Active</option>
+                            </select>
+                            <div class="input-group-btn">
+                                <input type="button" class="btn btn-default" id="btn_CloseBugIssue" value="Close Bug/Issue" onclick="CloseBugIssue()" />
+                            </div>
+                        </div>
+
                         <input type="button" class="btn btn-primary" id="btn_ReOpenBugIssue" value="ReOpen Bug/Issue" onclick="ReOpenBugIssue()" />
                     </div>
                 </div>
@@ -170,6 +201,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="CustomerJavaScriptPlace" runat="server">
     <script type="text/javascript" src="<%=ResolveUrl("~/bower_components/tinymce/tinymce.min.js") %>"></script>
+    <script type="text/javascript" src="<%=ResolveUrl("~/bower_components/bootstrap-select/dist/js/bootstrap-select.min.js") %>"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             ReloadBugIssueList('');
@@ -199,8 +231,10 @@
             });
 
             $('#btn_AddBugIssueReply').prop('disabled', true);
+            $('#BI_Resolution').attr('disabled', true);
             $('#btn_BugIssueContent').prop('disabled', true);
             $('#btn_AddBugIssueReply').hide();
+            $('#BI_Resolution').selectpicker('hide');
             $('#div_BIR_Content').hide();
             //tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
             $('#btn_CloseBugIssue').hide();
@@ -260,13 +294,13 @@
             var cssBI_Type, cssBI_Status;
             $('#BugIssueList').empty();
             for (var i in BugInfo) {
-                if (BugInfo[i].BI_Type == 'Bug') { cssBI_Type = 'text-danger'; }
-                else if (BugInfo[i].BI_Type == 'Issue') { cssBI_Type = 'text-warning'; }
+                if (BugInfo[i].BI_Type.indexOf('Bug') >= 0) { cssBI_Type = 'text-danger'; }
+                else if (BugInfo[i].BI_Type.indexOf('Issue') >= 0) { cssBI_Type = 'text-warning'; }
                 if (BugInfo[i].BI_Status == 'Open' || BugInfo[i].BI_Status == 'ReOpen') { cssBI_Status = 'bg-success'; }
                 else if (BugInfo[i].BI_Status == 'Clolsed') { cssBI_Status = 'bg-info'; }
                 $('#BugIssueList').append('<a class="list-group-item" onclick="BugIssueListClick($(this))" id="BugIssueList' + BugInfo[i].BI_ID + '">' +
                     '<h4 class="list-group-item-heading">' + BugInfo[i].BI_Title + '</h4>' +
-                    '<p class="list-group-item-text"><span class="' + cssBI_Type + '">' + BugInfo[i].BI_Type + '</span> | <span class="' + cssBI_Status + '">' + BugInfo[i].BI_Status + '</span> | ' + BugInfo[i].BI_CreateDate + ' | Create by ' + BugInfo[i].U_nickname + '</p></a>');
+                    '<p class="list-group-item-text"><span class="' + cssBI_Type + '">' + BugInfo[i].BI_Type + '</span> | <span class="' + cssBI_Status + '">' + BugInfo[i].BI_Status + '</span> | ' + BugInfo[i].BI_Priority + ' | ' + BugInfo[i].BI_CreateDate + ' | Create by ' + BugInfo[i].U_nickname + '</p></a>');
             }
         }
         function prevPage() {
@@ -316,8 +350,11 @@
             tinymce.activeEditor.setContent('');
             $('#BugIssueTimeLine').empty();
             $('#btn_AddBugIssueReply').prop('disabled', true);
+            $('#BI_Resolution').attr('disabled', true);
+            $('#BI_Resolution').selectpicker('val', '');
             $('#btn_BugIssueContent').prop('disabled', false);
             $('#btn_AddBugIssueReply').hide();
+            $('#BI_Resolution').selectpicker('hide');
             $('#BIR_Content').hide();
             $('#btn_CloseBugIssue').hide();
             $('#btn_ReOpenBugIssue').hide();
@@ -338,6 +375,7 @@
                 $('#BI_TopologyName').html(BugInfo.BI_TopologyName == '' ? '*' : BugInfo.BI_TopologyName);
                 $('#BI_UpdateTime').html(BugInfo.BI_UpdateTime == '' ? '*' : BugInfo.BI_UpdateTime);
                 $('#BI_CloseTime').html(BugInfo.BI_CloseTime == '' ? '*' : BugInfo.BI_CloseTime);
+                $('#BI_Priority').html(BugInfo.BI_Priority == '' ? '*' : BugInfo.BI_Priority);
             });
         }
         function ShowBugIssueContent(BI_ID, BI_Owner, BI_Status) {
@@ -392,6 +430,7 @@
                 }
                 $('#btn_BugIssueContent').prop('disabled', false);
                 $('#btn_AddBugIssueReply').prop('disabled', false);
+                $('#BI_Resolution').attr('disabled', false).selectpicker('refresh');
                 $('#btn_BugIssueContent').text('B/I Content');
                 if (BI_Owner == $('#User_ID').text()) {
                     if (BI_Status == "Open") {
@@ -404,13 +443,13 @@
                 else { $('#btn_CloseBugIssue').hide(); $('#btn_ReOpenBugIssue').hide(); }
 
                 if (BI_Status == 'Open') {
-                    $('#btn_AddBugIssueReply').show(); $('#div_BIR_Content').show();
+                    $('#btn_AddBugIssueReply').show(); $('#BI_Resolution').selectpicker('show'); $('#div_BIR_Content').show();
                 }
                 else if (BI_Status == 'Closed') {
-                    $('#btn_AddBugIssueReply').hide(); $('#div_BIR_Content').hide();
+                    $('#btn_AddBugIssueReply').hide(); $('#BI_Resolution').selectpicker('hide'); $('#div_BIR_Content').hide();
                 }
                 else {
-                    $('#btn_AddBugIssueReply').hide(); $('#div_BIR_Content').hide();
+                    $('#btn_AddBugIssueReply').hide(); $('#BI_Resolution').selectpicker('hide'); $('#div_BIR_Content').hide();
                 }
 
                 window.location.href = '#BugIssueContent';
@@ -448,8 +487,14 @@
             if (!confirm('Close This Bug/Issue Now ?')) {
                 return;
             }
+            var BI_Resolution = $('#BI_Resolution').selectpicker('val');
+            if (BI_Resolution == '') {
+                alert('Please select a Bug/Issue Resolution');
+                return;
+            }
             $.post('../ashx/BugIssueHandler.ashx', {
-                mode: 'CloseBugIssue', BI_ID: BIR_FK_BI_ID, User_ID: User_ID
+                mode: 'CloseBugIssue', BI_ID: BIR_FK_BI_ID, User_ID: User_ID,
+                BI_Resolution: BI_Resolution
             }, function (data) {
                 if (data == 'success') {
                     //<p>Bug/Issue Closed</p>
@@ -458,6 +503,7 @@
                         '<div class="timeline-body"><p>Bug/Issue Closed</p></div></div></li>');
                     $('#div_BIR_Content').hide();
                     $('#btn_AddBugIssueReply').hide();
+                    $('#BI_Resolution').selectpicker('hide');
                     $('#btn_CloseBugIssue').hide();
                     $('#btn_ReOpenBugIssue').show();
                     //ReloadBugIssueList('');
@@ -483,6 +529,8 @@
                         '<div class="timeline-body"><p>Bug/Issue ReOpen</p></div></div></li>');
                     $('#div_BIR_Content').show();
                     $('#btn_AddBugIssueReply').show();
+                    $('#BI_Resolution').selectpicker('show');
+                    $('#BI_Resolution').selectpicker('val', '');
                     $('#btn_CloseBugIssue').show();
                     $('#btn_ReOpenBugIssue').hide();
                 }

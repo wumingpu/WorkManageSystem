@@ -25,18 +25,29 @@
                 <div class="panel panel-default">
                     <div class="panel-body" id="formBugIssue">
                         <div class="row">
-                            <div class="col-lg-10">
+                            <div class="col-lg-9">
                                 <div class="form-group">
                                     <label>Bug/Issue Title</label>
                                     <input class="form-control" id="BI_Title" />
                                 </div>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label>Type</label>
                                     <select class="form-control selectpicker" id="BI_Type">
-                                        <option>Issue</option>
-                                        <option>Bug</option>
+                                        <%--<option>Issue</option>
+                                        <option>Bug</option>--%>
+                                        <option></option>
+                                        <optgroup label="Issue">
+                                            <option>Issue</option>
+                                            <option>Comfirm Issue</option>
+                                            <option>MU Issue</option>
+                                            <option>Configure Issue(W14/W15)</option>
+                                            <option>Configure Issue(W16)</option>
+                                        </optgroup>
+                                        <optgroup label="Bug">
+                                            <option>Bug</option>
+                                        </optgroup>
                                     </select>
                                 </div>
                             </div>
@@ -97,6 +108,18 @@
                                     <input class="form-control" id="BI_EnvironmentServer" />
                                 </div>
                             </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Priority</label>
+                                    <select class="form-control selectpicker" id="BI_Priority">
+                                        <option></option>
+                                        <option>P0</option>
+                                        <option>P1</option>
+                                        <option>P2</option>
+                                        <option>P3</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
@@ -110,7 +133,6 @@
                     <div class="panel-footer">
                         <button type="button" class="btn btn-success" onclick="SaveBug()">Save</button>
                         <%--<button type="button" class="btn btn-danger" onclick="EmptyPageContent()">EmptyPageContent</button>--%>
-
                     </div>
                 </div>
             </div>
@@ -168,7 +190,8 @@
             $('#BI_TopologyName').val('');
             $('#BI_CaseNumber').val('');
             $('#BI_Type').selectpicker('val', 'Issue');
-            $('.selectpicker:not(#BI_Type)').html('<option></option>').selectpicker('refresh');
+            //$('.selectpicker:not(#BI_Type)').html('<option></option>').selectpicker('refresh');
+            $('.selectpicker').html('<option></option>').selectpicker('refresh');
             ReloadDDLTaskTotal('InProgress');
             tinymce.activeEditor.setContent('');
         }
@@ -248,10 +271,21 @@
                 $('#BI_Title').focus();
                 return;
             }
+            var BI_Type = $('#BI_Type').selectpicker('val');
+            if (BI_Type == '') {
+                alert('Please Select a Bug/Issue Type !');
+                $('#BI_Type').focus();
+                return;
+            }
+            var BI_Priority = $('#BI_Priority').selectpicker('val');
+            if (BI_Priority == '') {
+                alert('Please Select a Priority !');
+                $('#BI_Priority').focus();
+                return;
+            }
             var BI_FK_TT_ID = $('#BI_FK_TT_ID').val();
             var BI_FK_S_ID = $('#BI_FK_S_ID').val();
             var BI_FK_SR_ID = $('#BI_FK_SR_ID').val();
-            var BI_Type = $('#BI_Type').selectpicker('val');
             var BI_EnvironmentServer = $('#BI_EnvironmentServer').val();
             var BI_TopologyName = $('#BI_TopologyName').val();
             var BI_CaseNumber = $('#BI_CaseNumber').val();
@@ -261,9 +295,10 @@
                 mode: 'AddBugIssue', BI_FK_TT_ID: BI_FK_TT_ID, BI_FK_S_ID: BI_FK_S_ID,
                 BI_FK_SR_ID: BI_FK_SR_ID, BI_Title: BI_Title, BI_Type: BI_Type,
                 BI_EnvironmentServer: BI_EnvironmentServer, BI_TopologyName: BI_TopologyName,
-                BI_CaseNumber: BI_CaseNumber, BI_Content: BI_Content, BI_Owner: BI_Owner
+                BI_CaseNumber: BI_CaseNumber, BI_Content: BI_Content, BI_Owner: BI_Owner,
+                BI_Priority: BI_Priority
             }, function (data) {
-                if (data=='success') {
+                if (data == 'success') {
                     alert('Save Data Success ~');
                     //location.reload();
                     //$('#formBugIssue').load(location.href + " #formBugIssue");

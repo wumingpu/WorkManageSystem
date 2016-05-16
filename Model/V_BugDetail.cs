@@ -24,6 +24,7 @@ namespace Model
         public string BI_UpdateTime { set; get; }
         public string BI_CloseTime { set; get; }
         public int BI_Owner { set; get; }
+        public string BI_Priority { set; get; }
     }
 
     [Serializable]
@@ -34,6 +35,7 @@ namespace Model
         public string BI_Type { set; get; }
         public string BI_Status { set; get; }
         public string BI_CreateDate { set; get; }
+        public string BI_Priority { set; get; }
         public string U_nickname { set; get; }
     }
 }

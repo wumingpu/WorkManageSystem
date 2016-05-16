@@ -28,5 +28,6 @@ namespace Model
         public string BI_CloseTime { set; get; }
         public int BI_ReferenceBIID { set; get; }
         public string BI_UpdateTime { set; get; }
+        public string BI_Priority { set; get; }
     }
 }

@@ -94,8 +94,9 @@ namespace RTCSEWorkManageBS.ashx
         {
             int BI_ID = Convert.ToInt32(context.Request["BI_ID"]);
             int User_ID = Convert.ToInt32(context.Request["User_ID"]);
+            string BI_Resolution = context.Request["BI_Resolution"];
             BLL.BugIssue bll = new BLL.BugIssue();
-            bool CloseRes = bll.CloseBugIssue(BI_ID, User_ID);
+            bool CloseRes = bll.CloseBugIssue(BI_ID, User_ID, BI_Resolution);
             if (CloseRes)
             {
                 context.Response.Write("success");
@@ -202,7 +203,8 @@ namespace RTCSEWorkManageBS.ashx
                 BI_UpdateTime = dr["BI_UpdateTime"].ToString(),
                 BI_CloseTime = dr["BI_CloseTime"].ToString(),
                 BI_Owner = Convert.ToInt32(dr["BI_Owner"]),
-                BI_Status = dr["BI_Status"].ToString()
+                BI_Status = dr["BI_Status"].ToString(),
+                BI_Priority = dr["BI_Priority"].ToString()
             });
             JavaScriptSerializer jss = new JavaScriptSerializer();
             string strJson = jss.Serialize(list).TrimStart('[').TrimEnd(']');
@@ -214,7 +216,7 @@ namespace RTCSEWorkManageBS.ashx
             string strKeyWord = context.Request["keyWord"];
             BLL.V_BugDetail bll = new BLL.V_BugDetail();
             DataSet ds = new DataSet();
-            string strFields = "BI_ID,BI_Title,BI_Type,BI_Status,BI_CreateDate,U_nickname";
+            string strFields = "BI_ID,BI_Title,BI_Type,BI_Status,BI_CreateDate,BI_Priority,U_nickname";
             if (string.IsNullOrEmpty(strKeyWord))
             {
                 ds = bll.GetList(strFields, "BI_Status='Open'");
@@ -236,6 +238,7 @@ namespace RTCSEWorkManageBS.ashx
                     BI_Type = dr["BI_Type"].ToString(),
                     BI_Status = dr["BI_Status"].ToString(),
                     BI_CreateDate = dr["BI_CreateDate"].ToString(),
+                    BI_Priority = dr["BI_Priority"].ToString(),
                     U_nickname = dr["U_nickname"].ToString()
                 });
             }
@@ -266,6 +269,7 @@ namespace RTCSEWorkManageBS.ashx
             model.BI_CloseTime = "";
             model.BI_ReferenceBIID = 0;
             model.BI_UpdateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            model.BI_Priority = context.Request["BI_Priority"];
             int AddRes = bll.Add(model);
             if (AddRes > 0)
             {

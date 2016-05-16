@@ -256,21 +256,25 @@
                     label: 'W14',
                     backgroundColor: randomColor(),//'rgba(0,134,246,0.71)', //randomColor(), // rgba(15,122,233,0.8)
                     data: [],
+                    lineTension: 0,
                     fill: false
                 }, {
                     label: 'W15',
                     backgroundColor: randomColor(),//'rgba(0,134,246,0.71)', //randomColor(), // rgba(15,122,233,0.8)
                     data: [],
+                    lineTension: 0,
                     fill: false
                 }, {
                     label: 'W16',
                     backgroundColor: randomColor(),//'rgba(0,134,246,0.71)', //randomColor(), // rgba(15,122,233,0.8)
                     data: [],
+                    lineTension: 0,
                     fill: false
                 }, {
                     label: 'LM',
                     backgroundColor: randomColor(),//'rgba(0,134,246,0.71)', //randomColor(), // rgba(15,122,233,0.8)
                     data: [],
+                    lineTension: 0,
                     fill: false
                 }]
             }

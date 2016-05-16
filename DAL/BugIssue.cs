@@ -31,11 +31,11 @@ namespace DAL
             }
         }
 
-        public bool CloseBugIssue(int BI_ID, int User_ID)
+        public bool CloseBugIssue(int BI_ID, int User_ID, string BI_Resolution)
         {
             string DateTimeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(string.Format("update BugIssue set BI_Status='Closed',BI_CloseTime='{0}',BI_UpdateTime='{0}' where BI_ID={1};", DateTimeNow, BI_ID));
+            strSql.Append(string.Format("update BugIssue set BI_Status='Closed',BI_CloseTime='{0}',BI_UpdateTime='{0}',BI_Resolution='{1}' where BI_ID={1};", DateTimeNow, BI_ID, BI_Resolution));
             strSql.Append(string.Format("insert into BugIssueReply (BIR_FK_BI_ID,BIR_Content,BIR_CreateTime,BIR_CreateUser) values ({0},'<p>Bug/Issue Closed</p>','{1}',{2});", BI_ID, DateTimeNow, User_ID));
             int CloseRes = DbHelperSQL.ExecuteSql(strSql.ToString());
             if (CloseRes > 0)
@@ -60,8 +60,8 @@ namespace DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into BugIssue (");
-            strSql.Append("BI_FK_SR_ID,BI_FK_S_ID,BI_FK_TT_ID,BI_Title,BI_Type,BI_Content,BI_EnvironmentServer,BI_TopologyName,BI_Remark,BI_CaseNumber,BI_CreateDate,BI_Status,BI_Owner,BI_CloseTime,BI_ReferenceBIID,BI_UpdateTime) values (");
-            strSql.Append("@BI_FK_SR_ID,@BI_FK_S_ID,@BI_FK_TT_ID,@BI_Title,@BI_Type,@BI_Content,@BI_EnvironmentServer,@BI_TopologyName,@BI_Remark,@BI_CaseNumber,@BI_CreateDate,@BI_Status,@BI_Owner,@BI_CloseTime,@BI_ReferenceBIID,@BI_UpdateTime)");
+            strSql.Append("BI_FK_SR_ID,BI_FK_S_ID,BI_FK_TT_ID,BI_Title,BI_Type,BI_Content,BI_EnvironmentServer,BI_TopologyName,BI_Remark,BI_CaseNumber,BI_CreateDate,BI_Status,BI_Owner,BI_CloseTime,BI_ReferenceBIID,BI_UpdateTime,BI_Priority) values (");
+            strSql.Append("@BI_FK_SR_ID,@BI_FK_S_ID,@BI_FK_TT_ID,@BI_Title,@BI_Type,@BI_Content,@BI_EnvironmentServer,@BI_TopologyName,@BI_Remark,@BI_CaseNumber,@BI_CreateDate,@BI_Status,@BI_Owner,@BI_CloseTime,@BI_ReferenceBIID,@BI_UpdateTime,@BI_Priority)");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
                 new SqlParameter("@BI_FK_SR_ID",SqlDbType.Int,4),
@@ -79,7 +79,8 @@ namespace DAL
                 new SqlParameter("@BI_Owner",SqlDbType.Int,4),
                 new SqlParameter("@BI_CloseTime",SqlDbType.VarChar,20),
                 new SqlParameter("@BI_ReferenceBIID",SqlDbType.Int,4),
-                new SqlParameter("@BI_UpdateTime",SqlDbType.VarChar,20)
+                new SqlParameter("@BI_UpdateTime",SqlDbType.VarChar,20),
+                new SqlParameter("@BI_Priority",SqlDbType.VarChar,10)
             };
             parameters[0].Value = model.BI_FK_SR_ID;
             parameters[1].Value = model.BI_FK_S_ID;
@@ -97,6 +98,7 @@ namespace DAL
             parameters[13].Value = model.BI_CloseTime;
             parameters[14].Value = model.BI_ReferenceBIID;
             parameters[15].Value = model.BI_UpdateTime;
+            parameters[16].Value = model.BI_Priority;
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
             {

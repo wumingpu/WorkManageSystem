@@ -46,6 +46,10 @@ namespace RTCSEWorkManageBS.ashx
                         GetUserInfoSingle(context);
                         break;
 
+                    case "ChangePassword":
+                        ChangePassword(context);
+                        break;
+
                     //case "LoginReturnUserInfo":
                     //    LoginReturnUserInfo(context);
                     //    break;
@@ -53,9 +57,18 @@ namespace RTCSEWorkManageBS.ashx
             }
         }
 
+        private void ChangePassword(HttpContext context)
+        {
+            int U_ID = Convert.ToInt32(context.Request["U_ID"]);
+            string oldPassword = context.Request["oldPassword"];
+            string NewPassword = context.Request["NewPassword"];
+            BLL.UserInfo bll = new BLL.UserInfo();
+            context.Response.Write(bll.ChangePassword(U_ID, oldPassword, NewPassword));
+        }
+
         //private void LoginReturnUserInfo(HttpContext context)
         //{
-            
+
         //}
 
         private void GetUserInfoSingle(HttpContext context)

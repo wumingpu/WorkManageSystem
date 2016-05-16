@@ -126,6 +126,7 @@
     <Content Include="DailyReport\ReportList.aspx" />
     <Content Include="DashBoard.aspx" />
     <Content Include="DynamicJS\TagsInputUserData.js" />
+    <Content Include="Login.aspx" />
     <Content Include="Other record.txt" />
     <Content Include="QBR\SOWList.aspx" />
     <Content Include="SystemManage\JsonManage.aspx" />
@@ -240,6 +241,13 @@
     </Compile>
     <Compile Include="DashBoard.aspx.designer.cs">
       <DependentUpon>DashBoard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="MainFrame.Master.cs">
       <DependentUpon>MainFrame.Master</DependentUpon>

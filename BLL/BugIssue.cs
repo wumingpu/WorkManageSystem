@@ -28,9 +28,9 @@ namespace BLL
             return dal.GetList(Fields, strWhere);
         }
 
-        public bool CloseBugIssue(int BI_ID,int User_ID)
+        public bool CloseBugIssue(int BI_ID,int User_ID,string BI_Resolution)
         {
-            return dal.CloseBugIssue(BI_ID, User_ID);
+            return dal.CloseBugIssue(BI_ID, User_ID, BI_Resolution);
         }
 
         public bool ReOpenBugIssue(int BI_ID, int User_ID)

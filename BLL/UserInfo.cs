@@ -38,5 +38,15 @@ namespace BLL
         {
             return dal.Delete(U_ID);
         }
+
+        public DataSet Login(string username, string password)
+        {
+            return dal.Login(username, password);
+        }
+
+        public string ChangePassword(int U_ID, string OldPassword, string NewPassword)
+        {
+            return dal.ChangePassword(U_ID, OldPassword, NewPassword);
+        }
     }
 }

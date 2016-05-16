@@ -48,7 +48,7 @@
                         <span class="icon-bar"></span>--%>
                         <span class="icon-bar"></span>
                     </button>
-                    <p class="navbar-brand"><b>RTCSE</b> Work Manage System</p>
+                    <a class="navbar-brand"><b>RTCSE</b> Work Manage System</a>
                 </div>
                 <!-- /.navbar-header -->
                 <label id="User_ID" hidden="hidden" runat="server"></label>
@@ -61,13 +61,14 @@
                             <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
+                            <li><a>Welcome <span id="U_nickname" runat="server" class="text-primary">*</span></a></li>
+                            <li class="divider"></li>
+                            <%--<li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
+                            </li>--%>
+                            <li><a href="#" onclick="ChangePasswordDialogShow()"><i class="fa fa-gear fa-fw"></i>Change Password</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                            <li><a href="login.aspx"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                             </li>
                         </ul>
                         <!-- /.dropdown-user -->
@@ -143,10 +144,10 @@
                                 <a href="#"><i class="fa fa-envelope-o fa-fw"></i>Daily Report<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="<%=ResolveUrl("~/DailyReport/PersonalReport.aspx") %>"><i class="fa fa-fw"></i>Personal Report</a>
+                                        <a href="<%=ResolveUrl("~/DailyReport/PersonalReport.aspx") %>">Personal Report</a>
                                     </li>
                                     <li>
-                                        <a href="<%=ResolveUrl("~/DailyReport/ReportList.aspx") %>"><i class="fa fa-fw"></i>Everyone Report</a>
+                                        <a href="<%=ResolveUrl("~/DailyReport/ReportList.aspx") %>">Everyone Report</a>
                                     </li>
                                 </ul>
                             </li>
@@ -154,7 +155,7 @@
                                 <a href="#"><i class="fa fa-book fa-fw"></i>QBR<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="<%=ResolveUrl("~/QBR/SOWList.aspx") %>"><i class="fa fa-fw"></i>SOW List</a>
+                                        <a href="<%=ResolveUrl("~/QBR/SOWList.aspx") %>">SOW List</a>
                                     </li>
                                 </ul>
                             </li>
@@ -174,10 +175,10 @@
                                 <a href="#"><i class="fa fa-warning fa-fw"></i>Test Pages<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="<%=ResolveUrl("~/TestPages/RagulaTest.aspx") %>"><i class="fa fa-fw"></i>Dragula</a>
+                                        <a href="<%=ResolveUrl("~/TestPages/RagulaTest.aspx") %>">Dragula</a>
                                     </li>
                                     <li>
-                                        <a href="<%=ResolveUrl("~/TestPages/TinyMCE.aspx") %>"><i class="fa fa-fw"></i>TinyMCE</a>
+                                        <a href="<%=ResolveUrl("~/TestPages/TinyMCE.aspx") %>">TinyMCE</a>
                                     </li>
                                     <%--<li>
                                         <a href="<%=ResolveUrl("~/TestPages/Validate.aspx") %>"><i class="fa fa-fw"></i>Validate</a>
@@ -189,16 +190,16 @@
                                         <a href="<%=ResolveUrl("~/TestPages/FileManagerTest.aspx") %>"><i class="fa fa-fw"></i>FileManager</a>
                                     </li>--%>
                                     <li>
-                                        <a href="<%=ResolveUrl("~/TestPages/TimeLineTest.aspx") %>"><i class="fa fa-fw"></i>TimeLine</a>
+                                        <a href="<%=ResolveUrl("~/TestPages/TimeLineTest.aspx") %>">TimeLine</a>
                                     </li>
                                     <li>
-                                        <a href="<%=ResolveUrl("~/TestPages/ListGroupPaging.aspx") %>"><i class="fa fa-fw"></i>ListGroupPaging</a>
+                                        <a href="<%=ResolveUrl("~/TestPages/ListGroupPaging.aspx") %>">ListGroupPaging</a>
                                     </li>
                                     <li>
-                                        <a href="<%=ResolveUrl("~/TestPages/ChartJS.aspx") %>"><i class="fa fa-fw"></i>ChartJS</a>
+                                        <a href="<%=ResolveUrl("~/TestPages/ChartJS.aspx") %>">ChartJS</a>
                                     </li>
                                     <li>
-                                        <a href="<%=ResolveUrl("~/TestPage.aspx") %>"><i class="fa fa-fw"></i>Other Test</a>
+                                        <a href="<%=ResolveUrl("~/TestPage.aspx") %>">Other Test</a>
                                     </li>
 
                                 </ul>
@@ -212,25 +213,106 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
 
-        </div>
+            <div class="modal fade" id="ModalChangePassword" tabindex="-1" role="dialog" aria-labelledby="ModalChangePasswordLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="ModalChangePasswordLabel">Change Password</h4>
+                        </div>
+                        <!-- /.modal-header -->
+                        <div class="modal-body">
+                            <div id="U_ID" hidden="hidden">*</div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Original Password</label>
+                                        <input class="form-control" type="password" id="txt_OriginalPassword" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>New Password</label>
+                                        <input class="form-control" type="password" id="txt_NewPassword" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Confirm Password</label>
+                                        <input class="form-control" type="password" id="txt_NewConfirmPassword" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success" onclick="ChangePassword()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- jQuery -->
+            <script src="<%=ResolveUrl("~/bower_components/jquery/dist/jquery.min.js") %>"></script>
 
-        <!-- jQuery -->
-        <script src="<%=ResolveUrl("~/bower_components/jquery/dist/jquery.min.js") %>"></script>
+            <!-- Bootstrap Core JavaScript -->
+            <script src="<%=ResolveUrl("~/bower_components/bootstrap/dist/js/bootstrap.min.js") %>"></script>
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="<%=ResolveUrl("~/bower_components/bootstrap/dist/js/bootstrap.min.js") %>"></script>
+            <!-- Metis Menu Plugin JavaScript -->
+            <script src="<%=ResolveUrl("~/bower_components/metisMenu/dist/metisMenu.min.js") %>"></script>
 
-        <!-- Metis Menu Plugin JavaScript -->
-        <script src="<%=ResolveUrl("~/bower_components/metisMenu/dist/metisMenu.min.js") %>"></script>
+            <!-- Custom Theme JavaScript -->
+            <script src="<%=ResolveUrl("~/dist/js/sb-admin-2.js") %>"></script>
 
-        <!-- Custom Theme JavaScript -->
-        <script src="<%=ResolveUrl("~/dist/js/sb-admin-2.js") %>"></script>
+            <!-- Empty url JavaScript -->
+            <%--<script src="<%=ResolveUrl("") %>"></script>--%>
 
-        <!-- Empty url JavaScript -->
-        <%--<script src="<%=ResolveUrl("") %>"></script>--%>
-
-        <asp:ContentPlaceHolder ID="CustomerJavaScriptPlace" runat="server">
-        </asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="CustomerJavaScriptPlace" runat="server">
+            </asp:ContentPlaceHolder>
+            <script type="text/javascript">
+                function ChangePasswordDialogShow() {
+                    $('#txt_OriginalPassword').val('');
+                    $('#txt_NewPassword').val('');
+                    $('#txt_NewConfirmPassword').val('');
+                    $('#ModalChangePassword').modal({ backdrop: 'static' }).modal('show');
+                }
+                function ChangePassword() {
+                    var U_ID = $('#User_ID').text();
+                    var oldPassword = $('#txt_OriginalPassword').val();
+                    var NewPassword = $('#txt_NewPassword').val();
+                    var NewConfirmPassword = $('#txt_NewConfirmPassword').val();
+                    if (oldPassword == '' || NewPassword == '' || NewConfirmPassword == '') {
+                        alert('password should not empty !');
+                        return;
+                    }
+                    if (NewPassword == NewConfirmPassword) {
+                        $.post('../ashx/SystemManageHandler.ashx', {
+                            mode: 'ChangePassword', U_ID: U_ID, oldPassword: oldPassword,
+                            NewPassword: NewPassword
+                        }, function (data) {
+                            if (data == 'success') {
+                                alert('Password Changed Success ~');
+                                $('#ModalChangePassword').modal('hide');
+                            }
+                            else if (data == 'password incorrect') {
+                                alert('Original Password Incorrect !');
+                            }
+                            else if (data == 'fail') {
+                                alert('Password Changed Failed !');
+                            }
+                            else {
+                                alert('Password Changed Failed !');
+                            }
+                        });
+                    }
+                    else {
+                        alert('New Password not matched !');
+                    }
+                }
+            </script>
     </form>
 </body>
 </html>

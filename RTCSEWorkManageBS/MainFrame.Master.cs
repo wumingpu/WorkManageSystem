@@ -17,6 +17,7 @@ namespace RTCSEWorkManageBS
             {
                 this.User_ID.InnerText = Session["User_ID"].ToString();
                 this.User_UserName.InnerText = Session["User_UserName"].ToString();
+                this.U_nickname.InnerText = Session["User_UserName"].ToString();
             }
             else
             {

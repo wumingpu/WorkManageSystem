@@ -47,6 +47,44 @@ namespace DAL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
+        public string ChangePassword(int U_ID, string oldPassword, string newPassword)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("if ((select U_password from UserInfo where U_ID=@U_ID)=@oldPassword) ");
+            strSql.Append(" begin ");
+            strSql.Append(" update UserInfo set U_password =@newPassword where U_ID=@U_ID; ");
+            strSql.Append(" if @@ROWCOUNT > 0 begin select 'success' as Res; end ");
+            strSql.Append(" else begin select 'fail' as Res; end ");
+            strSql.Append(" end ");
+            strSql.Append(" else begin select 'password incorrect' as Res end ");
+
+            SqlParameter[] parameters = {
+                new SqlParameter("@U_ID",SqlDbType.Int,4),
+                new SqlParameter("@oldPassword",SqlDbType.VarChar,200),
+                new SqlParameter("@newPassword",SqlDbType.VarChar,200)
+            };
+            parameters[0].Value = U_ID;
+            parameters[1].Value = oldPassword;
+            parameters[2].Value = newPassword;
+
+            object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
+            return obj.ToString();
+        }
+
+        public DataSet Login(string username, string password)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select * from UserInfo where U_username=@U_username and U_password=@U_password");
+            SqlParameter[] parameters = {
+                new SqlParameter("@U_username",SqlDbType.VarChar,50),
+                new SqlParameter("@U_password",SqlDbType.VarChar,200)
+            };
+            parameters[0].Value = username;
+            parameters[1].Value = password;
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            return ds;
+        }
+
         public int Add(Model.UserInfo model)
         {
             StringBuilder strSql = new StringBuilder();
