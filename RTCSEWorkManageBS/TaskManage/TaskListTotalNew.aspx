@@ -200,21 +200,22 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-8">
                                 <div class="list-group-item">
                                     <p class="list-group-item-text">Time Used</p>
                                     <h4 class="list-group-item-heading" id="D_TT_TimeUsed">*</h4>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-4">
                                 <div class="list-group-item">
                                     <p class="list-group-item-text">Have Scenario ?</p>
                                     <h4 class="list-group-item-heading" id="D_TT_HaveScenario">*</h4>
                                 </div>
                             </div>
                         </div>
+                        <%--<div class="row">
+                            
+                        </div>--%>
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="list-group-item">

@@ -35,8 +35,8 @@ namespace DAL
         {
             string DateTimeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(string.Format("update BugIssue set BI_Status='Closed',BI_CloseTime='{0}',BI_UpdateTime='{0}',BI_Resolution='{1}' where BI_ID={1};", DateTimeNow, BI_ID, BI_Resolution));
-            strSql.Append(string.Format("insert into BugIssueReply (BIR_FK_BI_ID,BIR_Content,BIR_CreateTime,BIR_CreateUser) values ({0},'<p>Bug/Issue Closed</p>','{1}',{2});", BI_ID, DateTimeNow, User_ID));
+            strSql.Append(string.Format("update BugIssue set BI_Status='Closed',BI_CloseTime='{0}',BI_UpdateTime='{0}',BI_Resolution='{2}' where BI_ID={1};", DateTimeNow, BI_ID, BI_Resolution));
+            strSql.Append(string.Format("insert into BugIssueReply (BIR_FK_BI_ID,BIR_Content,BIR_CreateTime,BIR_CreateUser) values ({0},'<p>Bug/Issue Closed, Resolution: {3}</p>','{1}',{2});", BI_ID, DateTimeNow, User_ID, BI_Resolution));
             int CloseRes = DbHelperSQL.ExecuteSql(strSql.ToString());
             if (CloseRes > 0)
             {

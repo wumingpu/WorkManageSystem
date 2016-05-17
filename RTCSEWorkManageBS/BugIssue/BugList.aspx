@@ -14,6 +14,7 @@
 
         .row > .list-group-item {
             border: 0px 0px 0px 0px !important;
+            /;
         }
 
         .row > .col-lg-6 > .list-group-item {
@@ -84,9 +85,9 @@
                     <div class="row">
                         <ul class="pager">
                             <li><a class="btn" onclick="prevPage(); return false;">Previous</a></li>
-                            <li><span id="CurrentPage">Current:3</span></li>
-                            <li><span id="TotalPage">Total:5</span></li>
-                            <li><span id="TotalItem">Items:5</span></li>
+                            <li><span id="CurrentPage">Current:0</span></li>
+                            <li><span id="TotalPage">Total:0</span></li>
+                            <li><span id="TotalItem">Items:0</span></li>
                             <li><a class="btn" onclick="nextPage(); return false;">Next</a></li>
                         </ul>
                     </div>
@@ -266,9 +267,7 @@
             return false;
         }
 
-        //var items;
         var pager = {};
-        //pager.items = JSON.parse(items);
         pager.itemsPerPage = 5;
         function ReloadBugIssueList(keyWord) {
             //<a class="list-group-item" onclick="BugIssueListClick($(this))" id="BugIssueList23">
@@ -411,10 +410,10 @@
                         if (data != 'fail') {
                             var replyJson = $.parseJSON(data);
                             for (var i in replyJson) {
-                                if (replyJson[i].BIR_Content == '<p>Bug/Issue Closed</p>') {
+                                if (replyJson[i].BIR_Content.indexOf('Bug/Issue Closed') >= 0) {
                                     var cssReplyIcon = '<div class="timeline-badge info">SYS</div>'
                                 }
-                                else if (replyJson[i].BIR_Content == '<p>Bug/Issue ReOpen</p>') {
+                                else if (replyJson[i].BIR_Content.indexOf('Bug/Issue ReOpen') >= 0) {
                                     var cssReplyIcon = '<div class="timeline-badge info">SYS</div>'
                                 }
                                 else {
@@ -500,7 +499,7 @@
                     //<p>Bug/Issue Closed</p>
                     $('#BugIssueTimeLine').append('<li class="timeline-inverted"><div class="timeline-badge info">SYS</div><div class="timeline-panel">' +
                         '<p><small class="text-muted"><i class="glyphicon glyphicon-user"></i>' + $('#User_UserName').text() + ' | <i class="glyphicon glyphicon-time"></i>recently</small></p>' +//| <i class="glyphicon glyphicon-time"></i>' + replyJson[i].TT_CreateDate + '
-                        '<div class="timeline-body"><p>Bug/Issue Closed</p></div></div></li>');
+                        '<div class="timeline-body"><p>Bug/Issue Closed, Resolution: ' + BI_Resolution + '</p></div></div></li>');
                     $('#div_BIR_Content').hide();
                     $('#btn_AddBugIssueReply').hide();
                     $('#BI_Resolution').selectpicker('hide');

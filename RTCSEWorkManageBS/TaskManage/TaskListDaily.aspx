@@ -50,6 +50,15 @@
                     <div class="list-group" id="TaskList">
                         <label hidden="hidden">*</label>
                     </div>
+                    <div class="row">
+                        <ul class="pager">
+                            <li><a class="btn" onclick="prevPage(); return false;"><<</a></li>
+                            <li><span id="CurrentPage">Current:0</span></li>
+                            <li><span id="TotalPage">Total:0</span></li>
+                            <li><span id="TotalItem">Items:0</span></li>
+                            <li><a class="btn" onclick="nextPage(); return false;">>></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-8">
@@ -130,26 +139,68 @@
             );
         });
 
-        //function AddTaskProgress() {
-
-        //}
-
-        //function AddBugIssue() {
-
-        //}
-
+        var pager = {};
+        pager.itemsPerPage = 5;
         function ReloadTaskList(keyWord) {
             $.post('../ashx/TaskHandler.ashx', {
                 mode: 'QueryTaskListTotalSimple', ListItemNum: keyWord == '' ? 10 : 0, keyWord: keyWord
             }, function (data, status) {
                 var TaskInfo = $.parseJSON(data);
-                $('#TaskList').empty();
-                for (var i in TaskInfo) {
-                    $('#TaskList').append('<a class="list-group-item" onclick="TaskListClick($(this))" id="TaskList' + TaskInfo[i].TT_ID + '">' +
-                        '<h4 class="list-group-item-heading">' + TaskInfo[i].TT_Title + '</h4>' +
-                        '<p class="list-group-item-text">' + TaskInfo[i].TT_Date + '</p><p class="list-group-item-text">' + TaskInfo[i].TT_TaskStatus + '</p></a>');
-                }
+                pager.items = TaskInfo;
+                pagerInit(pager);
+                $('#TotalPage').text('Total:' + pager.pagedItems.length);
+                $('#TotalItem').text('Items:' + TaskInfo.length);
+                BindTaskList();
             });
+        }
+        function BindTaskList() {
+            var TaskInfo = pager.pagedItems[pager.currentPage];
+            $('#CurrentPage').text('Current:' + (pager.currentPage + 1));
+            $('#TaskList').empty();
+            var cssTT_TaskStatus;
+            for (var i in TaskInfo) {
+                if (TaskInfo[i].TT_TaskStatus == 'Pending') { cssTT_TaskStatus = 'text-warning'; }
+                else if (TaskInfo[i].TT_TaskStatus == 'InProgress') { cssTT_TaskStatus = 'text-primary'; }
+                else if (TaskInfo[i].TT_TaskStatus == 'Complete') { cssTT_TaskStatus = 'text-success'; }
+                $('#TaskList').append('<a class="list-group-item" onclick="TaskListClick($(this))" id="TaskList' + TaskInfo[i].TT_ID + '">' +
+                    '<h4 class="list-group-item-heading">' + TaskInfo[i].TT_Title + '</h4>' +
+                    '<p class="list-group-item-text"><span class="' + cssTT_TaskStatus + '">' + TaskInfo[i].TT_TaskStatus + '</span> | ' + TaskInfo[i].TT_Date + '</p></a>');
+            }
+        }
+        function prevPage() {
+            pager.prevPage();
+            BindTaskList();
+        }
+        function nextPage() {
+            pager.nextPage();
+            BindTaskList();
+        }
+        function pagerInit(p) {
+            p.pagedItems = [];
+            p.currentPage = 0;
+            if (p.itemsPerPage === undefined) {
+                p.itemsPerPage = 5;
+            }
+            p.prevPage = function () {
+                if (p.currentPage > 0) {
+                    p.currentPage--;
+                }
+            };
+            p.nextPage = function () {
+                if (p.currentPage < p.pagedItems.length - 1) {
+                    p.currentPage++;
+                }
+            };
+            init = function () {
+                for (var i = 0; i < p.items.length; i++) {
+                    if (i % p.itemsPerPage === 0) {
+                        p.pagedItems[Math.floor(i / p.itemsPerPage)] = [p.items[i]];
+                    } else {
+                        p.pagedItems[Math.floor(i / p.itemsPerPage)].push(p.items[i]);
+                    }
+                }
+            };
+            init();
         }
 
         function SearchTaskList() {

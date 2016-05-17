@@ -76,6 +76,20 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        Run Case Per Release in this season
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <canvas id="pieReleaseCaseno"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <br />
         <div class="row">
@@ -108,6 +122,22 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Issue Distribution
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <canvas id="pieIssuetypeIssueno"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /#page-wrapper -->
 </asp:Content>
@@ -117,6 +147,9 @@
     <script type="text/ecmascript" src="<%=ResolveUrl("~/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js") %>"></script>
     <script type="text/javascript">
         var DateTimeNow = new Date();
+        var randomScalingFactor = function () {
+            return Math.round(Math.random() * 100);
+        };
         var randomColorFactor = function () {
             return Math.round(Math.random() * 255);
         };
@@ -132,6 +165,7 @@
             LoadBarTaskstyleCaseno('', '');
             LoadLineMonthCasenoRelease('');
             LoadPieReleaseCaseno('', '');
+            LoadPieIssuetypeIssueno('', '');
         });
 
         function LoadSeasonCaseTotal() {
@@ -146,7 +180,6 @@
             });
         }
 
-        //$('#barMonthTasknumber')
         function LoadBarMonthTasknumber(Year) {
             var barData = {
                 labels: [],
@@ -251,7 +284,7 @@
 
         function LoadLineMonthCasenoRelease(Year) {
             var barData = {
-                labels: ['1 / 2016', '2 / 2016', '3 / 2016', '4 / 2016', '5 / 2016', '6 / 2016', '7 / 2016', '8 / 2016', '9 / 2016', '10 / 2016', '11 / 2016', '12 / 2016'],
+                labels: ['1 / ' + Year, '2 / ' + Year, '3 / ' + Year, '4 / ' + Year, '5 / ' + Year, '6 / ' + Year, '7 / ' + Year, '8 / ' + Year, '9 / ' + Year, '10 / ' + Year, '11 / ' + Year, '12 / ' + Year],
                 datasets: [{
                     label: 'W14',
                     backgroundColor: randomColor(),//'rgba(0,134,246,0.71)', //randomColor(), // rgba(15,122,233,0.8)
@@ -326,8 +359,132 @@
             });
         }
 
-        function LoadPieReleaseCaseno(StartDate, EndDate) {
+        function LoadPieReleaseCaseno(Year, Season) {
+            var ChartData = {
+                datasets: [{
+                    //label: 'Task Number',
+                    data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()],
+                    //data:[],
+                    backgroundColor: [randomColor(), randomColor(), randomColor(), randomColor()]//'rgba(0,134,246,0.71)', //randomColor(), // rgba(15,122,233,0.8)
+                }],
+                labels: ['W14', 'W15', 'W16', 'LM']
+            }
+            $.post('../ashx/ChartReportHandler.ashx', {
+                mode: 'PieReleaseCaseno', Year: Year, Season: Season
+            }, function (data) {
+                var newDataset = { backgroundColor: [], data: [], label: [] }
+                var dataJSON = $.parseJSON(data);
+                for (var i in dataJSON) {
+                    newDataset.backgroundColor.push(randomColor());
+                    newDataset.data.push(dataJSON[i].iData);
+                    ChartData.labels[i] += ' - ' + dataJSON[i].Percent;
+                }
+                ChartData.datasets.splice(0, 1);
+                ChartData.datasets.push(newDataset);
+                window.ChartPieReleaseCaseno.update();
+            });
 
+            var ctx = document.getElementById("pieReleaseCaseno").getContext("2d");
+            window.ChartPieReleaseCaseno = new Chart(ctx, {
+                type: 'pie',
+                data: ChartData,
+                options: {
+                    responsive: true,
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            });
+        }
+
+        function LoadPieIssuetypeIssueno(Year, Season) {
+            var ChartData = {
+                datasets: [{
+                    //label: 'Task Number',
+                    data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()],
+                    //data:[],
+                    backgroundColor: [randomColor(), randomColor(), randomColor(), randomColor(), randomColor()]//'rgba(0,134,246,0.71)', //randomColor(), // rgba(15,122,233,0.8)
+                }],
+                labels: ['Confirm', 'MU', 'Configure(W14/W15)', 'Configure(W16)', 'Other']
+            }
+            $.post('../ashx/ChartReportHandler.ashx', {
+                mode: 'PieIssuetypeIssueno', Year: Year, Season: Season
+            }, function (data) {
+                var newDataset = { backgroundColor: [], data: [], label: [] }
+                var dataJSON = $.parseJSON(data);
+                for (var i in dataJSON) {
+                    newDataset.backgroundColor.push(randomColor());
+                    newDataset.data.push(dataJSON[i].iData);
+                    ChartData.labels[i] += ' - ' + dataJSON[i].Percent;
+                }
+                ChartData.datasets.splice(0, 1);
+                ChartData.datasets.push(newDataset);
+                window.ChartPieIssuetypeIssueno.update();
+            });
+
+            var ctx = document.getElementById("pieIssuetypeIssueno").getContext("2d");
+            window.ChartPieIssuetypeIssueno = new Chart(ctx, {
+                type: 'pie',
+                data: ChartData,
+                options: {
+                    responsive: true,
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            });
+        }
+
+        function LoadLineMonthBugnoReleaseNoMU(Year) {
+            var barData = {
+                labels: ['1 / ' + Year, '2 / ' + Year, '3 / ' + Year, '4 / ' + Year, '5 / ' + Year, '6 / ' + Year, '7 / ' + Year, '8 / ' + Year, '9 / ' + Year, '10 / ' + Year, '11 / ' + Year, '12 / ' + Year],
+                datasets: [{
+                    label: 'W14',
+                    backgroundColor: randomColor(),//'rgba(0,134,246,0.71)', //randomColor(), // rgba(15,122,233,0.8)
+                    data: [],
+                    lineTension: 0,
+                    fill: false
+                }, {
+                    label: 'W15',
+                    backgroundColor: randomColor(),//'rgba(0,134,246,0.71)', //randomColor(), // rgba(15,122,233,0.8)
+                    data: [],
+                    lineTension: 0,
+                    fill: false
+                }, {
+                    label: 'W16',
+                    backgroundColor: randomColor(),//'rgba(0,134,246,0.71)', //randomColor(), // rgba(15,122,233,0.8)
+                    data: [],
+                    lineTension: 0,
+                    fill: false
+                }, {
+                    label: 'LM',
+                    backgroundColor: randomColor(),//'rgba(0,134,246,0.71)', //randomColor(), // rgba(15,122,233,0.8)
+                    data: [],
+                    lineTension: 0,
+                    fill: false
+                }]
+            }
+            $.post('../ashx/ChartReportHandler.ashx', {
+                mode: 'LineMonthBugnoReleaseNoMU', Year: Year
+            }, function (data) {
+                var dataJSON = $.parseJSON(data);
+                for (var i in dataJSON) {
+                    //barData.labels.push(dataJSON[i].Month + ' / ' + DateTimeNow.getFullYear());
+                    if (dataJSON[i].Release == 'W14') { barData.datasets[0].data.push(dataJSON[i].iData); }
+                    else if (dataJSON[i].Release == 'W15') { barData.datasets[1].data.push(dataJSON[i].iData); }
+                    else if (dataJSON[i].Release == 'W16') { barData.datasets[2].data.push(dataJSON[i].iData); }
+                    else if (dataJSON[i].Release == 'LM') { barData.datasets[3].data.push(dataJSON[i].iData); }
+                }
+                $.each(barData.datasets, function (i, dataset) {
+                    var background = randomColor(0.5);
+                    dataset.borderColor = background;
+                    dataset.backgroundColor = background;
+                    dataset.pointBorderColor = background;
+                    dataset.pointBackgroundColor = background;
+                    dataset.pointBorderWidth = 1;
+                });
+                window.ChartLineMonthBugnoReleaseNoMU.update();
+            });
         }
     </script>
 </asp:Content>

@@ -68,6 +68,15 @@
                             <p class="list-group-item-text">04/07/2016 - 04/09/2016</p>
                         </a>--%>
                     </div>
+                    <div class="row">
+                        <ul class="pager">
+                            <li><a class="btn" onclick="prevPage(); return false;"><<</a></li>
+                            <li><span id="CurrentPage">Current:0</span></li>
+                            <li><span id="TotalPage">Total:0</span></li>
+                            <li><span id="TotalItem">Items:0</span></li>
+                            <li><a class="btn" onclick="nextPage(); return false;">>></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <!-- /.col-lg-3 Left TaskList-->
@@ -98,7 +107,7 @@
                         <input class="btn btn-success btn-sm" type="button" value="New" onclick="AddDialogShow()" />
                         <input class="btn btn-primary btn-sm" type="button" value="Edit" onclick="EditDialogShow()" />
                         <input class="btn btn-danger btn-sm" type="button" value="Delete" onclick="DeleteScenarioRole()" />
-                        <p style="margin-top:10px"></p>
+                        <p style="margin-top: 10px"></p>
                         <table id="GT_ScenarioRole"></table>
                         <div id="jqGridPager"></div>
                     </div>
@@ -177,7 +186,7 @@
         $.jgrid.defaults.styleUI = 'Bootstrap';
 
         $(document).ready(function () {
-            ReloadTaskList('', false);//var HaveTaskList = ReloadTaskList('', false);
+            ReloadTaskList('');//var HaveTaskList = ReloadTaskList('', false);
             //var S_FK_TT_ID;
             //if (HaveTaskList) {
             //    S_FK_TT_ID = $('.list-group a').first().attr('id').substring(8); // TaskList+S_FK_TT_ID
@@ -269,36 +278,73 @@
             InitialTagsInputUser($('#SR_AssignedUser'));
         });
 
-        function ReloadTaskList(keyWord, reloadScenario) {
+        var pager = {};
+        pager.itemsPerPage = 5;
+        function ReloadTaskList(keyWord) {
             //<a class="list-group-item" onclick="TaskListClick($(this))" id="TaskList23">
             //<h4 class="list-group-item-heading">W16 CU3 server build (9319.253) sanity Hotfix Verification</h4>
             //<p class="list-group-item-text">03/30/2016 - 04/02/2016</p></a>
             $.post('../ashx/TaskHandler.ashx', {
-                mode: 'QueryTaskListTotalSimple', ListItemNum: keyWord == '' ? 10 : 0, keyWord: keyWord
+                mode: 'QueryTaskListTotalSimple', ListItemNum: keyWord == '' ? 30 : 0, keyWord: keyWord
             }, function (data, status) {
                 var TaskInfo = $.parseJSON(data);
-                $('#TaskList').empty();
-                for (var i in TaskInfo) {
-                    $('#TaskList').append('<a class="list-group-item" onclick="TaskListClick($(this))" id="TaskList' + TaskInfo[i].TT_ID + '">' +
-                        '<h4 class="list-group-item-heading">' + TaskInfo[i].TT_Title + '</h4>' +
-                        '<p class="list-group-item-text">' + TaskInfo[i].TT_Date + '</p><p class="list-group-item-text">' + TaskInfo[i].TT_TaskStatus + '</p></a>');
-                }
-                //if (TaskInfo.length > 0) {
-                //    if ($('.list-group a.active').length === 0) {
-                //        $('.list-group a').first().addClass('active');
-                //        //$('.list-group a').first().click();
-                //        var S_FK_TT_ID = $('.list-group a').first().attr('id').substring(8);
-                //        if (reloadScenario) {
-                //            ReloadJQGridScenario(S_FK_TT_ID);
-                //        }
-                //    }
-                //    return true;
-                //}
-                //else {
-                //    return false;
-                //}
+                pager.items = TaskInfo;
+                pagerInit(pager);
+                $('#TotalPage').text('Total:' + pager.pagedItems.length);
+                $('#TotalItem').text('Items:' + TaskInfo.length);
+                BindTaskList();
             });
         }
+        function BindTaskList() {
+            var TaskInfo = pager.pagedItems[pager.currentPage];
+            $('#CurrentPage').text('Current:' + (pager.currentPage + 1));
+            $('#TaskList').empty();
+            var cssTT_TaskStatus;
+            for (var i in TaskInfo) {
+                if (TaskInfo[i].TT_TaskStatus == 'Pending') { cssTT_TaskStatus = 'text-warning'; }
+                else if (TaskInfo[i].TT_TaskStatus == 'InProgress') { cssTT_TaskStatus = 'text-primary'; }
+                else if (TaskInfo[i].TT_TaskStatus == 'Complete') { cssTT_TaskStatus = 'text-success'; }
+                $('#TaskList').append('<a class="list-group-item" onclick="TaskListClick($(this))" id="TaskList' + TaskInfo[i].TT_ID + '">' +
+                    '<h4 class="list-group-item-heading">' + TaskInfo[i].TT_Title + '</h4>' +
+                    '<p class="list-group-item-text"><span class="' + cssTT_TaskStatus + '">' + TaskInfo[i].TT_TaskStatus + '</span> | ' + TaskInfo[i].TT_Date + '</p></a>');
+            }
+        }
+        function prevPage() {
+            pager.prevPage();
+            BindTaskList();
+        }
+        function nextPage() {
+            pager.nextPage();
+            BindTaskList();
+        }
+        function pagerInit(p) {
+            p.pagedItems = [];
+            p.currentPage = 0;
+            if (p.itemsPerPage === undefined) {
+                p.itemsPerPage = 5;
+            }
+            p.prevPage = function () {
+                if (p.currentPage > 0) {
+                    p.currentPage--;
+                }
+            };
+            p.nextPage = function () {
+                if (p.currentPage < p.pagedItems.length - 1) {
+                    p.currentPage++;
+                }
+            };
+            init = function () {
+                for (var i = 0; i < p.items.length; i++) {
+                    if (i % p.itemsPerPage === 0) {
+                        p.pagedItems[Math.floor(i / p.itemsPerPage)] = [p.items[i]];
+                    } else {
+                        p.pagedItems[Math.floor(i / p.itemsPerPage)].push(p.items[i]);
+                    }
+                }
+            };
+            init();
+        }
+
 
         function InitialScenarioRole() {
             $('#SR_RoleTitle').val('');
@@ -308,7 +354,7 @@
 
         function SearchTaskList() {
             var KeyWord = $('#txt_KeyWord').val();
-            ReloadTaskList(KeyWord, true);
+            ReloadTaskList(KeyWord);
         }
 
         function TaskListClick(selector) {

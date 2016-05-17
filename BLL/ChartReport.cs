@@ -26,5 +26,19 @@ namespace BLL
         {
             return dal.LineMonthCasenoRelease(Year);
         }
+        public DataSet PieReleaseCaseno(string strDateTime)
+        {
+            return dal.PieReleaseCaseno(strDateTime);
+        }
+
+        public DataSet PieIssuetypeIssueno(string strDateTime)
+        {
+            return dal.PieIssuetypeIssueno(strDateTime);
+        }
+
+        public DataSet LineMonthBugnoReleaseNoMU(string year)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

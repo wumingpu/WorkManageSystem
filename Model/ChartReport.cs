@@ -35,6 +35,14 @@ namespace Model.ChartReport
     }
 
     [Serializable]
+    public partial class LabelDataPercent
+    {
+        public string LabelName { set; get; }
+        public int iData { set; get; }
+        public string Percent { set; get; }
+    }
+
+    [Serializable]
     public partial class LabelReleaseData
     {
         public string LabelName { set; get; }
