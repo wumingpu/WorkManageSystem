@@ -36,6 +36,17 @@ namespace DAL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
+        public DataSet LineMonthBugnoRelease(string Year)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select MONTH(BI_CreateDate) as MonthNum,TT_Release,count(BI_ID) as IssueNo from V_BugIssueTaskTotal");
+            strSql.Append(" where TT_Release is not null ");
+            strSql.Append(string.Format(" and BI_CreateDate between '{0}-01-01 00:00:00' and '{0}-12-31 23:59:59' ", Year));
+            strSql.Append(" and BI_Type = 'Bug' ");
+            strSql.Append(" group by TT_Release,MONTH(BI_CreateDate)");
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
         public DataSet PieIssuetypeIssueno(string strDateTime)
         {
             StringBuilder strSql = new StringBuilder();

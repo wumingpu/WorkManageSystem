@@ -138,6 +138,23 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        Delivery – Bug Reported
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <canvas id="lineMonthBugnoRelease"></canvas>
+                            </div>
+                            <div class="col-lg-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /#page-wrapper -->
 </asp:Content>
@@ -166,6 +183,7 @@
             LoadLineMonthCasenoRelease('');
             LoadPieReleaseCaseno('', '');
             LoadPieIssuetypeIssueno('', '');
+            LoadLineMonthBugnoRelease('');
         });
 
         function LoadSeasonCaseTotal() {
@@ -435,47 +453,46 @@
             });
         }
 
-        function LoadLineMonthBugnoReleaseNoMU(Year) {
-            var barData = {
+        function LoadLineMonthBugnoRelease(Year) {
+            var ChartData = {
                 labels: ['1 / ' + Year, '2 / ' + Year, '3 / ' + Year, '4 / ' + Year, '5 / ' + Year, '6 / ' + Year, '7 / ' + Year, '8 / ' + Year, '9 / ' + Year, '10 / ' + Year, '11 / ' + Year, '12 / ' + Year],
                 datasets: [{
                     label: 'W14',
-                    backgroundColor: randomColor(),//'rgba(0,134,246,0.71)', //randomColor(), // rgba(15,122,233,0.8)
+                    backgroundColor: randomColor(),
                     data: [],
                     lineTension: 0,
                     fill: false
                 }, {
                     label: 'W15',
-                    backgroundColor: randomColor(),//'rgba(0,134,246,0.71)', //randomColor(), // rgba(15,122,233,0.8)
+                    backgroundColor: randomColor(),
                     data: [],
                     lineTension: 0,
                     fill: false
                 }, {
                     label: 'W16',
-                    backgroundColor: randomColor(),//'rgba(0,134,246,0.71)', //randomColor(), // rgba(15,122,233,0.8)
+                    backgroundColor: randomColor(),
                     data: [],
                     lineTension: 0,
                     fill: false
                 }, {
                     label: 'LM',
-                    backgroundColor: randomColor(),//'rgba(0,134,246,0.71)', //randomColor(), // rgba(15,122,233,0.8)
+                    backgroundColor: randomColor(),
                     data: [],
                     lineTension: 0,
                     fill: false
                 }]
             }
             $.post('../ashx/ChartReportHandler.ashx', {
-                mode: 'LineMonthBugnoReleaseNoMU', Year: Year
+                mode: 'LineMonthBugnoRelease', Year: Year
             }, function (data) {
                 var dataJSON = $.parseJSON(data);
                 for (var i in dataJSON) {
-                    //barData.labels.push(dataJSON[i].Month + ' / ' + DateTimeNow.getFullYear());
-                    if (dataJSON[i].Release == 'W14') { barData.datasets[0].data.push(dataJSON[i].iData); }
-                    else if (dataJSON[i].Release == 'W15') { barData.datasets[1].data.push(dataJSON[i].iData); }
-                    else if (dataJSON[i].Release == 'W16') { barData.datasets[2].data.push(dataJSON[i].iData); }
-                    else if (dataJSON[i].Release == 'LM') { barData.datasets[3].data.push(dataJSON[i].iData); }
+                    if (dataJSON[i].Release == 'W14') { ChartData.datasets[0].data.push(dataJSON[i].iData); }
+                    else if (dataJSON[i].Release == 'W15') { ChartData.datasets[1].data.push(dataJSON[i].iData); }
+                    else if (dataJSON[i].Release == 'W16') { ChartData.datasets[2].data.push(dataJSON[i].iData); }
+                    else if (dataJSON[i].Release == 'LM') { ChartData.datasets[3].data.push(dataJSON[i].iData); }
                 }
-                $.each(barData.datasets, function (i, dataset) {
+                $.each(ChartData.datasets, function (i, dataset) {
                     var background = randomColor(0.5);
                     dataset.borderColor = background;
                     dataset.backgroundColor = background;
@@ -483,7 +500,36 @@
                     dataset.pointBackgroundColor = background;
                     dataset.pointBorderWidth = 1;
                 });
-                window.ChartLineMonthBugnoReleaseNoMU.update();
+                window.ChartLineMonthBugnoRelease.update();
+            });
+            var ctx = document.getElementById("lineMonthBugnoRelease").getContext("2d");
+            window.ChartLineMonthBugnoRelease = new Chart(ctx, {
+                type: 'line',
+                data: ChartData,
+                options: {
+                    responsive: true,
+                    legend: {
+                        position: 'bottom'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Bug Trend'
+                    },
+                    animation: {
+                        onComplete: function () {
+                            var chartInstance = this.chart;
+                            var ctx = chartInstance.ctx;
+                            ctx.textAlign = "center";
+
+                            Chart.helpers.each(this.data.datasets.forEach(function (dataset, i) {
+                                var meta = chartInstance.controller.getDatasetMeta(i);
+                                Chart.helpers.each(meta.data.forEach(function (bar, index) {
+                                    ctx.fillText(dataset.data[index], bar._model.x, bar._model.y - 15);
+                                }), this)
+                            }), this);
+                        }
+                    }
+                }
             });
         }
     </script>

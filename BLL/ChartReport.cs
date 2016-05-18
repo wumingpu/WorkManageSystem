@@ -36,9 +36,9 @@ namespace BLL
             return dal.PieIssuetypeIssueno(strDateTime);
         }
 
-        public DataSet LineMonthBugnoReleaseNoMU(string year)
+        public DataSet LineMonthBugnoRelease(string Year)
         {
-            throw new NotImplementedException();
+            return dal.LineMonthBugnoRelease(Year);
         }
     }
 }

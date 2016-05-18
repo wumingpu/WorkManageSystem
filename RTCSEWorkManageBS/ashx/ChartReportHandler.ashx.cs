@@ -41,8 +41,8 @@ namespace RTCSEWorkManageBS.ashx
                     case "PieIssuetypeIssueno":
                         PieIssuetypeIssueno(context);
                         break;
-                    case "LineMonthBugnoReleaseNoMU":
-                        LineMonthBugnoReleaseNoMU(context);
+                    case "LineMonthBugnoRelease":
+                        LineMonthBugnoRelease(context);
                         break;
 
                     // Pie Chart
@@ -53,7 +53,7 @@ namespace RTCSEWorkManageBS.ashx
             }
         }
 
-        private void LineMonthBugnoReleaseNoMU(HttpContext context)
+        private void LineMonthBugnoRelease(HttpContext context)
         {
             BLL.ChartReport bll = new BLL.ChartReport();
             string Year = context.Request["Year"];
@@ -61,14 +61,41 @@ namespace RTCSEWorkManageBS.ashx
             {
                 Year = DateTime.Now.Year.ToString();
             }
-            DataSet ds = bll.LineMonthBugnoReleaseNoMU(Year);
+            DataSet ds = bll.LineMonthBugnoRelease(Year);
             List<Model.ChartReport.LabelReleaseData> list = new List<Model.ChartReport.LabelReleaseData>();
-            //foreach (DataRow dr in ds.Tables[0].Rows)
-            //{
-            //    list.Add(new Model.ChartReport.LabelReleaseData() {
-            //        LabelName = dr[""]
-            //    });
-            //}
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                list.Add(new Model.ChartReport.LabelReleaseData()
+                {
+                    LabelName = dr["MonthNum"].ToString(),
+                    Release = dr["TT_Release"].ToString(),
+                    iData = Convert.ToInt32(dr["IssueNo"])
+                });
+            }
+            string[] arrRelease = { "W14", "W15", "W16", "LM" };
+            Model.ChartReport.LabelReleaseData modelCheck;
+            for (int i = 1; i <= 12; i++)
+            {
+                foreach (string Release in arrRelease)
+                {
+                    modelCheck = list.Find(delegate (Model.ChartReport.LabelReleaseData model) {
+                        return model.LabelName == i.ToString() && model.Release == Release;
+                    });
+                    if (modelCheck == null)
+                    {
+                        list.Add(new Model.ChartReport.LabelReleaseData()
+                        {
+                            LabelName = i.ToString(),
+                            Release = Release,
+                            iData = 0
+                        });
+                    }
+                }
+            }
+            list = list.OrderBy(o => o.LabelName).ThenBy(o => o.Release).ToList();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            string strJson = jss.Serialize(list);
+            context.Response.Write(strJson);
         }
 
         private void PieIssuetypeIssueno(HttpContext context)
