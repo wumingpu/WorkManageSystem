@@ -265,7 +265,7 @@
                 + '<button type="button" class="btn btn-default" name="btnAdd" onclick="AddScenarioRoleRow()">Add</button>'
                 + '</div></div></div>');
             //$('.DynamicSR label').style.padding = "2px";
-            InitialTagsInputUser($('.SR_AssignedUser'));
+            InitialTagsInputUser($('.SR_AssignedUser'), '');
         }
         function AddScenarioRoleRow() {
             //<div class="row DynamicSR" style="line-height: 40px">
@@ -284,7 +284,7 @@
                 + '<label>Resource</label><input class="form-control SR_AssignedUser" style="width:40%" />'
                 + '<button type="button" class="btn btn-danger" name="btnDel" onclick="RemoveScenarioRoleRow($(this))">Del</button>'
                 + '</div></div></div>');
-            InitialTagsInputUser($('.SR_AssignedUser'));
+            InitialTagsInputUser($('.SR_AssignedUser'), '');
         }
         function RemoveScenarioRoleRow(selector) {
             selector.parent().parent().parent().remove();
@@ -396,7 +396,7 @@
                 return;
             }
             var rowData = $('#GT_Scenario').jqGrid('getRowData', rowid);
-            if (rowData.S_HaveRole=="Yes") {
+            if (rowData.S_HaveRole == "Yes") {
                 alert('This Scenario Have Feature, Can not be deleted !');
                 return;
             }

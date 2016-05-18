@@ -107,7 +107,7 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label>Owner</label>
-                                <input class="form-control" id="TP_Owner" />
+                                <input class="form-control" id="TP_Owner" bootstrap-tagsinput-max="1" />
                             </div>
                         </div>
                     </div>
@@ -465,7 +465,7 @@
                 $('#TD_TimeEnd').datetimepicker("setStartDate", $("#TD_TimeStart").val());
             });
 
-            InitialTagsInputUser($('#TP_Owner'));
+            InitialTagsInputUser($('#TP_Owner'), 1);
 
             AddTaskCards();
         });

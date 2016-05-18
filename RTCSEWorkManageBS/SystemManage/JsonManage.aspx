@@ -80,7 +80,7 @@
     <script type="text/javascript" src="<%=ResolveUrl("~/DynamicJS/TagsInputUserData.js") %>"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            InitialTagsInputUser($('.SR_AssignedUser')); // function in TagsInputUserData.js
+            InitialTagsInputUser($('.SR_AssignedUser'), ''); // function in TagsInputUserData.js
         });
 
         function UpdateUserInfoJson() {

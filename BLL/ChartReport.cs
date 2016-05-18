@@ -40,5 +40,30 @@ namespace BLL
         {
             return dal.LineMonthBugnoRelease(Year);
         }
+
+        public DataSet PieFoundbyBugno(string strDateTime)
+        {
+            return dal.PieFoundbyBugno(strDateTime);
+        }
+
+        public DataSet PieReleaseBugno(string strDateTime)
+        {
+            return dal.PieReleaseBugno(strDateTime);
+        }
+
+        public DataSet PieTasktypeBugno(string strDateTime)
+        {
+            return dal.PieTasktypeBugno(strDateTime);
+        }
+
+        public DataSet PiePriorityBugno(string strDateTime)
+        {
+            return dal.PiePriorityBugno(strDateTime);
+        }
+
+        public DataSet PieResolutionBugno(string strDateTime)
+        {
+            return dal.PieResolutionBugno(strDateTime);
+        }
     }
 }

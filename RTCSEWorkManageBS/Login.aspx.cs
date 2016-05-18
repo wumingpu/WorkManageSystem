@@ -12,7 +12,11 @@ namespace RTCSEWorkManageBS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!string.IsNullOrEmpty(Request.QueryString["logout"]))
+            {
+                Session.Clear();
+                Response.Redirect("Login.aspx");
+            }
         }
 
         protected void btn_Login_Click(object sender, EventArgs e)
@@ -32,7 +36,7 @@ namespace RTCSEWorkManageBS
                 {
                     DataRow dr = ds.Tables[0].Rows[0];
                     Session["User_ID"] = dr["U_ID"];
-                    Session["User_UserName"] = dr["U_username"];
+                    Session["User_UserName"] = dr["U_nickname"];
                     Session["User_Power"] = dr["U_power"];
 
                     Response.Redirect("DashBoard.aspx");

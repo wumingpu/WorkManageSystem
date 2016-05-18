@@ -6,10 +6,14 @@ UserData = new Bloodhound({
 });
 UserData.initialize();
 
-function InitialTagsInputUser(selector) {
+function InitialTagsInputUser(selector, maxTagNum) {
+    if (maxTagNum == '') {
+        maxTagNum = 100;
+    }
     selector.off().on().tagsinput({
         itemValue: 'U_ID',
         itemText: 'U_nickname',
+        maxTags: maxTagNum,
         typeaheadjs: {
             name: 'UserData',
             displayKey: 'U_nickname',

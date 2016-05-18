@@ -128,6 +128,7 @@
     <Content Include="DynamicJS\TagsInputUserData.js" />
     <Content Include="Login.aspx" />
     <Content Include="Other record.txt" />
+    <Content Include="PageJS\DashBoardJS.js" />
     <Content Include="QBR\SOWList.aspx" />
     <Content Include="SystemManage\JsonManage.aspx" />
     <Content Include="SystemManage\UserManage.aspx" />

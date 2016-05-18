@@ -275,7 +275,7 @@
             { multipleSearch: true, multipleGroup: true, showQuery: true } // search options - define multiple search
             );
 
-            InitialTagsInputUser($('#SR_AssignedUser'));
+            InitialTagsInputUser($('#SR_AssignedUser'), '');
         });
 
         var pager = {};

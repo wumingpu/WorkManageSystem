@@ -33,6 +33,9 @@ namespace RTCSEWorkManageBS.ashx
                     case "LineMonthCasenoRelease":
                         LineMonthCasenoRelease(context);
                         break;
+                    case "LineMonthBugnoRelease":
+                        LineMonthBugnoRelease(context);
+                        break;
 
                     // Pie Chart
                     case "PieReleaseCaseno":
@@ -41,8 +44,20 @@ namespace RTCSEWorkManageBS.ashx
                     case "PieIssuetypeIssueno":
                         PieIssuetypeIssueno(context);
                         break;
-                    case "LineMonthBugnoRelease":
-                        LineMonthBugnoRelease(context);
+                    case "PieFoundbyBugno":
+                        PieFoundbyBugno(context);
+                        break;
+                    case "PieReleaseBugno":
+                        PieReleaseBugno(context);
+                        break;
+                    case "PieTasktypeBugno":
+                        PieTasktypeBugno(context);
+                        break;
+                    case "PiePriorityBugno":
+                        PiePriorityBugno(context);
+                        break;
+                    case "PieResolutionBugno":
+                        PieResolutionBugno(context);
                         break;
 
                     // Pie Chart
@@ -51,6 +66,116 @@ namespace RTCSEWorkManageBS.ashx
                         break;
                 }
             }
+        }
+
+        private void PieResolutionBugno(HttpContext context)
+        {
+            BLL.ChartReport bll = new BLL.ChartReport();
+            string Year = context.Request["Year"];
+            string Season = context.Request["Season"];
+            string strDateTime = GetDateTimeWithYearSeasonNum(Year, Season);
+            DataSet ds = bll.PieResolutionBugno(strDateTime);
+            List<Model.ChartReport.LabelDataPercent> list = new List<Model.ChartReport.LabelDataPercent>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                list.Add(new Model.ChartReport.LabelDataPercent()
+                {
+                    LabelName = dr["BI_Resolution"].ToString(),
+                    iData = Convert.ToInt32(dr["BugNo"]),
+                    Percent = Convert.ToInt32(dr["BugPercent"]).ToString() + '%'
+                });
+            }
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            string strJson = jss.Serialize(list);
+            context.Response.Write(strJson);
+        }
+
+        private void PiePriorityBugno(HttpContext context)
+        {
+            BLL.ChartReport bll = new BLL.ChartReport();
+            string Year = context.Request["Year"];
+            string Season = context.Request["Season"];
+            string strDateTime = GetDateTimeWithYearSeasonNum(Year, Season);
+            DataSet ds = bll.PiePriorityBugno(strDateTime);
+            List<Model.ChartReport.LabelDataPercent> list = new List<Model.ChartReport.LabelDataPercent>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                list.Add(new Model.ChartReport.LabelDataPercent()
+                {
+                    LabelName = dr["BI_Priority"].ToString(),
+                    iData = Convert.ToInt32(dr["BugNo"]),
+                    Percent = Convert.ToInt32(dr["BugPercent"]).ToString() + '%'
+                });
+            }
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            string strJson = jss.Serialize(list);
+            context.Response.Write(strJson);
+        }
+
+        private void PieTasktypeBugno(HttpContext context)
+        {
+            BLL.ChartReport bll = new BLL.ChartReport();
+            string Year = context.Request["Year"];
+            string Season = context.Request["Season"];
+            string strDateTime = GetDateTimeWithYearSeasonNum(Year, Season);
+            DataSet ds = bll.PieTasktypeBugno(strDateTime);
+            List<Model.ChartReport.LabelDataPercent> list = new List<Model.ChartReport.LabelDataPercent>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                list.Add(new Model.ChartReport.LabelDataPercent()
+                {
+                    LabelName = dr["TT_TaskType"].ToString(),
+                    iData = Convert.ToInt32(dr["BugNo"]),
+                    Percent = Convert.ToInt32(dr["BugPercent"]).ToString() + '%'
+                });
+            }
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            string strJson = jss.Serialize(list);
+            context.Response.Write(strJson);
+        }
+
+        private void PieReleaseBugno(HttpContext context)
+        {
+            BLL.ChartReport bll = new BLL.ChartReport();
+            string Year = context.Request["Year"];
+            string Season = context.Request["Season"];
+            string strDateTime = GetDateTimeWithYearSeasonNum(Year, Season);
+            DataSet ds = bll.PieReleaseBugno(strDateTime);
+            List<Model.ChartReport.LabelDataPercent> list = new List<Model.ChartReport.LabelDataPercent>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                list.Add(new Model.ChartReport.LabelDataPercent()
+                {
+                    LabelName = dr["TT_Release"].ToString(),
+                    iData = Convert.ToInt32(dr["BugNo"]),
+                    Percent = Convert.ToInt32(dr["BugPercent"]).ToString() + '%'
+                });
+            }
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            string strJson = jss.Serialize(list);
+            context.Response.Write(strJson);
+        }
+
+        private void PieFoundbyBugno(HttpContext context)
+        {
+            BLL.ChartReport bll = new BLL.ChartReport();
+            string Year = context.Request["Year"];
+            string Season = context.Request["Season"];
+            string strDateTime = GetDateTimeWithYearSeasonNum(Year, Season);
+            DataSet ds = bll.PieFoundbyBugno(strDateTime);
+            List<Model.ChartReport.LabelDataPercent> list = new List<Model.ChartReport.LabelDataPercent>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                list.Add(new Model.ChartReport.LabelDataPercent()
+                {
+                    LabelName = dr["FoundBy"].ToString(),
+                    iData = Convert.ToInt32(dr["BugNo"]),
+                    Percent = Convert.ToInt32(dr["BugPercent"]).ToString() + '%'
+                });
+            }
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            string strJson = jss.Serialize(list);
+            context.Response.Write(strJson);
         }
 
         private void LineMonthBugnoRelease(HttpContext context)
@@ -78,21 +203,23 @@ namespace RTCSEWorkManageBS.ashx
             {
                 foreach (string Release in arrRelease)
                 {
-                    modelCheck = list.Find(delegate (Model.ChartReport.LabelReleaseData model) {
+                    modelCheck = list.Find(delegate (Model.ChartReport.LabelReleaseData model)
+                    {
                         return model.LabelName == i.ToString() && model.Release == Release;
                     });
                     if (modelCheck == null)
                     {
                         list.Add(new Model.ChartReport.LabelReleaseData()
                         {
-                            LabelName = i.ToString(),
+                            LabelName = i.ToString(),//.Length == 1 ? '0' + i.ToString() : i.ToString()
                             Release = Release,
                             iData = 0
                         });
                     }
                 }
             }
-            list = list.OrderBy(o => o.LabelName).ThenBy(o => o.Release).ToList();
+            
+            list = list.OrderBy(o => o.LabelName.PadLeft(2,'0')).ThenBy(o => o.Release).ToList();
             JavaScriptSerializer jss = new JavaScriptSerializer();
             string strJson = jss.Serialize(list);
             context.Response.Write(strJson);
@@ -130,7 +257,8 @@ namespace RTCSEWorkManageBS.ashx
             List<Model.ChartReport.LabelDataPercent> list = new List<Model.ChartReport.LabelDataPercent>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                list.Add(new Model.ChartReport.LabelDataPercent() {
+                list.Add(new Model.ChartReport.LabelDataPercent()
+                {
                     LabelName = dr["TT_Release"].ToString(),
                     iData = Convert.ToInt32(dr["CaseNo"]),
                     Percent = Convert.ToInt32(dr["CasePercent"]).ToString() + '%'
@@ -153,7 +281,8 @@ namespace RTCSEWorkManageBS.ashx
             List<Model.ChartReport.LabelReleaseData> list = new List<Model.ChartReport.LabelReleaseData>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                list.Add(new Model.ChartReport.LabelReleaseData() {
+                list.Add(new Model.ChartReport.LabelReleaseData()
+                {
                     LabelName = dr["MonthNum"].ToString(),
                     Release = dr["TT_Release"].ToString(),
                     iData = Convert.ToInt32(dr["CaseNo"])
@@ -165,12 +294,14 @@ namespace RTCSEWorkManageBS.ashx
             {
                 foreach (string Release in arrRelease)
                 {
-                    modelCheck = list.Find(delegate (Model.ChartReport.LabelReleaseData model) {
+                    modelCheck = list.Find(delegate (Model.ChartReport.LabelReleaseData model)
+                    {
                         return model.LabelName == i.ToString() && model.Release == Release;
                     });
                     if (modelCheck == null)
                     {
-                        list.Add(new Model.ChartReport.LabelReleaseData() {
+                        list.Add(new Model.ChartReport.LabelReleaseData()
+                        {
                             LabelName = i.ToString(),
                             Release = Release,
                             iData = 0
@@ -178,7 +309,7 @@ namespace RTCSEWorkManageBS.ashx
                     }
                 }
             }
-            list = list.OrderBy(o => o.LabelName).ThenBy(o => o.Release).ToList();
+            list = list.OrderBy(o => o.LabelName.PadLeft(2, '0')).ThenBy(o => o.Release).ToList();
             JavaScriptSerializer jss = new JavaScriptSerializer();
             string strJson = jss.Serialize(list);
             context.Response.Write(strJson);
@@ -195,7 +326,8 @@ namespace RTCSEWorkManageBS.ashx
             List<Model.ChartReport.LabelData> list = new List<Model.ChartReport.LabelData>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                list.Add(new Model.ChartReport.LabelData() {
+                list.Add(new Model.ChartReport.LabelData()
+                {
                     LabelName = dr["TaskType"].ToString(),
                     iData = Convert.ToInt32(dr["CaseNo"])
                 });

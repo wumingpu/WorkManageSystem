@@ -189,9 +189,10 @@
             $('#BI_EnvironmentServer').val('');
             $('#BI_TopologyName').val('');
             $('#BI_CaseNumber').val('');
-            $('#BI_Type').selectpicker('val', 'Issue');
+            $('#BI_Type').selectpicker('val', '');
+            $('#BI_Priority').selectpicker('val', '');
             //$('.selectpicker:not(#BI_Type)').html('<option></option>').selectpicker('refresh');
-            $('.selectpicker').html('<option></option>').selectpicker('refresh');
+            $('.selectpicker:not(#BI_Type):not(#BI_Priority)').html('<option></option>').selectpicker('refresh');
             ReloadDDLTaskTotal('InProgress');
             tinymce.activeEditor.setContent('');
         }
@@ -277,13 +278,19 @@
                 $('#BI_Type').focus();
                 return;
             }
+            var BI_FK_TT_ID = $('#BI_FK_TT_ID').val();
+            if (BI_FK_TT_ID == '') {
+                alert('Please Select Hit Task !');
+                $('#BI_FK_TT_ID').focus();
+                return;
+            }
             var BI_Priority = $('#BI_Priority').selectpicker('val');
             if (BI_Priority == '') {
                 alert('Please Select a Priority !');
                 $('#BI_Priority').focus();
                 return;
             }
-            var BI_FK_TT_ID = $('#BI_FK_TT_ID').val();
+            
             var BI_FK_S_ID = $('#BI_FK_S_ID').val();
             var BI_FK_SR_ID = $('#BI_FK_SR_ID').val();
             var BI_EnvironmentServer = $('#BI_EnvironmentServer').val();
