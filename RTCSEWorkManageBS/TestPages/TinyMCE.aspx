@@ -42,26 +42,48 @@
     <script type="text/javascript" src="<%=ResolveUrl("~/bower_components/tinymce/tinymce.min.js") %>"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            //tinymce.init({
+            //    selector: "textarea", theme: "modern",
+            //    height: 600,
+            //    plugins: [
+            //         "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+            //         "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+            //         "table contextmenu directionality emoticons paste textcolor code"
+            //    ], //responsivefilemanager 
+            //    toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
+            //    toolbar2: " | link unlink anchor | image media | forecolor backcolor  | print preview code ",
+            //    image_advtab: true,//| responsivefilemanager
+            //    //external_filemanager_path: "../bower_components/filemanager/",
+            //    //filemanager_title: "Responsive Filemanager",
+            //    //external_plugins: { "filemanager": "../bower_components/filemanager/plugin.min.js" }
+            //    file_browser_callback: RoxyFileBrowser
+            //});
+
+            //$.post('../ashx/BugIssueHandler.ashx', { mode: 'GetBugIssueContentSingle', BI_ID: 1 }, function (data) {
+            //    var dataJson = $.parseJSON(data);
+            //    $('#BI_Content').html(dataJson.BI_Content);
+            //});
             tinymce.init({
                 selector: "textarea", theme: "modern",
                 height: 600,
+                setup: function (ed) {
+                    ed.on('init', function () {
+                        //this.execCommand("fontName", false, "Tahoma");
+                        //this.execCommand("fontSize", false, "12pt");
+                        this.getDoc().body.style.fontSize = '12pt';
+                    });
+                },
                 plugins: [
                      "advlist autolink link image lists charmap print preview hr anchor pagebreak",
                      "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
-                     "table contextmenu directionality emoticons paste textcolor code"
-                ], //responsivefilemanager 
-                toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
-                toolbar2: " | link unlink anchor | image media | forecolor backcolor  | print preview code ",
-                image_advtab: true,//| responsivefilemanager
-                //external_filemanager_path: "../bower_components/filemanager/",
-                //filemanager_title: "Responsive Filemanager",
-                //external_plugins: { "filemanager": "../bower_components/filemanager/plugin.min.js" }
+                     "table contextmenu directionality emoticons paste textcolor code codesample"//fullpage fullscreen
+                ],
+                //menubar: "edit",
+                toolbar1: "undo redo | bold italic underline | fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
+                toolbar2: "paste | link unlink anchor | image media emoticons hr insertdatetime codesample | forecolor backcolor | charmap  | print preview code ",//fullpage fullscreen 
+                image_advtab: true,
+                paste_data_images: true,
                 file_browser_callback: RoxyFileBrowser
-            });
-
-            $.post('../ashx/BugIssueHandler.ashx', { mode: 'GetBugIssueContentSingle', BI_ID: 1 }, function (data) {
-                var dataJson = $.parseJSON(data);
-                $('#BI_Content').html(dataJson.BI_Content);
             });
         });
         var roxyFileman = '../bower_components/fileman/index.html?integration=tinymce4';

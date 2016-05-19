@@ -107,7 +107,7 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label>Owner</label>
-                                <input class="form-control" id="TP_Owner" bootstrap-tagsinput-max="1" />
+                                <input class="form-control" id="TP_Owner" />
                             </div>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                                 <label>Release</label><input class="form-control" id="TT_Release" />
                             </div>
                         </div>
-                        
+
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>Build Type</label><input class="form-control" id="TT_BuildType" />
@@ -450,6 +450,10 @@
                 }
             });
 
+            $('#ModalAddProgress').on('hidden.bs.modal', function () {
+                ReloadCardList(false, true, true);
+            })
+
             // Datetime Picker options
             $("#TP_DateStart").datetimepicker({ format: 'mm/dd/yyyy', minView: "month", autoclose: true }).on("click", function (ev) {
                 $('#TP_DateStart').datetimepicker("setEndDate", $("#TP_DateEnd").val());
@@ -572,11 +576,15 @@
 
         function AddTaskPersonal() {
             var TP_Title = $('#TP_Title').val();
+            if (TP_Title == '') { alert('please input Task Title !'); $('#TP_Title').focus(); return; }
             var TP_DateStart = $('#TP_DateStart').val();
+            if (TP_DateStart == '') { alert('please input Start Date !'); $('#TP_DateStart').focus(); return; }
             var TP_DateEnd = $('#TP_DateEnd').val();
+            if (TP_DateEnd == '') { alert('please input End Date !'); $('#TP_DateEnd').focus(); return; }
             var TP_Owner = $('#TP_Owner').val();
             var TP_Comments = $('#TP_Comments').val();
             var User_ID = $('#User_ID').text();
+            if (TP_Owner == '') { TP_Owner = User_ID; }
             $.post('../ashx/TaskHandler.ashx', {
                 mode: 'AddTaskPersonal', TP_Title: TP_Title, TP_DateStart: TP_DateStart,
                 TP_DateEnd: TP_DateEnd, TP_Owner: TP_Owner, TP_Comments: TP_Comments,
@@ -642,7 +650,7 @@
                 $('#p_TD_Progress').val(dataJson.TD_Progress);
                 $('#TD_TimeStart').val(dataJson.TD_TimeStart);
                 $('#TD_TimeEnd').val(dataJson.TD_TimeEnd);
-                
+
                 if (dataJson.TD_TimeStart != '') {
                     $('#TD_TimeStart').attr('disabled', 'disabled');
                     $('.TimeEndCol').hide();
@@ -681,7 +689,7 @@
             var TT_ID = $('#TT_ID').text();
             var User_ID = $('#User_ID').text();
 
-            if (!(dragFrom=="LeftPanel" && dropTo == "MiddlePanel")) {
+            if (!(dragFrom == "LeftPanel" && dropTo == "MiddlePanel")) {
                 var SR_CasePassed = $('#SR_CasePassed').val();
                 var SR_CaseFailed = $('#SR_CaseFailed').val();
                 var SR_CaseNA = $('#SR_CaseNA').val();
@@ -721,12 +729,12 @@
                     return;
                 }
             }
-            
+
             $.post('../ashx/TaskHandler.ashx', {
                 mode: 'UpdataTaskProgress', SR_CasePassed: SR_CasePassed, SR_CaseFailed: SR_CaseFailed,
                 SR_CasePassedGrow: SR_CasePassedGrow, SR_CaseFailedGrow: SR_CaseFailedGrow, SR_CaseNAGrow: SR_CaseNAGrow, SR_CaseRedmondGrow: SR_CaseRedmondGrow,
                 SR_CaseNA: SR_CaseNA, SR_CaseRedmond: SR_CaseRedmond, TimeStart: TimeStart,
-                TimeEnd: TimeEnd, TD_Progress: TD_Progress,TD_CompleteReason:TD_CompleteReason,
+                TimeEnd: TimeEnd, TD_Progress: TD_Progress, TD_CompleteReason: TD_CompleteReason,
                 dragFrom: dragFrom, dropTo: dropTo, TD_CardType: TD_CardType, TD_ID: TD_ID, TT_ID: TT_ID,
                 User_ID: User_ID
             }, function (data, status) {

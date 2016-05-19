@@ -68,7 +68,7 @@
                             <li><a href="#" onclick="ChangePasswordDialogShow()"><i class="fa fa-gear fa-fw"></i>Change Password</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="login.aspx?logout=1"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                            <li><a href="../../login.aspx?logout=1"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                             </li>
                         </ul>
                         <!-- /.dropdown-user -->
@@ -98,7 +98,8 @@
                             <li>
                                 <a href="<%=ResolveUrl("~/DashBoard.aspx") %>"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                             </li>
-                            <% if (UP == "L10" || UP == "L9" || UP == "L8" || UP == "L6") { %>
+                            <% if (UP == "L10" || UP == "L9" || UP == "L8" || UP == "L6")
+                                { %>
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Task<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -108,7 +109,8 @@
                                     <%--<li>
                                         <a href="<%=ResolveUrl("~/TaskManage/TaskListTotal.aspx") %>">Task List(Total)</a>
                                     </li>--%>
-                                    <% if (UP == "L10" || UP == "L9" || UP == "L8") { %>
+                                    <% if (UP == "L10" || UP == "L9" || UP == "L8")
+                                        { %>
                                     <li>
                                         <a href="<%=ResolveUrl("~/TaskManage/TaskListTotalNew.aspx") %>">Task List(Total)</a>
                                     </li>
@@ -129,7 +131,8 @@
                                 <!-- /.nav-second-level -->
                             </li>
                             <% } %>
-                            <% if (UP == "L10" || UP == "L9" || UP == "L8" || UP == "L6") { %>
+                            <% if (UP == "L10" || UP == "L9" || UP == "L8" || UP == "L6")
+                                { %>
                             <li>
                                 <a href="#"><i class="fa fa-bug fa-fw"></i>Bug/Issue<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -145,14 +148,16 @@
                                 </ul>
                             </li>
                             <% } %>
-                            <% if (UP == "L10" || UP == "L9" || UP == "L8" || UP == "L6") { %>
+                            <% if (UP == "L10" || UP == "L9" || UP == "L8" || UP == "L6")
+                                { %>
                             <li>
                                 <a href="#"><i class="fa fa-envelope-o fa-fw"></i>Daily Report<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="<%=ResolveUrl("~/DailyReport/PersonalReport.aspx") %>">Personal Report</a>
                                     </li>
-                                    <%if (UP == "L10" || UP == "L9") { %>
+                                    <%if (UP == "L10" || UP == "L9")
+                                    { %>
                                     <li>
                                         <a href="<%=ResolveUrl("~/DailyReport/ReportList.aspx") %>">Everyone Report</a>
                                     </li>
@@ -160,7 +165,8 @@
                                 </ul>
                             </li>
                             <% } %>
-                            <% if (UP == "L10" || UP == "L9" || UP == "L7") { %>
+                            <% if (UP == "L10" || UP == "L9" || UP == "L7")
+                                { %>
                             <li>
                                 <a href="#"><i class="fa fa-book fa-fw"></i>QBR<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -170,7 +176,8 @@
                                 </ul>
                             </li>
                             <% } %>
-                            <% if (UP == "L10" || UP == "L9") { %>
+                            <% if (UP == "L10" || UP == "L9")
+                                { %>
                             <li>
                                 <a href="#"><i class="fa fa-cogs fa-fw"></i>SystemManage<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -180,10 +187,14 @@
                                     <li>
                                         <a href="<%=ResolveUrl("~/SystemManage/JsonManage.aspx") %>">Json Manage</a>
                                     </li>
+                                    <li>
+                                        <a href="<%=ResolveUrl("~/SystemManage/HelpPage.aspx") %>">Some Help</a>
+                                    </li>
                                 </ul>
                             </li>
                             <% } %>
-                            <% if (UP == "L10") { %>
+                            <% if (UP == "L10")
+                            { %>
                             <li>
                                 <a href="#"><i class="fa fa-warning fa-fw"></i>Test Pages<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -269,64 +280,65 @@
                     </div>
                 </div>
             </div>
-            <!-- jQuery -->
-            <script src="<%=ResolveUrl("~/bower_components/jquery/dist/jquery.min.js") %>"></script>
+        </div>
+        <!-- jQuery -->
+        <script src="<%=ResolveUrl("~/bower_components/jquery/dist/jquery.min.js") %>"></script>
 
-            <!-- Bootstrap Core JavaScript -->
-            <script src="<%=ResolveUrl("~/bower_components/bootstrap/dist/js/bootstrap.min.js") %>"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="<%=ResolveUrl("~/bower_components/bootstrap/dist/js/bootstrap.min.js") %>"></script>
 
-            <!-- Metis Menu Plugin JavaScript -->
-            <script src="<%=ResolveUrl("~/bower_components/metisMenu/dist/metisMenu.min.js") %>"></script>
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="<%=ResolveUrl("~/bower_components/metisMenu/dist/metisMenu.min.js") %>"></script>
 
-            <!-- Custom Theme JavaScript -->
-            <script src="<%=ResolveUrl("~/dist/js/sb-admin-2.js") %>"></script>
+        <!-- Custom Theme JavaScript -->
+        <script src="<%=ResolveUrl("~/dist/js/sb-admin-2.js") %>"></script>
 
-            <!-- Empty url JavaScript -->
-            <%--<script src="<%=ResolveUrl("") %>"></script>--%>
+        <!-- Empty url JavaScript -->
+        <%--<script src="<%=ResolveUrl("") %>"></script>--%>
 
-            <asp:ContentPlaceHolder ID="CustomerJavaScriptPlace" runat="server">
-            </asp:ContentPlaceHolder>
-            <script type="text/javascript">
-                function ChangePasswordDialogShow() {
-                    $('#txt_OriginalPassword').val('');
-                    $('#txt_NewPassword').val('');
-                    $('#txt_NewConfirmPassword').val('');
-                    $('#ModalChangePassword').modal({ backdrop: 'static' }).modal('show');
+        <asp:ContentPlaceHolder ID="CustomerJavaScriptPlace" runat="server">
+        </asp:ContentPlaceHolder>
+        <script type="text/javascript">
+            function ChangePasswordDialogShow() {
+                $('#txt_OriginalPassword').val('');
+                $('#txt_NewPassword').val('');
+                $('#txt_NewConfirmPassword').val('');
+                $('#ModalChangePassword').modal({ backdrop: 'static' }).modal('show');
+            }
+            function ChangePassword() {
+                var U_ID = $('#User_ID').text();
+                var oldPassword = $('#txt_OriginalPassword').val();
+                var NewPassword = $('#txt_NewPassword').val();
+                var NewConfirmPassword = $('#txt_NewConfirmPassword').val();
+                if (oldPassword == '' || NewPassword == '' || NewConfirmPassword == '') {
+                    alert('password should not empty !');
+                    return;
                 }
-                function ChangePassword() {
-                    var U_ID = $('#User_ID').text();
-                    var oldPassword = $('#txt_OriginalPassword').val();
-                    var NewPassword = $('#txt_NewPassword').val();
-                    var NewConfirmPassword = $('#txt_NewConfirmPassword').val();
-                    if (oldPassword == '' || NewPassword == '' || NewConfirmPassword == '') {
-                        alert('password should not empty !');
-                        return;
-                    }
-                    if (NewPassword == NewConfirmPassword) {
-                        $.post('../ashx/SystemManageHandler.ashx', {
-                            mode: 'ChangePassword', U_ID: U_ID, oldPassword: oldPassword,
-                            NewPassword: NewPassword
-                        }, function (data) {
-                            if (data == 'success') {
-                                alert('Password Changed Success ~');
-                                $('#ModalChangePassword').modal('hide');
-                            }
-                            else if (data == 'password incorrect') {
-                                alert('Original Password Incorrect !');
-                            }
-                            else if (data == 'fail') {
-                                alert('Password Changed Failed !');
-                            }
-                            else {
-                                alert('Password Changed Failed !');
-                            }
-                        });
-                    }
-                    else {
-                        alert('New Password not matched !');
-                    }
+                if (NewPassword == NewConfirmPassword) {
+                    $.post('../ashx/SystemManageHandler.ashx', {
+                        mode: 'ChangePassword', U_ID: U_ID, oldPassword: oldPassword,
+                        NewPassword: NewPassword
+                    }, function (data) {
+                        if (data == 'success') {
+                            alert('Password Changed Success ~');
+                            $('#ModalChangePassword').modal('hide');
+                        }
+                        else if (data == 'password incorrect') {
+                            alert('Original Password Incorrect !');
+                        }
+                        else if (data == 'fail') {
+                            alert('Password Changed Failed !');
+                        }
+                        else {
+                            alert('Password Changed Failed !');
+                        }
+                    });
                 }
-            </script>
+                else {
+                    alert('New Password not matched !');
+                }
+            }
+        </script>
     </form>
 </body>
 </html>

@@ -14,6 +14,7 @@ function InitialTagsInputUser(selector, maxTagNum) {
         itemValue: 'U_ID',
         itemText: 'U_nickname',
         maxTags: maxTagNum,
+        freeInput: false,
         typeaheadjs: {
             name: 'UserData',
             displayKey: 'U_nickname',
