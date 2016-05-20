@@ -90,7 +90,7 @@
                     alert('Update JSON data Success ~');
                 }
                 else {
-                    aler('Update JSON data Failed !');
+                    alert('Update JSON data Failed !');
                 }
 
             });

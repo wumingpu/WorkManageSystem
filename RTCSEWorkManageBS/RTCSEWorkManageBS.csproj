@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bower_components\bootcards\dist\css\bootcards-desktop.css" />
+    <Content Include="bower_components\bootcards\dist\fonts\icomoon.svg" />
     <Content Include="bower_components\bootstrap-colorpicker\dist\css\bootstrap-colorpicker.min.css" />
     <Content Include="bower_components\bootstrap-colorpicker\dist\js\bootstrap-colorpicker.min.js" />
     <Content Include="bower_components\bootstrap-datetimepicker\css\bootstrap-datetimepicker.min.css" />
@@ -131,7 +132,14 @@
     <Content Include="bower_components\bootstrap\dist\css\bootstrap.min.css" />
     <Content Include="bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="bower_components\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="bower_components\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="bower_components\bootstrap\Gruntfile.js" />
+    <Content Include="bower_components\bootstrap\grunt\bs-commonjs-generator.js" />
+    <Content Include="bower_components\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <Content Include="bower_components\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <Content Include="bower_components\bootstrap\grunt\bs-raw-files-generator.js" />
     <Content Include="bower_components\bootstrap\js\modal.js" />
+    <Content Include="bower_components\bootstrap\package.js" />
     <Content Include="bower_components\Chartjs\dist\Chart.bundle.min.js" />
     <Content Include="bower_components\dragula\dist\dragula.css" />
     <Content Include="bower_components\dragula\dist\dragula.min.js" />
@@ -408,6 +416,121 @@
     <Content Include="bower_components\fileman\LICENSE.txt" />
     <Content Include="bower_components\fileman\third-party.txt" />
     <Content Include="bower_components\font-awesome\css\font-awesome.min.css" />
+    <Content Include="bower_components\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="bower_components\icheck\icheck.min.js" />
+    <Content Include="bower_components\icheck\skins\all.css" />
+    <Content Include="bower_components\icheck\skins\flat\aero%402x.png" />
+    <Content Include="bower_components\icheck\skins\flat\aero.css" />
+    <Content Include="bower_components\icheck\skins\flat\aero.png" />
+    <Content Include="bower_components\icheck\skins\flat\blue%402x.png" />
+    <Content Include="bower_components\icheck\skins\flat\blue.css" />
+    <Content Include="bower_components\icheck\skins\flat\blue.png" />
+    <Content Include="bower_components\icheck\skins\flat\flat%402x.png" />
+    <Content Include="bower_components\icheck\skins\flat\flat.css" />
+    <Content Include="bower_components\icheck\skins\flat\flat.png" />
+    <Content Include="bower_components\icheck\skins\flat\green%402x.png" />
+    <Content Include="bower_components\icheck\skins\flat\green.css" />
+    <Content Include="bower_components\icheck\skins\flat\green.png" />
+    <Content Include="bower_components\icheck\skins\flat\grey%402x.png" />
+    <Content Include="bower_components\icheck\skins\flat\grey.css" />
+    <Content Include="bower_components\icheck\skins\flat\grey.png" />
+    <Content Include="bower_components\icheck\skins\flat\orange%402x.png" />
+    <Content Include="bower_components\icheck\skins\flat\orange.css" />
+    <Content Include="bower_components\icheck\skins\flat\orange.png" />
+    <Content Include="bower_components\icheck\skins\flat\pink%402x.png" />
+    <Content Include="bower_components\icheck\skins\flat\pink.css" />
+    <Content Include="bower_components\icheck\skins\flat\pink.png" />
+    <Content Include="bower_components\icheck\skins\flat\purple%402x.png" />
+    <Content Include="bower_components\icheck\skins\flat\purple.css" />
+    <Content Include="bower_components\icheck\skins\flat\purple.png" />
+    <Content Include="bower_components\icheck\skins\flat\red%402x.png" />
+    <Content Include="bower_components\icheck\skins\flat\red.css" />
+    <Content Include="bower_components\icheck\skins\flat\red.png" />
+    <Content Include="bower_components\icheck\skins\flat\yellow%402x.png" />
+    <Content Include="bower_components\icheck\skins\flat\yellow.css" />
+    <Content Include="bower_components\icheck\skins\flat\yellow.png" />
+    <Content Include="bower_components\icheck\skins\flat\_all.css" />
+    <Content Include="bower_components\icheck\skins\futurico\futurico%402x.png" />
+    <Content Include="bower_components\icheck\skins\futurico\futurico.css" />
+    <Content Include="bower_components\icheck\skins\futurico\futurico.png" />
+    <Content Include="bower_components\icheck\skins\line\aero.css" />
+    <Content Include="bower_components\icheck\skins\line\blue.css" />
+    <Content Include="bower_components\icheck\skins\line\green.css" />
+    <Content Include="bower_components\icheck\skins\line\grey.css" />
+    <Content Include="bower_components\icheck\skins\line\line%402x.png" />
+    <Content Include="bower_components\icheck\skins\line\line.css" />
+    <Content Include="bower_components\icheck\skins\line\line.png" />
+    <Content Include="bower_components\icheck\skins\line\orange.css" />
+    <Content Include="bower_components\icheck\skins\line\pink.css" />
+    <Content Include="bower_components\icheck\skins\line\purple.css" />
+    <Content Include="bower_components\icheck\skins\line\red.css" />
+    <Content Include="bower_components\icheck\skins\line\yellow.css" />
+    <Content Include="bower_components\icheck\skins\line\_all.css" />
+    <Content Include="bower_components\icheck\skins\minimal\aero%402x.png" />
+    <Content Include="bower_components\icheck\skins\minimal\aero.css" />
+    <Content Include="bower_components\icheck\skins\minimal\aero.png" />
+    <Content Include="bower_components\icheck\skins\minimal\blue%402x.png" />
+    <Content Include="bower_components\icheck\skins\minimal\blue.css" />
+    <Content Include="bower_components\icheck\skins\minimal\blue.png" />
+    <Content Include="bower_components\icheck\skins\minimal\green%402x.png" />
+    <Content Include="bower_components\icheck\skins\minimal\green.css" />
+    <Content Include="bower_components\icheck\skins\minimal\green.png" />
+    <Content Include="bower_components\icheck\skins\minimal\grey%402x.png" />
+    <Content Include="bower_components\icheck\skins\minimal\grey.css" />
+    <Content Include="bower_components\icheck\skins\minimal\grey.png" />
+    <Content Include="bower_components\icheck\skins\minimal\minimal%402x.png" />
+    <Content Include="bower_components\icheck\skins\minimal\minimal.css" />
+    <Content Include="bower_components\icheck\skins\minimal\minimal.png" />
+    <Content Include="bower_components\icheck\skins\minimal\orange%402x.png" />
+    <Content Include="bower_components\icheck\skins\minimal\orange.css" />
+    <Content Include="bower_components\icheck\skins\minimal\orange.png" />
+    <Content Include="bower_components\icheck\skins\minimal\pink%402x.png" />
+    <Content Include="bower_components\icheck\skins\minimal\pink.css" />
+    <Content Include="bower_components\icheck\skins\minimal\pink.png" />
+    <Content Include="bower_components\icheck\skins\minimal\purple%402x.png" />
+    <Content Include="bower_components\icheck\skins\minimal\purple.css" />
+    <Content Include="bower_components\icheck\skins\minimal\purple.png" />
+    <Content Include="bower_components\icheck\skins\minimal\red%402x.png" />
+    <Content Include="bower_components\icheck\skins\minimal\red.css" />
+    <Content Include="bower_components\icheck\skins\minimal\red.png" />
+    <Content Include="bower_components\icheck\skins\minimal\yellow%402x.png" />
+    <Content Include="bower_components\icheck\skins\minimal\yellow.css" />
+    <Content Include="bower_components\icheck\skins\minimal\yellow.png" />
+    <Content Include="bower_components\icheck\skins\minimal\_all.css" />
+    <Content Include="bower_components\icheck\skins\polaris\polaris%402x.png" />
+    <Content Include="bower_components\icheck\skins\polaris\polaris.css" />
+    <Content Include="bower_components\icheck\skins\polaris\polaris.png" />
+    <Content Include="bower_components\icheck\skins\square\aero%402x.png" />
+    <Content Include="bower_components\icheck\skins\square\aero.css" />
+    <Content Include="bower_components\icheck\skins\square\aero.png" />
+    <Content Include="bower_components\icheck\skins\square\blue%402x.png" />
+    <Content Include="bower_components\icheck\skins\square\blue.css" />
+    <Content Include="bower_components\icheck\skins\square\blue.png" />
+    <Content Include="bower_components\icheck\skins\square\green%402x.png" />
+    <Content Include="bower_components\icheck\skins\square\green.css" />
+    <Content Include="bower_components\icheck\skins\square\green.png" />
+    <Content Include="bower_components\icheck\skins\square\grey%402x.png" />
+    <Content Include="bower_components\icheck\skins\square\grey.css" />
+    <Content Include="bower_components\icheck\skins\square\grey.png" />
+    <Content Include="bower_components\icheck\skins\square\orange%402x.png" />
+    <Content Include="bower_components\icheck\skins\square\orange.css" />
+    <Content Include="bower_components\icheck\skins\square\orange.png" />
+    <Content Include="bower_components\icheck\skins\square\pink%402x.png" />
+    <Content Include="bower_components\icheck\skins\square\pink.css" />
+    <Content Include="bower_components\icheck\skins\square\pink.png" />
+    <Content Include="bower_components\icheck\skins\square\purple%402x.png" />
+    <Content Include="bower_components\icheck\skins\square\purple.css" />
+    <Content Include="bower_components\icheck\skins\square\purple.png" />
+    <Content Include="bower_components\icheck\skins\square\red%402x.png" />
+    <Content Include="bower_components\icheck\skins\square\red.css" />
+    <Content Include="bower_components\icheck\skins\square\red.png" />
+    <Content Include="bower_components\icheck\skins\square\square%402x.png" />
+    <Content Include="bower_components\icheck\skins\square\square.css" />
+    <Content Include="bower_components\icheck\skins\square\square.png" />
+    <Content Include="bower_components\icheck\skins\square\yellow%402x.png" />
+    <Content Include="bower_components\icheck\skins\square\yellow.css" />
+    <Content Include="bower_components\icheck\skins\square\yellow.png" />
+    <Content Include="bower_components\icheck\skins\square\_all.css" />
     <Content Include="bower_components\jqgrid\css\ui.jqgrid-bootstrap.css" />
     <Content Include="bower_components\jqgrid\js\i18n\grid.locale-ar.js" />
     <Content Include="bower_components\jqgrid\js\i18n\grid.locale-bg.js" />
@@ -533,10 +656,10 @@
     <Content Include="bower_components\tinymce\themes\modern\theme.min.js" />
     <Content Include="bower_components\tinymce\tinymce.min.js" />
     <Content Include="bower_components\typeahead\dist\typeahead.bundle.min.js" />
+    <Content Include="bower_components\typeahead\dist\typeaheadjs.css" />
     <Content Include="BugIssue\BugAdd.aspx" />
-    <Content Include="BugIssue\BugContent.aspx" />
+    <Content Include="BugIssue\BugDetail.aspx" />
     <Content Include="BugIssue\BugList.aspx" />
-    <Content Include="BugIssue\BugManage.aspx" />
     <Content Include="DailyReport\PersonalReport.aspx" />
     <Content Include="DailyReport\ReportList.aspx" />
     <Content Include="DashBoard.aspx" />
@@ -548,7 +671,18 @@
     <Content Include="DynamicJS\TagsInputUserData.js" />
     <Content Include="Login.aspx" />
     <Content Include="Other record.txt" />
+    <Content Include="PageJS\BugIssue\BugAdd.js" />
+    <Content Include="PageJS\BugIssue\BugDetail.js" />
+    <Content Include="PageJS\DailyReport\PersonalReport.js" />
+    <Content Include="PageJS\DailyReport\ReportList.js" />
     <Content Include="PageJS\DashBoardJS.js" />
+    <Content Include="PageJS\QBR\SOWList.js" />
+    <Content Include="PageJS\SystemManage\UserManage.js" />
+    <Content Include="PageJS\TaskManage\Scenario.js" />
+    <Content Include="PageJS\TaskManage\ScenarioRole.js" />
+    <Content Include="PageJS\TaskManage\TaskBoard.js" />
+    <Content Include="PageJS\TaskManage\TaskListDaily.js" />
+    <Content Include="PageJS\TaskManage\TaskListTotalNew.js" />
     <Content Include="QBR\SOWList.aspx" />
     <Content Include="SystemManage\HelpPage.aspx" />
     <Content Include="SystemManage\JsonManage.aspx" />
@@ -568,6 +702,7 @@
     <Content Include="TestPages\TimeLineTest.aspx" />
     <Content Include="TestPages\TinyMCE.aspx" />
     <Content Include="TestPages\Validate.aspx" />
+    <Content Include="UploadFiles\evaa.png" />
     <Content Include="UsingDLL\PHP.VisualStudio.PhalangerTasks.dll" />
     <Content Include="UsingDLL\PhpNetClassLibrary.dll" />
     <Content Include="UsingDLL\PhpNetCore.CodeDom.dll" />
@@ -618,12 +753,12 @@
     <Compile Include="BugIssue\BugAdd.aspx.designer.cs">
       <DependentUpon>BugAdd.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BugIssue\BugContent.aspx.cs">
-      <DependentUpon>BugContent.aspx</DependentUpon>
+    <Compile Include="BugIssue\BugDetail.aspx.cs">
+      <DependentUpon>BugDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BugIssue\BugContent.aspx.designer.cs">
-      <DependentUpon>BugContent.aspx</DependentUpon>
+    <Compile Include="BugIssue\BugDetail.aspx.designer.cs">
+      <DependentUpon>BugDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="BugIssue\BugList.aspx.cs">
       <DependentUpon>BugList.aspx</DependentUpon>
@@ -631,13 +766,6 @@
     </Compile>
     <Compile Include="BugIssue\BugList.aspx.designer.cs">
       <DependentUpon>BugList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="BugIssue\BugManage.aspx.cs">
-      <DependentUpon>BugManage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="BugIssue\BugManage.aspx.designer.cs">
-      <DependentUpon>BugManage.aspx</DependentUpon>
     </Compile>
     <Compile Include="DailyReport\PersonalReport.aspx.cs">
       <DependentUpon>PersonalReport.aspx</DependentUpon>
@@ -843,6 +971,139 @@
     <Content Include="bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="bower_components\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="bower_components\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="bower_components\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="bower_components\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="bower_components\bootstrap\grunt\.jshintrc" />
+    <Content Include="bower_components\bootstrap\grunt\configBridge.json" />
+    <Content Include="bower_components\bootstrap\grunt\sauce_browsers.yml" />
+    <Content Include="bower_components\bootstrap\less\.csscomb.json" />
+    <Content Include="bower_components\bootstrap\less\.csslintrc" />
+    <Content Include="bower_components\bootstrap\less\alerts.less" />
+    <Content Include="bower_components\bootstrap\less\badges.less" />
+    <Content Include="bower_components\bootstrap\less\bootstrap.less" />
+    <Content Include="bower_components\bootstrap\less\breadcrumbs.less" />
+    <Content Include="bower_components\bootstrap\less\button-groups.less" />
+    <Content Include="bower_components\bootstrap\less\buttons.less" />
+    <Content Include="bower_components\bootstrap\less\carousel.less" />
+    <Content Include="bower_components\bootstrap\less\close.less" />
+    <Content Include="bower_components\bootstrap\less\code.less" />
+    <Content Include="bower_components\bootstrap\less\component-animations.less" />
+    <Content Include="bower_components\bootstrap\less\dropdowns.less" />
+    <Content Include="bower_components\bootstrap\less\forms.less" />
+    <Content Include="bower_components\bootstrap\less\glyphicons.less" />
+    <Content Include="bower_components\bootstrap\less\grid.less" />
+    <Content Include="bower_components\bootstrap\less\input-groups.less" />
+    <Content Include="bower_components\bootstrap\less\jumbotron.less" />
+    <Content Include="bower_components\bootstrap\less\labels.less" />
+    <Content Include="bower_components\bootstrap\less\list-group.less" />
+    <Content Include="bower_components\bootstrap\less\media.less" />
+    <Content Include="bower_components\bootstrap\less\mixins.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\alerts.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\background-variant.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\border-radius.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\buttons.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\center-block.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\clearfix.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\forms.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\gradients.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\grid-framework.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\grid.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\hide-text.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\image.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\labels.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\list-group.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\nav-divider.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\nav-vertical-align.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\opacity.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\pagination.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\panels.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\progress-bar.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\reset-filter.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\reset-text.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\resize.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\responsive-visibility.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\size.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\tab-focus.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\table-row.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\text-emphasis.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\text-overflow.less" />
+    <Content Include="bower_components\bootstrap\less\mixins\vendor-prefixes.less" />
+    <Content Include="bower_components\bootstrap\less\modals.less" />
+    <Content Include="bower_components\bootstrap\less\navbar.less" />
+    <Content Include="bower_components\bootstrap\less\navs.less" />
+    <Content Include="bower_components\bootstrap\less\normalize.less" />
+    <Content Include="bower_components\bootstrap\less\pager.less" />
+    <Content Include="bower_components\bootstrap\less\pagination.less" />
+    <Content Include="bower_components\bootstrap\less\panels.less" />
+    <Content Include="bower_components\bootstrap\less\popovers.less" />
+    <Content Include="bower_components\bootstrap\less\print.less" />
+    <Content Include="bower_components\bootstrap\less\progress-bars.less" />
+    <Content Include="bower_components\bootstrap\less\responsive-embed.less" />
+    <Content Include="bower_components\bootstrap\less\responsive-utilities.less" />
+    <Content Include="bower_components\bootstrap\less\scaffolding.less" />
+    <Content Include="bower_components\bootstrap\less\tables.less" />
+    <Content Include="bower_components\bootstrap\less\theme.less" />
+    <Content Include="bower_components\bootstrap\less\thumbnails.less" />
+    <Content Include="bower_components\bootstrap\less\tooltip.less" />
+    <Content Include="bower_components\bootstrap\less\type.less" />
+    <Content Include="bower_components\bootstrap\less\utilities.less" />
+    <Content Include="bower_components\bootstrap\less\variables.less" />
+    <Content Include="bower_components\bootstrap\less\wells.less" />
+    <Content Include="bower_components\bootstrap\package.json" />
+    <Content Include="bower_components\bootstrap\bower.json" />
+    <Content Include="bower_components\bootstrap\.bower.json" />
+    <Content Include="bower_components\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="bower_components\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="bower_components\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="bower_components\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="bower_components\font-awesome\scss\font-awesome.scss" />
+    <Content Include="bower_components\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="bower_components\font-awesome\scss\_core.scss" />
+    <Content Include="bower_components\font-awesome\scss\_extras.scss" />
+    <Content Include="bower_components\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="bower_components\font-awesome\scss\_icons.scss" />
+    <Content Include="bower_components\font-awesome\scss\_larger.scss" />
+    <Content Include="bower_components\font-awesome\scss\_list.scss" />
+    <Content Include="bower_components\font-awesome\scss\_mixins.scss" />
+    <Content Include="bower_components\font-awesome\scss\_path.scss" />
+    <Content Include="bower_components\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="bower_components\font-awesome\scss\_spinning.scss" />
+    <Content Include="bower_components\font-awesome\scss\_stacked.scss" />
+    <Content Include="bower_components\font-awesome\scss\_variables.scss" />
+    <Content Include="bower_components\font-awesome\less\bordered-pulled.less" />
+    <Content Include="bower_components\font-awesome\less\core.less" />
+    <Content Include="bower_components\font-awesome\less\extras.less" />
+    <Content Include="bower_components\font-awesome\less\fixed-width.less" />
+    <Content Include="bower_components\font-awesome\less\font-awesome.less" />
+    <Content Include="bower_components\font-awesome\less\icons.less" />
+    <Content Include="bower_components\font-awesome\less\larger.less" />
+    <Content Include="bower_components\font-awesome\less\list.less" />
+    <Content Include="bower_components\font-awesome\less\mixins.less" />
+    <Content Include="bower_components\font-awesome\less\path.less" />
+    <Content Include="bower_components\font-awesome\less\rotated-flipped.less" />
+    <Content Include="bower_components\font-awesome\less\spinning.less" />
+    <Content Include="bower_components\font-awesome\less\stacked.less" />
+    <Content Include="bower_components\font-awesome\less\variables.less" />
+    <Content Include="bower_components\font-awesome\bower.json" />
+    <Content Include="bower_components\font-awesome\.bower.json" />
+    <Content Include="bower_components\jquery\dist\jquery.min.map" />
+    <Content Include="bower_components\bootcards\dist\css\bootcards-desktop.css.map" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="bower_components\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="bower_components\bootstrap-colorpicker\dist\css\bootstrap-colorpicker.css.map" />
+    <Content Include="bower_components\bootstrap-colorpicker\dist\css\bootstrap-colorpicker.min.css.map" />
+    <Content Include="bower_components\bootstrap-select\dist\css\bootstrap-select.css.map" />
+    <Content Include="bower_components\bootstrap-select\dist\js\bootstrap-select.js.map" />
+    <Content Include="bower_components\bootstrap-tagsinput\dist\bootstrap-tagsinput-angular.min.js.map" />
+    <Content Include="bower_components\bootstrap-tagsinput\dist\bootstrap-tagsinput.min.js.map" />
+    <Content Include="bower_components\bootcards\dist\fonts\icomoon.eot" />
+    <Content Include="bower_components\bootcards\dist\fonts\icomoon.ttf" />
+    <Content Include="bower_components\bootcards\dist\fonts\icomoon.woff" />
+    <None Include="Properties\PublishProfiles\PublishCustomProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -867,6 +1128,9 @@
   <ItemGroup>
     <Folder Include="bower_components\fileman\tmp\" />
     <Folder Include="ChartReport\" />
+    <Folder Include="UploadFiles\Documents\" />
+    <Folder Include="UploadFiles\FLV\" />
+    <Folder Include="UploadFiles\Images\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

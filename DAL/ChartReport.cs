@@ -41,6 +41,7 @@ namespace DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("declare @TotalNum decimal;");
             strSql.Append(string.Format("set @TotalNum = (select count(BI_ID) from BugIssue where DATENAME(quarter, BI_CreateDate) = DATENAME(QUARTER, '{0}'));",strDateTime));
+            strSql.Append("if(@TotalNum=0)begin set @TotalNum = 1 end;");
             strSql.Append("select T.*,round((T.BugNo / @TotalNum) * 100, 0) as BugPercent from(");
             strSql.Append(string.Format("select 'Fixed' as BI_Resolution, count(BI_ID) as BugNo from BugIssue where BI_Resolution='Fixed' and DATENAME(quarter, BI_CreateDate) = DATENAME(QUARTER, '{0}')", strDateTime));
             strSql.Append(" union all ");
@@ -54,6 +55,7 @@ namespace DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("declare @TotalNum decimal;");
             strSql.Append(string.Format("set @TotalNum = (select count(BI_ID) from BugIssue where DATENAME(quarter, BI_CreateDate) = DATENAME(QUARTER, '{0}'));", strDateTime));
+            strSql.Append("if(@TotalNum=0)begin set @TotalNum = 1 end;");
             strSql.Append("select T.*,round((T.BugNo / @TotalNum) * 100, 0) as BugPercent from(");
             strSql.Append(string.Format("select 'P0' as BI_Priority, count(BI_ID) as BugNo from BugIssue where BI_Priority = 'P0' and DATENAME(quarter, BI_CreateDate) = DATENAME(QUARTER, '{0}')", strDateTime));
             strSql.Append(" union all ");
@@ -71,6 +73,7 @@ namespace DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("declare @TotalNum decimal;");
             strSql.Append(string.Format("set @TotalNum = (select COUNT(BI_ID) from V_BugIssueTaskTotal where (TT_TaskType like '%HotFix%' or TT_TaskType like '%E2E%' or TT_TaskType like '%MU%') and BI_Type = 'Bug' and DATENAME(quarter, BI_CreateDate) = DATENAME(QUARTER, '{0}'));",strDateTime));
+            strSql.Append("if(@TotalNum=0)begin set @TotalNum = 1 end;");
             strSql.Append("select T.*,round((T.BugNo / @TotalNum) * 100, 0) as BugPercent from(");
             strSql.Append(string.Format("select 'Hotfix' as TT_TaskType, count(BI_ID) as BugNo from V_BugIssueTaskTotal where TT_TaskType like '%HotFix%' and BI_Type = 'Bug' and DATENAME(quarter, BI_CreateDate) = DATENAME(QUARTER, '2016-05-17 14:05:05')", strDateTime));
             strSql.Append(" union all ");
@@ -86,6 +89,7 @@ namespace DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("declare @TotalNum decimal;");
             strSql.Append(string.Format("set @TotalNum = (select COUNT(BI_ID) from V_BugIssueTaskTotal where TT_Release in ('W14','W15','W16','LM') and BI_Type = 'Bug' and DATENAME(quarter, BI_CreateDate) = DATENAME(QUARTER, '{0}'));", strDateTime));
+            strSql.Append("if(@TotalNum=0)begin set @TotalNum = 1 end;");
             strSql.Append("select T.*,round((T.BugNo / @TotalNum) * 100, 0) as BugPercent from(");
             strSql.Append(string.Format("select 'W14' as TT_Release, count(BI_ID) as BugNo from V_BugIssueTaskTotal where TT_Release = 'W14' and BI_Type = 'Bug' and DATENAME(quarter, BI_CreateDate) = DATENAME(QUARTER, '{0}')", strDateTime));
             strSql.Append(" union all ");
@@ -102,7 +106,8 @@ namespace DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("declare @TotalNum decimal;");
-            strSql.Append(string.Format("set @TotalNum = (select count(BI_ID) from BugIssue where DATENAME(quarter, BI_CreateDate) = DATENAME(QUARTER, '{0}'))", strDateTime));
+            strSql.Append(string.Format("set @TotalNum = (select count(BI_ID) from BugIssue where DATENAME(quarter, BI_CreateDate) = DATENAME(QUARTER, '{0}'));", strDateTime));
+            strSql.Append("if(@TotalNum=0)begin set @TotalNum = 1 end;");
             strSql.Append("select T.*,round((T.BugNo / @TotalNum) * 100, 0) as BugPercent from(");
             strSql.Append(string.Format("select 'Per Case' as FoundBy, count(BI_ID) as BugNo from BugIssue where BI_CaseNumber != '' and DATENAME(quarter, BI_CreateDate) = DATENAME(QUARTER, '{0}')", strDateTime));
             strSql.Append(" union all ");
@@ -127,6 +132,7 @@ namespace DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("declare @TotalNum decimal;");
             strSql.Append(string.Format("set @TotalNum = (select count(BI_ID) from BugIssue where DATENAME(quarter, BI_CreateDate) = DATENAME(QUARTER, '{0}') and BI_Type like '%Issue%');", strDateTime));
+            strSql.Append("if(@TotalNum=0)begin set @TotalNum = 1 end;");
             strSql.Append("select T.*,round((T.IssueNo / @TotalNum) * 100, 0) as IssuePercent from(");
             strSql.Append(string.Format("select 'Confirm' as BI_Type, count(BI_ID) as IssueNo from BugIssue where DATENAME(quarter, BI_CreateDate) = DATENAME(QUARTER, '{0}') and BI_Type = 'Confirm Issue'", strDateTime));
             strSql.Append(" union all ");
@@ -149,6 +155,7 @@ namespace DAL
             //strSql.Append("') and TT_Release in ('W14','W15','W16','LM') group by TT_Release order by charindex(TT_Release+',','W14,W15,W16,LM,');");
             strSql.Append("declare @TotalNum decimal;");
             strSql.Append(string.Format("set @TotalNum = (select sum(convert(int, TT_CaseRealRunNum)) from TaskTotal where DATENAME(quarter, TT_TimeEnd) = DATENAME(QUARTER, '{0}') and TT_Release in('W14','W15','W16','LM'));", strDateTime));
+            strSql.Append("if(@TotalNum=0)begin set @TotalNum = 1 end;");
             strSql.Append("select T.*, round((T.CaseNo / @TotalNum) * 100, 0) as CasePercent from(");
             strSql.Append(string.Format("select 'W14' as TT_Release,ISNULL(sum(convert(int, TT_CaseRealRunNum)), 0) as CaseNo from TaskTotal where DATENAME(quarter, TT_TimeEnd) = DATENAME(QUARTER, '{0}') and TT_Release = 'W14'", strDateTime));
             strSql.Append(" union all ");

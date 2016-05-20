@@ -60,7 +60,7 @@ namespace RTCSEWorkManageBS.ashx
                         PieResolutionBugno(context);
                         break;
 
-                    // Pie Chart
+                    // Test Chart
                     case "TestQuery1":
                         TestQuery1(context);
                         break;
@@ -82,7 +82,7 @@ namespace RTCSEWorkManageBS.ashx
                 {
                     LabelName = dr["BI_Resolution"].ToString(),
                     iData = Convert.ToInt32(dr["BugNo"]),
-                    Percent = Convert.ToInt32(dr["BugPercent"]).ToString() + '%'
+                    Percent = Convert.ToInt32(dr["BugPercent"].ToString() == "" ? 0 : dr["BugPercent"]).ToString() + '%'
                 });
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
@@ -104,7 +104,7 @@ namespace RTCSEWorkManageBS.ashx
                 {
                     LabelName = dr["BI_Priority"].ToString(),
                     iData = Convert.ToInt32(dr["BugNo"]),
-                    Percent = Convert.ToInt32(dr["BugPercent"]).ToString() + '%'
+                    Percent = Convert.ToInt32(dr["BugPercent"].ToString() == "" ? 0 : dr["BugPercent"]).ToString() + '%'
                 });
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
@@ -126,7 +126,7 @@ namespace RTCSEWorkManageBS.ashx
                 {
                     LabelName = dr["TT_TaskType"].ToString(),
                     iData = Convert.ToInt32(dr["BugNo"]),
-                    Percent = Convert.ToInt32(dr["BugPercent"]).ToString() + '%'
+                    Percent = Convert.ToInt32(dr["BugPercent"].ToString() == "" ? 0 : dr["BugPercent"]).ToString() + '%'
                 });
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
@@ -148,7 +148,7 @@ namespace RTCSEWorkManageBS.ashx
                 {
                     LabelName = dr["TT_Release"].ToString(),
                     iData = Convert.ToInt32(dr["BugNo"]),
-                    Percent = Convert.ToInt32(dr["BugPercent"]).ToString() + '%'
+                    Percent = Convert.ToInt32(dr["BugPercent"].ToString() == "" ? 0 : dr["BugPercent"]).ToString() + '%'
                 });
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
@@ -170,7 +170,7 @@ namespace RTCSEWorkManageBS.ashx
                 {
                     LabelName = dr["FoundBy"].ToString(),
                     iData = Convert.ToInt32(dr["BugNo"]),
-                    Percent = Convert.ToInt32(dr["BugPercent"]).ToString() + '%'
+                    Percent = Convert.ToInt32(dr["BugPercent"].ToString() == "" ? 0 : dr["BugPercent"]).ToString() + '%'
                 });
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
@@ -218,8 +218,8 @@ namespace RTCSEWorkManageBS.ashx
                     }
                 }
             }
-            
-            list = list.OrderBy(o => o.LabelName.PadLeft(2,'0')).ThenBy(o => o.Release).ToList();
+
+            list = list.OrderBy(o => o.LabelName.PadLeft(2, '0')).ThenBy(o => o.Release).ToList();
             JavaScriptSerializer jss = new JavaScriptSerializer();
             string strJson = jss.Serialize(list);
             context.Response.Write(strJson);
@@ -239,7 +239,7 @@ namespace RTCSEWorkManageBS.ashx
                 {
                     LabelName = dr["BI_Type"].ToString(),
                     iData = Convert.ToInt32(dr["IssueNo"]),
-                    Percent = Convert.ToInt32(dr["IssuePercent"]).ToString() + '%'
+                    Percent = Convert.ToInt32(dr["IssuePercent"].ToString() == "" ? 0 : dr["IssuePercent"]).ToString() + '%'
                 });
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
@@ -261,7 +261,7 @@ namespace RTCSEWorkManageBS.ashx
                 {
                     LabelName = dr["TT_Release"].ToString(),
                     iData = Convert.ToInt32(dr["CaseNo"]),
-                    Percent = Convert.ToInt32(dr["CasePercent"]).ToString() + '%'
+                    Percent = Convert.ToInt32(dr["CasePercent"].ToString() == "" ? 0 : dr["CasePercent"]).ToString() + '%'
                 });
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();

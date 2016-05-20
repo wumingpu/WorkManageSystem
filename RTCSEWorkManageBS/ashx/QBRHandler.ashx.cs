@@ -49,10 +49,11 @@ namespace RTCSEWorkManageBS.ashx
             DataSet ds = bll.GetSeasonTotalCaseno();
             List<Model.QBR.LSReleaseCaseNo> list = new List<Model.QBR.LSReleaseCaseNo>();
             DataRow dr = ds.Tables[0].Rows[0];
-            list.Add(new Model.QBR.LSReleaseCaseNo() {
+            list.Add(new Model.QBR.LSReleaseCaseNo()
+            {
                 SeasonNum = dr["SeasonNum"].ToString(),
                 TT_Release = dr["TT_Release"].ToString(),
-                CaseNo = Convert.ToInt32(dr["CaseNo"])
+                CaseNo = Convert.ToInt32(dr["CaseNo"].ToString() == "" ? 0 : dr["CaseNo"])
             });
             JavaScriptSerializer jss = new JavaScriptSerializer();
             string strJson = jss.Serialize(list).TrimStart('[').TrimEnd(']');
@@ -99,7 +100,7 @@ namespace RTCSEWorkManageBS.ashx
                 {
                     SeasonNum = dr["SeasonNum"].ToString(),
                     TT_Release = dr["TT_Release"].ToString(),
-                    CaseNo = Convert.ToInt32(dr["CaseNo"])
+                    CaseNo = Convert.ToInt32(dr["CaseNo"].ToString() == "" ? 0 : dr["CaseNo"])
                 });
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
@@ -167,7 +168,8 @@ namespace RTCSEWorkManageBS.ashx
             List<Model.QBR.LSReleaseCaseNo> list = new List<Model.QBR.LSReleaseCaseNo>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                list.Add(new Model.QBR.LSReleaseCaseNo() {
+                list.Add(new Model.QBR.LSReleaseCaseNo()
+                {
                     SeasonNum = dr["SeasonNum"].ToString(),
                     TT_Release = dr["TT_Release"].ToString(),
                     CaseNo = Convert.ToInt32(dr["CaseNo"])
