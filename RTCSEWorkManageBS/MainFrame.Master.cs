@@ -23,7 +23,7 @@ namespace RTCSEWorkManageBS
             else
             {
                 //Response.Redirect("Login.aspx");
-                Response.Write("<script>alert('Login Info Time Out, Please login again ~');location.href='../../Login.aspx'</script>");
+                Response.Write("<script>alert('Login Info Time Out, Please login again ~');location.href='" + ResolveUrl("~") + "Login.aspx'</script>");
             }
         }
         protected string UP = "";

@@ -68,7 +68,7 @@
                             <li><a href="#" onclick="ChangePasswordDialogShow()"><i class="fa fa-gear fa-fw"></i>Change Password</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="../../login.aspx?logout=1"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                            <li><a href="<%=ResolveUrl("~/login.aspx?logout=1") %>"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                             </li>
                         </ul>
                         <!-- /.dropdown-user -->
