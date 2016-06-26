@@ -139,16 +139,17 @@ function ReloadCardList(left, middle, right) {
         for (var i in TaskInfo) {
             if (TaskInfo[i].TD_CardType == "public") {
                 DataCardHTML = '<div class="panel w3-card-4" id="' + TaskInfo[i].TD_CardType + TaskInfo[i].TD_ID + '"><div class="panel-heading w3-blue">' + TaskInfo[i].TD_TaskType + '<label class="TD_ID" hidden="hidden">' + TaskInfo[i].TD_ID + '</label><label class="TD_CardType" hidden="hidden">' + TaskInfo[i].TD_CardType + '</label><button type="button" class="btn btn-primary btn-xs pull-right PDHidden" onclick="AddProgressDialogShow($(this),\'*\',\'*\',\'\',\'\')">Add Progress</button><button type="button" class="btn btn-default btn-xs pull-right" onclick="DetailDialogShow($(this))">Detail</button></div>' +
-                '<div class="list-group"><div class="list-group-item"><p class="list-group-item-text">Task Title</p><h4 class="list-group-item-heading">' + TaskInfo[i].TD_TaskTitle + '</h4></div>' +
+                '<div class="list-group"><div class="list-group-item"><p class="list-group-item-text">Task</p><h5 class="list-group-item-heading">' + TaskInfo[i].TD_TaskTitle + '--' + TaskInfo[i].TD_ScenarioTitle + '--' + TaskInfo[i].TD_RoleTitle + '</h5></div>' +
                 '<div class="list-group-item"><p class="list-group-item-text">Assigned to</p><h4 class="list-group-item-heading">' + TaskInfo[i].TD_AssignedUserName + '</h4></div>' +
                 '<div class="list-group-item"><p class="list-group-item-text">Owner</p><h4 class="list-group-item-heading">' + TaskInfo[i].TD_Owner + '</h4></div>' +
-                '<div class="list-group-item"><p class="list-group-item-text">Scenario</p><h4 class="list-group-item-heading">' + TaskInfo[i].TD_ScenarioTitle + '</h4></div>' +
-                '<div class="list-group-item"><p class="list-group-item-text">Feature</p><h4 class="list-group-item-heading">' + TaskInfo[i].TD_RoleTitle + '</h4></div>' +
-                '<div class="list-group-item"><p class="list-group-item-text">Date Range</p><h4 class="list-group-item-heading">' + TaskInfo[i].TD_Date + '</h4></div></div></div>';
+                //'<div class="list-group-item"><p class="list-group-item-text">Scenario</p><h4 class="list-group-item-heading">' + TaskInfo[i].TD_ScenarioTitle + '</h4></div>' +
+                //'<div class="list-group-item"><p class="list-group-item-text">Feature</p><h4 class="list-group-item-heading">' + TaskInfo[i].TD_RoleTitle + '</h4></div>' +
+                //'<div class="list-group-item"><p class="list-group-item-text">Date Range</p><h4 class="list-group-item-heading">' + TaskInfo[i].TD_Date + '</h4></div></div></div>';
+                '<div class="list-group-item"><h5 class="list-group-item-heading">' + TaskInfo[i].TD_Date + '</h5></div></div></div>';
             }
             else if (TaskInfo[i].TD_CardType == "private") {
                 DataCardHTML = '<div class="panel w3-card-4"  id="' + TaskInfo[i].TD_CardType + TaskInfo[i].TD_ID + '"><div class="panel-heading w3-pink">' + TaskInfo[i].TD_TaskType + '<label class="TD_ID" hidden="hidden">' + TaskInfo[i].TD_ID + '</label><label class="TD_CardType" hidden="hidden">' + TaskInfo[i].TD_CardType + '</label><button type="button" class="btn btn-primary btn-xs pull-right PDHidden" onclick="AddProgressDialogShow($(this),\'*\',\'*\',\'\',\'\')">Add Progress</button><button type="button" class="btn btn-default btn-xs pull-right" onclick="DetailDialogShow($(this))">Detail</button></div>' +
-                '<div class="list-group"><div class="list-group-item"><p class="list-group-item-text">Task Title</p><h4 class="list-group-item-heading">' + TaskInfo[i].TD_TaskTitle + '</h4></div>' +
+                '<div class="list-group"><div class="list-group-item"><p class="list-group-item-text">Task Title</p><h5 class="list-group-item-heading">' + TaskInfo[i].TD_TaskTitle + '</h5></div>' +
                 '<div class="list-group-item"><p class="list-group-item-text">Assigned to</p><h4 class="list-group-item-heading">' + TaskInfo[i].TD_AssignedUserName + '</h4></div>' +
                 '<div class="list-group-item"><p class="list-group-item-text">Owner</p><h4 class="list-group-item-heading">' + TaskInfo[i].TD_Owner + '</h4></div>' +
                 '<div class="list-group-item"><p class="list-group-item-text">Date Range</p><h4 class="list-group-item-heading">' + TaskInfo[i].TD_Date + '</h4></div></div></div>';
