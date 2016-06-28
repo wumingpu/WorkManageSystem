@@ -25,7 +25,7 @@ namespace DAL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
-        public bool UpdateHaveRole(int S_ID,bool HaveRole)
+        public bool UpdateHaveRole(int S_ID, bool HaveRole)
         {
             StringBuilder strSql = new StringBuilder();
             if (HaveRole)
@@ -38,7 +38,7 @@ namespace DAL
             }
             strSql.Append(S_ID);
             int UpdateRes = DbHelperSQL.ExecuteSql(strSql.ToString());
-            if (UpdateRes>0)
+            if (UpdateRes > 0)
             {
                 return true;
             }
@@ -52,7 +52,7 @@ namespace DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select count(*) from Scenario ");
-            if (strWhere!="")
+            if (strWhere != "")
             {
                 strSql.Append(" where ");
                 strSql.Append(strWhere);
@@ -75,7 +75,7 @@ namespace DAL
             strSql.Append(" values ");
             strSql.Append("(@S_FK_TT_ID,@S_ScenarioName,@S_CreateDate,@S_IsDelete,@S_HaveRole)");
             strSql.Append(";select @@IDENTITY");
-            SqlParameter[] parameters = { 
+            SqlParameter[] parameters = {
                                         new SqlParameter("@S_FK_TT_ID",SqlDbType.Int,4),
                                         new SqlParameter("@S_ScenarioName",SqlDbType.VarChar,300),
                                         new SqlParameter("@S_CreateDate",SqlDbType.VarChar,20),
@@ -106,7 +106,7 @@ namespace DAL
             foreach (string ScenarioName in arrScenarioName)
             {
                 strSql.Append("insert into Scenario(S_FK_TT_ID,S_ScenarioName,S_CreateDate,S_IsDelete,S_HaveRole)");
-                strSql.Append(string.Format(" values ({0},'{1}','{2}',{3},'{4}');", model.S_FK_TT_ID, ScenarioName, model.S_CreateDate,model.S_IsDelete,model.S_HaveRole));
+                strSql.Append(string.Format(" values ({0},'{1}','{2}',{3},'{4}');", model.S_FK_TT_ID, ScenarioName, model.S_CreateDate, model.S_IsDelete, model.S_HaveRole));
             }
             int EffRow = DbHelperSQL.ExecuteSql(strSql.ToString());
             if (ScenarioNumber == EffRow)
@@ -123,7 +123,7 @@ namespace DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("update Scenario set S_ScenarioName=@S_ScenarioName where S_ID=@S_ID");
-            SqlParameter[] parameters = { 
+            SqlParameter[] parameters = {
                                         new SqlParameter("@S_ScenarioName",SqlDbType.VarChar,300),
                                         new SqlParameter("@S_ID",SqlDbType.Int,4)
                                         };
@@ -144,12 +144,12 @@ namespace DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("delete from Scenario where S_ID=@S_ID");
-            SqlParameter[] parameters = { 
+            SqlParameter[] parameters = {
                                         new SqlParameter("@S_ID",SqlDbType.Int,4)
                                         };
             parameters[0].Value = S_ID;
             int res = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
-            if (res>0)
+            if (res > 0)
             {
                 return true;
             }

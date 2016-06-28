@@ -305,7 +305,7 @@ function DeleteScenarioRole() {
     }
     if (confirm('Delete the item now ?')) {
         $.post('../ashx/TaskHandler.ashx', {
-            mode: 'DeleteScenarioRole', SR_ID: rowid
+            mode: 'DeleteScenarioRole', SR_ID: rowid, SR_FK_S_ID: SR_FK_S_ID
         }, function (data, status) {
             if (data == 'success') {
                 //alert('Save data success !');

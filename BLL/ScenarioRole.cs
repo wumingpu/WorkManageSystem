@@ -44,7 +44,7 @@ namespace BLL
         {
             if (dal.Delete(SR_ID))
             {
-                if (dal.Exist("SR_FK_S_ID=" + SR_FK_S_ID) > 0)
+                if (dal.Exist("SR_FK_S_ID=" + SR_FK_S_ID) == 0)
                 {
                     DAL.Scenario dalScenario = new DAL.Scenario();
                     if (dalScenario.UpdateHaveRole(SR_FK_S_ID, false))
